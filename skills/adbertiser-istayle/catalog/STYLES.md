@@ -68,6 +68,10 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | B35 | Comic title burst | template | pow, comic title, boom | Title slams on a starburst, speed lines | Hooks | text ("line 1|line 2"), caption, color |
 | B36 | Comic speech bubble | template | speech bubble, comic footage | Footage in an inked frame + bubble | Talking points | media, say, caption, side |
 | B37 | Comic price | template | comic price, wow price | WOW! then the price slams on a burst | Promos | price, oldPrice, word, note, color |
+| B38 | Cinematic title | template | cinematic, movie title, film title | Letterbox closes, serif title settles with tracking | Premium hooks | title ("line 1|line 2"), sub, media, grade (warm/teal/mono) |
+| B39 | Graded film shot | template | film look, color grade, letterbox | Footage graded + letterboxed, subtitle line | B-roll with mood | media, line, grade, zoom, leak |
+| B40 | Trailer statement | template | trailer text, statement | Words fade in on black like a trailer | Big claims (true) | text |
+| B41 | Trailer word flash | template | trailer flash, impact words | Hard cuts of big serif words with flashes | Rhythm hooks | words (2–5), media, grade |
 | C1 | Paper cutout stop-motion | template | paper, paper cutout, cutout, craft, stop motion, handmade | Torn-paper letters, cut-out items, choppy motion | Food, local biz, explainers | title, sub, items[{emoji or image,label}], colors[], paperColor |
 | C2 | Scrapbook collage | template | scrapbook, collage, polaroid, tape | Polaroids drop in with tape and notes | Product features, stories | title, photos[], notes[], paperColor |
 | C3 | Sticky notes | template | sticky notes, post-it, notes, checklist | Notes slap on a board, checks drawn | Tips, plans, steps | title, notes[], check, boardColor |
@@ -127,11 +131,12 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | G14 | Glass captions | template | glass captions, pill captions | Words on a frosted pill | Glass look | `captions.style: "G14"` |
 | G15 | Marker captions | template | handwritten captions, marker captions | Captions in the hand font, active word in brand color | Whiteboard look | `captions.style: "G15"` |
 | G16 | Comic captions | template | comic captions, bangers | Comic lettering, active word yellow | Comic look | `captions.style: "G16"` |
+| G17 | Film subtitles | template | movie subtitles, serif captions | Italic serif subtitles | Cinematic look | `captions.style: "G17"` |
 | H1 | Slide | template | slide, push | Next scene slides in | Any cut | scene.transition "H1" |
 | H2 | Glitch | template | glitch, rgb split, digital | Jitter + color bars | Tech, energy | scene.transition "H2" |
 | H3 | Glare / light sweep | template | glare, light sweep, shine | A shine passes as it fades in | Beauty, premium | scene.transition "H3" |
 | H4 | Camera flash | template | flash, shutter, camera | White flash | Photos, reveals | scene.transition "H4" |
-| H5 | Film burn | planned | film burn, burn | Orange burn through | Cinematic | — |
+| H5 | Film burn | template | film burn, burn | Orange burn through | Cinematic | `"transition": "H5"` |
 | H6 | Brand color wipe | template | wipe, color wipe, bar wipe | A diagonal brand-color bar wipes | Brand moments | scene.transition "H6" |
 | H7 | Crash zoom | template | zoom, crash zoom, punch | Zooms in from big + blur | Hooks, hits | scene.transition "H7" |
 | H8 | Light leak flash | planned | light leak | Warm leak flash | Lifestyle | — |
@@ -181,4 +186,5 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | K10 | Glass CTA | template | glass cta, glass end card | Glass card, glowing button, shine | Glass look outros | logo or name, headline, cta, handle, bg |
 | K11 | Marker CTA | template | marker cta, whiteboard cta | CTA written by marker, boxed, arrow + star | Whiteboard look outros | cta, title, handle, color |
 | K12 | Comic CTA | template | comic cta | CTA in an inked box, pointing hand | Comic look outros | cta, title, handle |
+| K13 | Cinematic end card | template | film end card, movie outro | Wide serif name, rule, CTA, light sweep | Premium outros | name, cta, line |
 | U1 | Footage / photo shot | template | footage, broll, b-roll, photo, video clip, shot | Your clip or photo with zoom | The base of every ad | media, zoom (in/out/none), punchAt, title, titleAt |

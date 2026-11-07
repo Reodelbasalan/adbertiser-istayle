@@ -20,6 +20,7 @@ export const TRANSITION_SFX: Record<string, string> = {
   H18: 'whoosh_soft',
   H19: 'scribble',
   H20: 'impact',
+  H5: 'whoosh_low',
 };
 
 export const TRANSITIONS = Object.keys(TRANSITION_SFX);
@@ -52,6 +53,14 @@ export const TransitionIn: React.FC<{type?: string; frames: number; children: Re
         <AbsoluteFill style={{opacity: Math.min(1, t * 2.5)}}>
           {children}
           <AbsoluteFill style={{background: 'linear-gradient(115deg, transparent 30%, rgba(255,255,255,.9) 50%, transparent 70%)', transform: `translateX(${(t * 2.4 - 1.2) * 100}%)`, mixBlendMode: 'screen'}} />
+        </AbsoluteFill>
+      );
+    case 'H5':
+      // film burn: an orange-white burn blooms from one corner and reveals the new shot
+      return (
+        <AbsoluteFill>
+          <AbsoluteFill style={{clipPath: `circle(${e * 150}% at 85% 20%)`}}>{children}</AbsoluteFill>
+          <AbsoluteFill style={{background: `radial-gradient(circle at 85% 20%, rgba(255,255,240,${0.95 * v}) ${e * 40}%, rgba(255,140,40,${0.85 * v}) ${e * 70}%, rgba(180,40,0,${0.6 * v}) ${e * 95}%, transparent ${e * 120 + 10}%)`, mixBlendMode: 'screen'}} />
         </AbsoluteFill>
       );
     case 'H20':

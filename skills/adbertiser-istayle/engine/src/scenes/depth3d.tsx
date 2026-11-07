@@ -165,7 +165,7 @@ export const Logo3D: React.FC<SceneProps> = ({p}) => {
 /* ---------------- three.js helpers ---------------- */
 
 /** studio reflections so metal looks like metal */
-const Env: React.FC = () => {
+export const Env: React.FC = () => {
   const {gl, scene} = useThree();
   useEffect(() => {
     const pm = new THREE.PMREMGenerator(gl);
@@ -269,7 +269,7 @@ const demoTexture = (emoji: string, hue: number, w = 540, h = 1080) => {
  * Hold the frame until the texture is on the material, then redraw once.
  * perFrame: a video texture changes every frame, so hold again on each new frame.
  */
-const useDrawWhenReady = (tex: THREE.Texture | null, perFrame: boolean) => {
+export const useDrawWhenReady = (tex: THREE.Texture | null, perFrame: boolean) => {
   const frame = useCurrentFrame();
   const {advance} = useThree();
   const hold = useRef<{h: number; frame: number; tex: THREE.Texture | null} | null>(null);
