@@ -84,6 +84,7 @@ K4 `{"title": "Starter Package", "items": ["5 video ads", "Captions + music"], "
 
 ## G1 G2 G3 G7 G8 Captions
 `job.captions = {"style": "G1", "file": "words.json", "y": 0.63}`
+Captions hide on templates that show their own big text (hooks, prices, chats, cards, end cards) and show on footage (U1, B11). Force per scene with `"captions": true` or `false`.
 `words.json`: `[{"w": "Hello", "s": 0.12, "e": 0.40}]`, or `[{"word", "start", "end"}]`, or Whisper-style segments with `words`. `y` = 0–1 of the frame height (keep 0.25–0.75 on 9:16). Captions follow `audio.vo` timing, so transcribe the VO first.
 
 ## H1 H2 H3 H4 H6 H7 H9 H10 H12 Transitions

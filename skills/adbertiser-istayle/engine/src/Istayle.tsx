@@ -4,7 +4,7 @@ import {BrandProvider, useBrand} from './brand';
 import {Captions} from './Captions';
 import {asset} from './lib/Media';
 import {Grain, SampleTag, Vignette, Watermark} from './Overlays';
-import {REGISTRY} from './registry';
+import {OWN_TEXT, REGISTRY} from './registry';
 import {TRANSITION_SFX, TransitionIn} from './Transitions';
 import type {Job, Scene, SceneProps} from './types';
 
@@ -47,6 +47,9 @@ const Body: React.FC<Job> = (job) => {
     if (job.sfx !== false && i > 0 && s.transition && TRANSITION_SFX[s.transition]) events.push({at: Math.max(0, from - 2), name: TRANSITION_SFX[s.transition], volume: 0.8});
     (s.sfx ?? []).forEach((ev) => events.push({...ev, at: from + Math.round(ev.at * fps)}));
   });
+  const hidden: [number, number][] = items
+    .filter(({s}) => s.captions === false || (s.captions !== true && OWN_TEXT.has(s.style)))
+    .map(({from, d}) => [from / fps, (from + d) / fps]);
   const vo = job.audio?.vo;
   const music = job.audio?.music;
   return (
@@ -66,7 +69,7 @@ const Body: React.FC<Job> = (job) => {
       })}
       {job.overlays?.vignette && <Vignette />}
       {job.overlays?.grain ? <Grain amount={job.overlays.grain} /> : null}
-      {job.captions?.words?.length ? <Captions words={job.captions.words} style={job.captions.style} y={job.captions.y} /> : null}
+      {job.captions?.words?.length ? <Captions words={job.captions.words} style={job.captions.style} y={job.captions.y} hidden={hidden} /> : null}
       {job.overlays?.watermark && <Watermark />}
       {job.overlays?.sample && <SampleTag />}
       {vo && <Audio src={asset(vo)} volume={job.audio?.voVolume ?? 1} />}

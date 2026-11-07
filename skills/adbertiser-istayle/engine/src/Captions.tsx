@@ -22,12 +22,13 @@ const chunk = (ws: Word[], max: number, gap = 0.45) => {
 };
 
 /** word-timed captions. G1 gold active word · G2 one big word · G3 karaoke box · G7 highlighter · G8 TikTok native */
-export const Captions: React.FC<{words: Word[]; style?: string; y?: number}> = ({words, style = 'G1', y}) => {
+export const Captions: React.FC<{words: Word[]; style?: string; y?: number; hidden?: [number, number][]}> = ({words, style = 'G1', y, hidden = []}) => {
   const f = useCurrentFrame();
   const L = useLayout();
   const b = useBrand();
   const t = f / L.fps;
   const groups = useMemo(() => chunk(words, style === 'G2' ? 1 : 3), [words, style]);
+  if (hidden.some(([a, z]) => t >= a && t < z)) return null;
   let g: Word[] | undefined;
   for (let i = 0; i < groups.length; i++) {
     const next = groups[i + 1];

@@ -20,6 +20,7 @@ export type Scene = {
   dur: number; // seconds
   props?: Record<string, any>;
   transition?: string; // transition ID used to ENTER this scene, e.g. "H9"
+  captions?: boolean; // force captions on/off for this scene (default: off on templates with their own text)
   sfx?: Sfx[];
 };
 

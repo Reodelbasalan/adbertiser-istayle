@@ -34,6 +34,9 @@ const priceSfx = (p: P, _d: number, fps: number): Ev[] => {
   return [{at: 0, name: 'whoosh_soft'}, {at, name: 'impact'}, {at: at + 6, name: 'ding', volume: 0.7}];
 };
 
+/** templates that show their own big text: captions hide there unless scene.captions === true */
+export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4']);
+
 export const REGISTRY: Record<string, Entry> = {
   // hooks + text
   J1: {name: 'Bold question hook', C: HookQuestion, dur: 2.5, sfx: hookSfx},
