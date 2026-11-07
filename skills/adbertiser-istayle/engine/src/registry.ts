@@ -7,6 +7,7 @@ import {PaperCutout, Scrapbook, StickyNotes, TornReveal} from './scenes/paper';
 import {FootageShot, PriceSlam, ProductHero, TextBehind} from './scenes/product';
 import {HookQuestion, KineticText, POVHook} from './scenes/text';
 import {Cards3D, CoinsRain, Logo3D, Phone3D, Text3D, cardTimes, cardsList, coinsTitleAt, textLand} from './scenes/depth3d';
+import {ComicBubble, ComicCTA, ComicPanels, ComicPrice, ComicTitle, burstAt, panelList, panelTimes, priceSlamAt} from './scenes/comic';
 import {Flow, LineIcons, MarkerCTA, MarkerList, MarkerTitle, SketchChart, chartEnd, ctaWriteEnd, flowNodes, flowTimes, iconItems, iconTimes, markerItems, markerTimes, writeEnd} from './scenes/whiteboard';
 import {CursorDemo, Dashboard, GlassCTA, GlassPricing, GlassTitle, Workflow, clickTimes, cursorButtons, stepTimes, stepsList, tierList, tierTimes} from './scenes/glass';
 import {HoloHUD, HoloProduct, NeonCTA, NeonList, NeonPrice, NeonSign, ctaOn, hudItems, hudTimes, listTimes, neonItems, priceOn, signTimes} from './scenes/neon';
@@ -41,7 +42,7 @@ const priceSfx = (p: P, _d: number, fps: number): Ev[] => {
 };
 
 /** templates that show their own big text: captions hide there unless scene.captions === true */
-export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4', 'A8', 'A17', 'A18', 'A20', 'J11', 'K2', 'K3', 'D3', 'D5', 'D6', 'K8', 'D1', 'D7', 'D4', 'G11', 'D9', 'B12', 'B26', 'B27', 'B28', 'B29', 'K9', 'B17', 'B2', 'B22', 'B23', 'B30', 'K10', 'B31', 'B25', 'B32', 'B33', 'B34', 'K11']);
+export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4', 'A8', 'A17', 'A18', 'A20', 'J11', 'K2', 'K3', 'D3', 'D5', 'D6', 'K8', 'D1', 'D7', 'D4', 'G11', 'D9', 'B12', 'B26', 'B27', 'B28', 'B29', 'K9', 'B17', 'B2', 'B22', 'B23', 'B30', 'K10', 'B31', 'B25', 'B32', 'B33', 'B34', 'K11', 'B35', 'B19', 'B36', 'B37', 'K12']);
 
 export const REGISTRY: Record<string, Entry> = {
   // hooks + text
@@ -115,6 +116,11 @@ export const REGISTRY: Record<string, Entry> = {
     const t = oldNewTimes(d, fps, p.newAt);
     return [{at: 0, name: 'whoosh_fast'}, {at: t.xAt, name: 'error', volume: 0.6}, {at: t.newAt, name: 'whoosh'}, {at: t.checkAt, name: 'ding', volume: 0.8}];
   }},
+  // comic look
+  B35: {name: 'Comic title burst', C: ComicTitle, dur: 2.5, sfx: (_p, _d, fps) => [{at: 0, name: 'whoosh_fast'}, {at: burstAt(fps), name: 'impact'}, {at: burstAt(fps) + 3, name: 'pop', volume: 0.7}]},
+  B19: {name: 'Comic panels', C: ComicPanels, dur: 4.5, sfx: (p, d, fps) => panelTimes(panelList(p).length, d, fps, p.at).flatMap((at, i) => [{at, name: i % 2 ? 'whoosh_fast' : 'impact', volume: 0.6}, ...(panelList(p)[i].say ? [{at: at + 6, name: 'pop', volume: 0.6}] : [])])},
+  B36: {name: 'Comic speech bubble', C: ComicBubble, dur: 3, sfx: (p, _d, fps) => [{at: Math.round(fps * 0.25), name: 'pop'}, ...(p.caption ? [{at: Math.round(fps * 0.6), name: 'click', volume: 0.6}] : [])]},
+  B37: {name: 'Comic price', C: ComicPrice, dur: 3, sfx: (_p, _d, fps) => [{at: 2, name: 'pop'}, {at: priceSlamAt(fps), name: 'impact'}, {at: priceSlamAt(fps) + 4, name: 'ding', volume: 0.7}]},
   // whiteboard look
   B31: {name: 'Marker title', C: MarkerTitle, dur: 3, sfx: (p) => {
     const lines = String(p.text ?? 'Bakit walang|nag-me-message?').split('|').map((x) => x.trim()).filter(Boolean);
@@ -173,6 +179,7 @@ export const REGISTRY: Record<string, Entry> = {
     const end = ctaWriteEnd(p, String(p.cta ?? 'MESSAGE US'));
     return [{at: 2, name: 'scribble', volume: 0.5}, {at: end - 8, name: 'scribble', volume: 0.6}, {at: end, name: 'scribble', volume: 0.5}, {at: end + 10, name: 'pop', volume: 0.6}];
   }},
+  K12: {name: 'Comic CTA', C: ComicCTA, dur: 2.5, sfx: () => [{at: 0, name: 'whoosh_fast'}, {at: 8, name: 'impact', volume: 0.8}, {at: 14, name: 'pop', volume: 0.6}]},
   K7: {name: 'Brand end card', C: EndCard, dur: 3, sfx: () => [{at: 0, name: 'whoosh'}, {at: 14, name: 'pop'}]},
   K1: {name: 'One-line CTA', C: EndCard, dur: 2, props: {variant: 'line'}, sfx: () => [{at: 0, name: 'impact', volume: 0.7}]},
   K4: {name: 'Offer card', C: EndCard, dur: 4, props: {variant: 'offer'}, sfx: (p) => {

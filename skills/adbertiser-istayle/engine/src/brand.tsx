@@ -7,6 +7,7 @@ import * as PlayfairDisplay from '@remotion/google-fonts/PlayfairDisplay';
 import * as Montserrat from '@remotion/google-fonts/Montserrat';
 import * as BebasNeue from '@remotion/google-fonts/BebasNeue';
 import * as Inter from '@remotion/google-fonts/Inter';
+import * as Bangers from '@remotion/google-fonts/Bangers';
 import type {Brand} from './types';
 
 type FontModule = {
@@ -24,6 +25,7 @@ const FONTS = {
   Montserrat,
   'Bebas Neue': BebasNeue,
   Inter,
+  Bangers,
 } as unknown as Record<string, FontModule>;
 
 const cache = new Map<string, string>();

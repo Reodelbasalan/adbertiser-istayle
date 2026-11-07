@@ -49,7 +49,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | B16 | Bold brutalist | planned | brutalist, bold blocks, loud | Big blocks, hard shadows | Scroll stoppers | Meanwhile: B1 with accent lines |
 | B17 | Glass title | template | glass, frosted, glassmorphism | Frosted glass card over color blobs | Tech, software | title, sub, tag, bg |
 | B18 | Retro poster | planned | retro, 70s, 80s, vintage poster | Grain, warm palette | Food, nostalgia | Meanwhile: J1 + I2 grain + warm brand colors |
-| B19 | Comic panels | planned | comic, manga, speech bubble, panels | Panels, bubbles, halftone | Stories, skits | — |
+| B19 | Comic panels | template | comic, manga, speech bubble, panels | Comic page: panels slam in with captions + bubbles | Stories, skits | panels [{media, caption, say}] (1–4), at |
 | B20 | Cartoon host | planned | cartoon, mascot, character host | A drawn host character | Explainers | — |
 | B21 | Sticker pop | planned | stickers, emoji pop, sticker | Stickers pop on beats | UGC energy | — |
 | B22 | Cursor demo | template | cursor, click demo, walkthrough | Cursor clicks through steps in a glass app | Tutorials | buttons, result, title, at (seconds per click), bg |
@@ -65,6 +65,9 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | B32 | Whiteboard flow | template | flow, problem solution result, diagram | Boxes and arrows drawn by hand | Explainers | nodes (2–4), title, at, color |
 | B33 | Marker list | template | whiteboard list, checklist, handwritten list | Handwritten list, drawn checks, red circle | Tips, checklists | title, items, highlight (index), at |
 | B34 | Sketch chart | template | sketch chart, hand-drawn graph | Hand-drawn axes and a rising arrow | Results (true numbers) | title, from, to, xLabel, xLabel2, color |
+| B35 | Comic title burst | template | pow, comic title, boom | Title slams on a starburst, speed lines | Hooks | text ("line 1|line 2"), caption, color |
+| B36 | Comic speech bubble | template | speech bubble, comic footage | Footage in an inked frame + bubble | Talking points | media, say, caption, side |
+| B37 | Comic price | template | comic price, wow price | WOW! then the price slams on a burst | Promos | price, oldPrice, word, note, color |
 | C1 | Paper cutout stop-motion | template | paper, paper cutout, cutout, craft, stop motion, handmade | Torn-paper letters, cut-out items, choppy motion | Food, local biz, explainers | title, sub, items[{emoji or image,label}], colors[], paperColor |
 | C2 | Scrapbook collage | template | scrapbook, collage, polaroid, tape | Polaroids drop in with tape and notes | Product features, stories | title, photos[], notes[], paperColor |
 | C3 | Sticky notes | template | sticky notes, post-it, notes, checklist | Notes slap on a board, checks drawn | Tips, plans, steps | title, notes[], check, boardColor |
@@ -123,6 +126,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | G13 | Neon captions | template | neon captions, glow captions | Glowing words, active word in brand color | Neon look | `captions.style: "G13"` |
 | G14 | Glass captions | template | glass captions, pill captions | Words on a frosted pill | Glass look | `captions.style: "G14"` |
 | G15 | Marker captions | template | handwritten captions, marker captions | Captions in the hand font, active word in brand color | Whiteboard look | `captions.style: "G15"` |
+| G16 | Comic captions | template | comic captions, bangers | Comic lettering, active word yellow | Comic look | `captions.style: "G16"` |
 | H1 | Slide | template | slide, push | Next scene slides in | Any cut | scene.transition "H1" |
 | H2 | Glitch | template | glitch, rgb split, digital | Jitter + color bars | Tech, energy | scene.transition "H2" |
 | H3 | Glare / light sweep | template | glare, light sweep, shine | A shine passes as it fades in | Beauty, premium | scene.transition "H3" |
@@ -142,6 +146,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | H17 | Neon flicker | template | neon flicker, flicker transition | New scene buzzes on like a tube | Neon look | `"transition": "H17"` |
 | H18 | Frosted blur | template | blur transition, frosted, glass wipe | New scene comes out of a frosted blur | Glass look | `"transition": "H18"` |
 | H19 | Eraser wipe | template | eraser, whiteboard wipe | Soft white band wipes to the next scene | Whiteboard look | `"transition": "H19"` |
+| H20 | Comic panel slam | template | comic transition, panel slam | New scene lands as a tilted inked panel | Comic look | `"transition": "H20"` |
 | I1 | Watermark | template | watermark, logo bug | Logo or brand name, top right | Every edit | job.overlays.watermark |
 | I2 | Film grain | template | grain, film grain, texture | Moving grain | Retro, paper, cinematic | job.overlays.grain (0–0.4) |
 | I3 | Light leaks | planned | light leaks | Warm color leaks | Lifestyle | — |
@@ -175,4 +180,5 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | K9 | Neon CTA | template | neon cta, neon button | Neon button + chasing arrows | Neon look outros | cta, title, handle, arrow, color, color2 |
 | K10 | Glass CTA | template | glass cta, glass end card | Glass card, glowing button, shine | Glass look outros | logo or name, headline, cta, handle, bg |
 | K11 | Marker CTA | template | marker cta, whiteboard cta | CTA written by marker, boxed, arrow + star | Whiteboard look outros | cta, title, handle, color |
+| K12 | Comic CTA | template | comic cta | CTA in an inked box, pointing hand | Comic look outros | cta, title, handle |
 | U1 | Footage / photo shot | template | footage, broll, b-roll, photo, video clip, shot | Your clip or photo with zoom | The base of every ad | media, zoom (in/out/none), punchAt, title, titleAt |

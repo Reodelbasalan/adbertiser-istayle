@@ -121,6 +121,15 @@ G11 `{"media": "clip.mp4", "title": "Ad na|Panalo", "sub": "optional", "position
 H14 cube spin: put `"transition": "H14"` on the entering scene; both scenes turn like a cube.
 D5 and D6 use WebGL (three.js); the engine renders with `--gl=angle`. On a machine with no GPU, set `Config.setChromiumOpenGlRenderer('swangle')` in `engine/remotion.config.ts`.
 
+## Comic look: B35 Comic title burst · B19 Comic panels · B36 Speech bubble on footage · B37 Comic price · K12 Comic CTA · G16 Comic captions · H20 Panel slam
+Comic lettering (Bangers, OFL), ink outlines, halftone dots, speed lines and starbursts.
+B35 `{"text": "Bagsak|Ang Ads?", "caption": "Meanwhile...", "color": "#FFD60A"}`
+B19 `{"panels": [{"media": "a.jpg", "caption": "Dati...", "say": "Walang nagme-message!"}, {"media": "b.mp4", "caption": "Ngayon!", "say": "Sunod-sunod na!"}], "at": [0.1, 1.5]}` · 1–4 panels; stacked on 9:16, side by side on 16:9.
+B36 `{"media": "clip.mp4", "say": "Ito na ang ad mo!", "caption": "Optional box", "side": "left"}`
+B37 `{"word": "WOW!", "price": "₱999", "oldPrice": "₱1,499", "note": "This week only"}`
+K12 `{"cta": "MESSAGE US", "title": "Ano pang hinihintay mo?", "handle": "@page"}`
+G16 captions: `job.captions.style = "G16"`. H20: `"transition": "H20"` on the entering scene.
+
 ## Whiteboard look: B31 Marker title · B25 Line icons · B32 Flow · B33 Marker list · B34 Sketch chart · K11 Marker CTA · G15 Marker captions · H19 Eraser wipe
 White board, everything is written or drawn live (hand font = `brand.handFont`). Accent marker = `color`, else the brand primary (a light primary falls back to blue so it reads on white).
 B31 `{"text": "Bakit walang|nag-me-message?", "sub": "optional"}`
@@ -157,12 +166,12 @@ K1 `{"cta": "MESSAGE US", "arrow": "👇"}`
 K4 `{"title": "Starter Package", "items": ["5 video ads", "Captions + music"], "price": "₱4,999", "note": "Limited slots", "cta": "MESSAGE US"}`
 `cta` defaults to `brand.cta`; `logo` to `brand.logo`.
 
-## G1 G2 G3 G7 G8 G13 G14 G15 Captions
+## G1 G2 G3 G7 G8 G13 G14 G15 G16 Captions
 `job.captions = {"style": "G1", "file": "words.json", "y": 0.63}`
 Captions hide on templates that show their own big text (hooks, prices, chats, cards, end cards) and show on footage (U1, B11). Force per scene with `"captions": true` or `false`.
 `words.json`: `[{"w": "Hello", "s": 0.12, "e": 0.40}]`, or `[{"word", "start", "end"}]`, or Whisper-style segments with `words`. `y` = 0–1 of the frame height (keep 0.25–0.75 on 9:16). Captions follow `audio.vo` timing, so transcribe the VO first.
 
-## H1 H2 H3 H4 H6 H7 H9 H10 H12 H14 H17 H18 H19 Transitions
+## H1 H2 H3 H4 H6 H7 H9 H10 H12 H14 H17 H18 H19 H20 Transitions
 Put `"transition": "H9"` on the scene that comes IN. Each one has its own SFX. Mix 2–3 kinds per ad; don't use a different one on every cut.
 
 ## I1 I2 I5 I10 Overlays

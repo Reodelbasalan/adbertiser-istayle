@@ -1,10 +1,10 @@
 import React, {useMemo} from 'react';
 import {useCurrentFrame} from 'remotion';
-import {useBrand} from './brand';
+import {font, useBrand} from './brand';
 import {alpha, ink, pop, useLayout} from './lib/util';
 import type {Word} from './types';
 
-export const CAPTION_STYLES = ['G1', 'G2', 'G3', 'G7', 'G8', 'G13', 'G14', 'G15'];
+export const CAPTION_STYLES = ['G1', 'G2', 'G3', 'G7', 'G8', 'G13', 'G14', 'G15', 'G16'];
 
 const chunk = (ws: Word[], max: number, gap = 0.45) => {
   const out: Word[][] = [];
@@ -21,7 +21,7 @@ const chunk = (ws: Word[], max: number, gap = 0.45) => {
   return out;
 };
 
-/** word-timed captions. G1 gold active word · G2 one big word · G3 karaoke box · G7 highlighter · G8 TikTok native · G13 neon glow · G14 glass pill · G15 marker */
+/** word-timed captions. G1 gold active word · G2 one big word · G3 karaoke box · G7 highlighter · G8 TikTok native · G13 neon glow · G14 glass pill · G15 marker · G16 comic */
 export const Captions: React.FC<{words: Word[]; style?: string; y?: number; hidden?: [number, number][]}> = ({words, style = 'G1', y, hidden = []}) => {
   const f = useCurrentFrame();
   const L = useLayout();
@@ -80,6 +80,7 @@ export const Captions: React.FC<{words: Word[]; style?: string; y?: number; hidd
         if (style === 'G7' && passed)
           Object.assign(base, {color: '#111', WebkitTextStroke: '0', textShadow: 'none', padding: `0 ${size * 0.1}px`, backgroundImage: `linear-gradient(${alpha(b.primary, 0.92)}, ${alpha(b.primary, 0.92)})`, backgroundRepeat: 'no-repeat', backgroundSize: `${Math.min(1, (t - w.s) / 0.15) * 100}% 80%`, backgroundPosition: 'left center'});
         if (style === 'G8') Object.assign(base, {transform: `scale(${active ? 1.04 : 1})`});
+        if (style === 'G16') Object.assign(base, {fontFamily: `'${font('Bangers', [400])}', sans-serif`, fontWeight: 400, fontSize: size * 1.15, letterSpacing: size * 0.03, color: active ? '#FFD60A' : '#fff', WebkitTextStroke: `${size * 0.09}px #111`, textShadow: `${size * 0.05}px ${size * 0.06}px 0 #111`, transform: `rotate(${i % 2 ? 2 : -2}deg) scale(${active ? 1.08 : 1})`});
         if (style === 'G15') Object.assign(base, {fontFamily: b.fHand, fontWeight: 400, textTransform: 'none', fontSize: size * 1.1, color: active ? b.primary : '#fff', transform: `rotate(${active ? -2 : 0}deg) scale(${active ? 1.05 : 1})`});
         if (style === 'G14') Object.assign(base, {WebkitTextStroke: '0', textShadow: 'none', color: active ? b.primary : '#FFFFFF', fontWeight: 800});
         if (style === 'G13') {

@@ -19,6 +19,7 @@ export const TRANSITION_SFX: Record<string, string> = {
   H17: 'buzz',
   H18: 'whoosh_soft',
   H19: 'scribble',
+  H20: 'impact',
 };
 
 export const TRANSITIONS = Object.keys(TRANSITION_SFX);
@@ -51,6 +52,14 @@ export const TransitionIn: React.FC<{type?: string; frames: number; children: Re
         <AbsoluteFill style={{opacity: Math.min(1, t * 2.5)}}>
           {children}
           <AbsoluteFill style={{background: 'linear-gradient(115deg, transparent 30%, rgba(255,255,255,.9) 50%, transparent 70%)', transform: `translateX(${(t * 2.4 - 1.2) * 100}%)`, mixBlendMode: 'screen'}} />
+        </AbsoluteFill>
+      );
+    case 'H20':
+      // comic panel slam: the new scene lands as a tilted inked panel that straightens
+      return (
+        <AbsoluteFill style={{background: '#111111'}}>
+          <AbsoluteFill style={{transform: `scale(${0.55 + 0.45 * e}) rotate(${-9 * v}deg)`, boxShadow: `0 0 0 ${14 * L.u * v}px #FFFFFF, 0 0 0 ${24 * L.u * v}px #111111`}}>{children}</AbsoluteFill>
+          <AbsoluteFill style={{backgroundImage: `radial-gradient(circle, rgba(255,214,10,${0.6 * v}) ${2.2 * L.u}px, transparent ${2.6 * L.u}px)`, backgroundSize: `${13 * L.u}px ${13 * L.u}px`}} />
         </AbsoluteFill>
       );
     case 'H19': {
