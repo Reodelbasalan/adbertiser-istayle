@@ -6,6 +6,7 @@ import {Newspaper, ServicesGrid, StatCounters} from './scenes/data';
 import {PaperCutout, Scrapbook, StickyNotes, TornReveal} from './scenes/paper';
 import {FootageShot, PriceSlam, ProductHero, TextBehind} from './scenes/product';
 import {HookQuestion, KineticText, POVHook} from './scenes/text';
+import {CoinsRain, Logo3D, Phone3D, Text3D, coinsTitleAt, textLand} from './scenes/depth3d';
 import {ButtonPress, CommentKeyword, GreenScreen, MythFact, OldVsNew, SlotsCounter, SplitDialogue, UsVsThem, commentTimes, dialogAt, mythTimes, oldNewTimes, pressTimes, slotTimes, vsAt} from './scenes/formats';
 import type {SceneProps} from './types';
 
@@ -36,7 +37,7 @@ const priceSfx = (p: P, _d: number, fps: number): Ev[] => {
 };
 
 /** templates that show their own big text: captions hide there unless scene.captions === true */
-export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4', 'A8', 'A17', 'A18', 'A20', 'J11', 'K2', 'K3']);
+export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4', 'A8', 'A17', 'A18', 'A20', 'J11', 'K2', 'K3', 'D3', 'D5', 'D6', 'K8']);
 
 export const REGISTRY: Record<string, Entry> = {
   // hooks + text
@@ -110,6 +111,11 @@ export const REGISTRY: Record<string, Entry> = {
     const t = oldNewTimes(d, fps, p.newAt);
     return [{at: 0, name: 'whoosh_fast'}, {at: t.xAt, name: 'error', volume: 0.6}, {at: t.newAt, name: 'whoosh'}, {at: t.checkAt, name: 'ding', volume: 0.8}];
   }},
+  // 3D look
+  D3: {name: '3D text reveal', C: Text3D, dur: 2.5, sfx: (_p, _d, fps) => [{at: 0, name: 'whoosh_low'}, {at: textLand(fps), name: 'impact'}, {at: textLand(fps) + 4, name: 'sparkle', volume: 0.6}]},
+  D5: {name: '3D phone mockup', C: Phone3D, dur: 3.5, sfx: (p) => [{at: 0, name: 'whoosh'}, ...(p.title === false || p.title === '' ? [] : [{at: 6, name: 'pop', volume: 0.7}])]},
+  D6: {name: 'Coins rain', C: CoinsRain, dur: 3, sfx: (_p, _d, fps) => [{at: 0, name: 'riser', volume: 0.5}, {at: coinsTitleAt(fps), name: 'impact'}, {at: coinsTitleAt(fps) + 3, name: 'ding'}, ...[8, 14, 19, 27, 33].map((at) => ({at: coinsTitleAt(fps) + at, name: 'tick', volume: 0.45}))]},
+  K8: {name: '3D logo end card', C: Logo3D, dur: 3, sfx: (_p, _d, fps) => [{at: 0, name: 'whoosh_low'}, {at: Math.round(fps * 0.8), name: 'impact', volume: 0.8}, {at: Math.round(fps * 0.8) + 2, name: 'sparkle', volume: 0.6}, {at: Math.round(fps * 0.8) + 6, name: 'pop', volume: 0.7}]},
   // CTA
   K2: {name: 'Comment keyword CTA', C: CommentKeyword, dur: 3, sfx: (p, d, fps) => {
     const t = commentTimes(p, d, fps);

@@ -108,6 +108,13 @@ The keyword slams in, then gets typed into a generic comment box and posted. Use
 `{"button": "MESSAGE US", "title": "Ready ka na?", "sub": "Reply within 5 minutes", "icon": "💬", "after": "SENT ✓", "pressAt": 1.0, "hand": true}`
 `button` defaults to `brand.cta`. `after` (optional) swaps the label after the tap. `hand: false` hides the finger.
 
+## D3 3D text reveal · D5 3D phone mockup · D6 Coins rain · K8 3D logo end card (3D look)
+D3 `{"text": "Ads na|Bumebenta", "sub": "optional line", "color": "#FFD23F"}` · `|` splits lines (1–3 short lines). Extruded text flies in from depth and lands at ~0.55 s.
+D5 `{"media": "my_ad.mp4", "title": "Ganito dapat ang ad mo", "sub": "Hook · Product · Captions", "side": "right"}` · a 9:16 clip or image plays on the phone screen (it is cover-fitted).
+D6 `{"title": "₱999", "sub": "Starter package", "symbol": "₱", "count": 36}` · gold coins rain behind the headline; keep the headline short (price, SALE, -50%).
+K8 `{"logo": "logo.png", "name": "Brand", "cta": "MESSAGE US", "handle": "@page"}` · without a logo the brand name becomes 3D text.
+D5 and D6 use WebGL (three.js); the engine renders with `--gl=angle`. On a machine with no GPU, set `Config.setChromiumOpenGlRenderer('swangle')` in `engine/remotion.config.ts`.
+
 ## K7 Brand end card · K1 One-line CTA · K4 Offer card
 K7 `{"logo": "logo.png", "headline": "Order na today", "cta": "MESSAGE US", "handle": "@yourpage"}`
 K1 `{"cta": "MESSAGE US", "arrow": "👇"}`

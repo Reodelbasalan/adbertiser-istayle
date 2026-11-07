@@ -67,10 +67,10 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | C9 | Pop-up book | planned | pop-up book, fold, paper fold | Pages fold up into scenes | Storytelling | — |
 | D1 | 3D UI cards | planned | 3d cards, tilt, perspective | Tilted panels with depth | Software | — |
 | D2 | 2.5D parallax photo | planned | parallax, 2.5d, depth, photo motion | A still photo moves with depth | Product and place photos | Will use Depth Anything V2 Small (Apache 2.0) |
-| D3 | 3D text / logo reveal | planned | 3d text, 3d logo, logo reveal, metallic | Metallic text spins in | Intros | Needs @remotion/three |
+| D3 | 3D text / logo reveal | template | 3d text, 3d logo, logo reveal, metallic | Metallic text spins in | Intros | text ("line 1|line 2"), sub, color, gridColor |
 | D4 | Floating product spin | planned | 3d product, product spin, floating product | Product floats and turns | E-commerce | Meanwhile: F1 |
-| D5 | 3D phone / laptop mockup | planned | phone mockup, laptop mockup, device | Device turns, your ad on its screen | Agencies, apps | — |
-| D6 | 3D icons / coins rain | planned | coins, money rain, 3d icons | Coins fall and bounce | Money topics | — |
+| D5 | 3D phone / laptop mockup | template | phone mockup, laptop mockup, device | Device turns, your ad on its screen | Agencies, apps | media (9:16 clip or image on the screen), title, sub, side, phoneColor |
+| D6 | 3D icons / coins rain | template | coins, money rain, 3d icons | Coins fall and bounce | Money topics | title (price / SALE), sub, symbol, count, color |
 | D7 | 3D bar chart | planned | 3d chart, growth chart | Bars rise in 3D | Growth (label SAMPLE) | Meanwhile: B5 |
 | D8 | Photo to 3D model | recipe | image to 3d, 3d model, glb | A product photo becomes a model | Product spins | Make a .glb with an open image-to-3D model (e.g. TripoSR, MIT); D4 will load it |
 | D9 | Photo layer fly-through | planned | fly-through, layered photo, camera fly | Camera flies into a layered photo | Hooks, places | — |
@@ -156,5 +156,5 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | K5 | Loop ending | recipe | loop, seamless loop | Last frame flows into the first | Reels, TikTok | Repeat scene 1's style/props as the last scene; skip end cards |
 | K6 | Logo animation outro | planned | logo outro, logo animation | Logo reveal | Brand outros | Meanwhile: K7 |
 | K7 | Brand end card | template | end card, outro, brand card | Logo, headline, pulsing CTA button | Every ad | logo, headline, cta, handle |
-| K8 | 3D logo end card | planned | 3d logo end | Spinning metallic logo | Premium outros | Needs D3 |
+| K8 | 3D logo end card | template | 3d logo end | Spinning metallic logo | Premium outros | logo (PNG) or name, cta, handle |
 | U1 | Footage / photo shot | template | footage, broll, b-roll, photo, video clip, shot | Your clip or photo with zoom | The base of every ad | media, zoom (in/out/none), punchAt, title, titleAt |
