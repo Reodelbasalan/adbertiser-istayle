@@ -4,8 +4,8 @@
 
 Adbertiser Istayle is a free Claude Code plugin that turns "gawa ka ng ad, paper style" into a finished, captioned, sound-designed video. Every style has an ID (C1 paper cutout, G6 text behind subject, H9 paper rip...), so you can mix them like a menu: `J1 + C1 + F6 + K7`.
 
-- **64 templates render today, in 5 looks: 2D motion, paper and craft, social UI, footage edit and 3D** (3D text, 3D phone, 3D cards, 3D bar chart, product spin, photo fly-through, coins rain, cube transition, 3D logo, hooks, paper and craft, chat stories, newspaper, doodles, myth vs fact, us vs them, split-screen dialogue, green screen reaction, slots counter, price slams, product hero, captions, transitions, overlays, comment and button CTAs, end cards).
-- **89 more** are in the catalog as planned templates or step-by-step recipes (3D, AI looks, footage formats), with packs added over time.
+- **72 templates render today, in 6 looks: 2D motion, paper and craft, social UI, footage edit, 3D and neon/hologram** (neon sign, hologram HUD and product, neon price and CTA, 3D text, 3D phone, 3D cards, 3D bar chart, product spin, photo fly-through, coins rain, cube transition, 3D logo, hooks, paper and craft, chat stories, newspaper, doodles, myth vs fact, us vs them, split-screen dialogue, green screen reaction, slots counter, price slams, product hero, captions, transitions, overlays, comment and button CTAs, end cards).
+- **87 more** are in the catalog as planned templates or step-by-step recipes (3D, AI looks, footage formats), with packs added over time.
 - 9:16, 16:9, 1:1 and 4:5. Safe-zone aware. Auto SFX on every pop. Mastered to -14 LUFS.
 - No stock media or paid packs inside: textures are procedural, SFX are synthesized at setup, fonts are open (OFL).
 
@@ -17,7 +17,7 @@ Adbertiser Istayle is a free Claude Code plugin that turns "gawa ka ng ad, paper
 <tr><td align="center"><img src="H9.jpg" width="180" alt="H9"><br><sub><b>H9</b> Paper rip</sub></td><td align="center"><img src="G1.jpg" width="180" alt="G1"><br><sub><b>G1</b> Gold active word</sub></td><td align="center"><img src="K4.jpg" width="180" alt="K4"><br><sub><b>K4</b> Offer card</sub></td><td align="center"><img src="K7.jpg" width="180" alt="K7"><br><sub><b>K7</b> Brand end card</sub></td></tr>
 </table>
 
-All 64 template previews: [previews/](previews/README.md)
+All 72 template previews: [previews/](previews/README.md)
 <!-- /GALLERY -->
 
 ## Install

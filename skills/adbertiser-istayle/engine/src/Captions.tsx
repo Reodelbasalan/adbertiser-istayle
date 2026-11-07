@@ -4,7 +4,7 @@ import {useBrand} from './brand';
 import {alpha, ink, pop, useLayout} from './lib/util';
 import type {Word} from './types';
 
-export const CAPTION_STYLES = ['G1', 'G2', 'G3', 'G7', 'G8'];
+export const CAPTION_STYLES = ['G1', 'G2', 'G3', 'G7', 'G8', 'G13'];
 
 const chunk = (ws: Word[], max: number, gap = 0.45) => {
   const out: Word[][] = [];
@@ -21,7 +21,7 @@ const chunk = (ws: Word[], max: number, gap = 0.45) => {
   return out;
 };
 
-/** word-timed captions. G1 gold active word · G2 one big word · G3 karaoke box · G7 highlighter · G8 TikTok native */
+/** word-timed captions. G1 gold active word · G2 one big word · G3 karaoke box · G7 highlighter · G8 TikTok native · G13 neon glow */
 export const Captions: React.FC<{words: Word[]; style?: string; y?: number; hidden?: [number, number][]}> = ({words, style = 'G1', y, hidden = []}) => {
   const f = useCurrentFrame();
   const L = useLayout();
@@ -63,6 +63,10 @@ export const Captions: React.FC<{words: Word[]; style?: string; y?: number; hidd
         if (style === 'G7' && passed)
           Object.assign(base, {color: '#111', WebkitTextStroke: '0', textShadow: 'none', padding: `0 ${size * 0.1}px`, backgroundImage: `linear-gradient(${alpha(b.primary, 0.92)}, ${alpha(b.primary, 0.92)})`, backgroundRepeat: 'no-repeat', backgroundSize: `${Math.min(1, (t - w.s) / 0.15) * 100}% 80%`, backgroundPosition: 'left center'});
         if (style === 'G8') Object.assign(base, {transform: `scale(${active ? 1.04 : 1})`});
+        if (style === 'G13') {
+          const c = active ? b.primary : b.secondary;
+          Object.assign(base, {WebkitTextStroke: '0', color: active ? '#FFFFFF' : alpha('#FFFFFF', 0.88), textShadow: `0 0 ${2 * L.u}px #fff, 0 0 ${8 * L.u}px ${c}, 0 0 ${18 * L.u}px ${c}, 0 0 ${36 * L.u}px ${c}`});
+        }
         return (
           <span key={`${w.s}-${i}`} style={base}>
             {w.w}

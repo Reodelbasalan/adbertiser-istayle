@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Easing, random, useCurrentFrame} from 'remotion';
 import {useBrand} from './brand';
 import {tearLine} from './lib/Paper';
-import {useLayout} from './lib/util';
+import {alpha, useLayout} from './lib/util';
 
 /** transition ID → default SFX */
 export const TRANSITION_SFX: Record<string, string> = {
@@ -16,6 +16,7 @@ export const TRANSITION_SFX: Record<string, string> = {
   H10: 'whoosh_fast',
   H12: 'whoosh_soft',
   H14: 'whoosh',
+  H17: 'buzz',
 };
 
 export const TRANSITIONS = Object.keys(TRANSITION_SFX);
@@ -50,6 +51,16 @@ export const TransitionIn: React.FC<{type?: string; frames: number; children: Re
           <AbsoluteFill style={{background: 'linear-gradient(115deg, transparent 30%, rgba(255,255,255,.9) 50%, transparent 70%)', transform: `translateX(${(t * 2.4 - 1.2) * 100}%)`, mixBlendMode: 'screen'}} />
         </AbsoluteFill>
       );
+    case 'H17': {
+      // neon flicker: the new scene buzzes on like a neon tube
+      const on = [0, 1, 0, 0, 1, 0.4, 1, 0, 1, 1, 1, 1][Math.min(11, Math.floor(f))] ?? 1;
+      return (
+        <AbsoluteFill style={{opacity: on, filter: on ? `brightness(${1.7 - 0.7 * e}) saturate(1.4)` : undefined}}>
+          {children}
+          <AbsoluteFill style={{backgroundImage: `repeating-linear-gradient(0deg, ${alpha(b.primary, 0.3)} 0 ${3 * L.u}px, transparent ${3 * L.u}px ${9 * L.u}px)`, opacity: v}} />
+        </AbsoluteFill>
+      );
+    }
     case 'H14':
       // cube spin: the new scene is the cube's right face turning to the front
       return (

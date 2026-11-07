@@ -121,18 +121,28 @@ G11 `{"media": "clip.mp4", "title": "Ad na|Panalo", "sub": "optional", "position
 H14 cube spin: put `"transition": "H14"` on the entering scene; both scenes turn like a cube.
 D5 and D6 use WebGL (three.js); the engine renders with `--gl=angle`. On a machine with no GPU, set `Config.setChromiumOpenGlRenderer('swangle')` in `engine/remotion.config.ts`.
 
+## Neon look: B12 Neon sign · B26 Hologram HUD · B27 Neon price · B28 Hologram product · B29 Neon checklist · K9 Neon CTA · G13 Neon captions · H17 Neon flicker
+Neon colors come from the brand (`primary` = neon 1, `secondary` = neon 2); override per scene with `color` / `color2`. Every part takes an optional `bg` photo or clip (shown dark).
+B12 `{"text": "Bukas na|Ads mo?", "sub": "optional", "script": true}` · `|` splits lines; line 1 uses the hand font (`script: false` for block letters). Lines flicker on one by one.
+B26 `{"value": "98%", "label": "AD SCORE", "items": ["Hook sa 3 sec", "Malinaw na offer"], "title": "optional"}` · rings spin around the value; items type in.
+B27 `{"label": "PROMO", "price": "₱999", "oldPrice": "₱1,499", "note": "This week only"}` · neon frame, price buzzes on, neon strike on the old price.
+B28 `{"product": "bottle.png", "title": "Bagong launch", "sub": "optional"}` · transparent PNG shown as a projected hologram.
+B29 `{"title": "Kasama na", "items": ["Script", "Edit + captions", "Music + SFX"], "at": [0.4, 1.2, 2.0]}` · `at` (seconds) times each line to the VO.
+K9 `{"cta": "MESSAGE US", "title": "Ready ka na?", "handle": "@page", "arrow": true}`
+G13 captions: `job.captions.style = "G13"`. H17: `"transition": "H17"` on the entering scene.
+
 ## K7 Brand end card · K1 One-line CTA · K4 Offer card
 K7 `{"logo": "logo.png", "headline": "Order na today", "cta": "MESSAGE US", "handle": "@yourpage"}`
 K1 `{"cta": "MESSAGE US", "arrow": "👇"}`
 K4 `{"title": "Starter Package", "items": ["5 video ads", "Captions + music"], "price": "₱4,999", "note": "Limited slots", "cta": "MESSAGE US"}`
 `cta` defaults to `brand.cta`; `logo` to `brand.logo`.
 
-## G1 G2 G3 G7 G8 Captions
+## G1 G2 G3 G7 G8 G13 Captions
 `job.captions = {"style": "G1", "file": "words.json", "y": 0.63}`
 Captions hide on templates that show their own big text (hooks, prices, chats, cards, end cards) and show on footage (U1, B11). Force per scene with `"captions": true` or `false`.
 `words.json`: `[{"w": "Hello", "s": 0.12, "e": 0.40}]`, or `[{"word", "start", "end"}]`, or Whisper-style segments with `words`. `y` = 0–1 of the frame height (keep 0.25–0.75 on 9:16). Captions follow `audio.vo` timing, so transcribe the VO first.
 
-## H1 H2 H3 H4 H6 H7 H9 H10 H12 H14 Transitions
+## H1 H2 H3 H4 H6 H7 H9 H10 H12 H14 H17 Transitions
 Put `"transition": "H9"` on the scene that comes IN. Each one has its own SFX. Mix 2–3 kinds per ad; don't use a different one on every cut.
 
 ## I1 I2 I5 I10 Overlays

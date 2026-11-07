@@ -42,7 +42,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | B9 | Timeline / roadmap | planned | timeline, roadmap, steps, process | Steps along a line | Courses, process | Meanwhile: C3 notes |
 | B10 | Newspaper headline | template | newspaper, news, breaking, headline, balita | Page spins in, BREAKING slams | News-style hooks | paper, headline, sub, image, date, banner |
 | B11 | Doodle on footage | template | doodle, scribble, marker, circle, arrow, annotate | Marker circles, arrows, underlines | Tutorials, edu | media, marks[{type,x,y,w,h,at,label,color}] |
-| B12 | Neon hologram | planned | neon, hologram, hud, futuristic | Glowing HUD graphics | Tech topics | — |
+| B12 | Neon sign | template | neon, neon sign, glow sign, hologram | Neon tube text flickers on | Night vibe, tech, promos | text ("line 1|line 2"), sub, color, color2, script, bg |
 | B13 | Glitch / VHS / Y2K | planned | glitch scene, vhs, y2k, retro tv | RGB split, scanlines | Pattern interrupts | Meanwhile: H2 transition + I2 grain |
 | B14 | Premium punch-zoom | recipe | premium, punch zoom, light streak | Punch zooms, light sweeps | Short-form content | U1 with punchAt + H7/H3 + G1 |
 | B15 | Clean minimal | planned | minimal, clean, corporate, elegant | White space, thin lines | Clinics, real estate | Meanwhile: K7 with a light brand.bg |
@@ -56,6 +56,10 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | B23 | Workflow steps | planned | workflow, 3 steps, how it works | 3-step process animation | Services | Meanwhile: C3 notes |
 | B24 | Sample montage | planned | montage, portfolio grid, samples | Grid of output samples | Portfolio proof | Meanwhile: C2 with photos |
 | B25 | Line-art draw-on | planned | line art, icon draw, outline animation | Outline icons draw themselves | Features | — |
+| B26 | Hologram HUD | template | hud, hologram, futuristic ui | Spinning rings, value, typed items | Tech, AI, results | value, label, items, title, color, bg |
+| B27 | Neon price | template | neon price, neon promo | Neon frame, price buzzes on | Promos | label, price, oldPrice, note, color, color2 |
+| B28 | Hologram product | template | hologram product, projected product | Product as a flickering hologram | Tech, launches | product (PNG), title, sub, color2 |
+| B29 | Neon checklist | template | neon list, neon checklist | Neon lines light up with checks | Inclusions, steps | title, items, at (seconds per line) |
 | C1 | Paper cutout stop-motion | template | paper, paper cutout, cutout, craft, stop motion, handmade | Torn-paper letters, cut-out items, choppy motion | Food, local biz, explainers | title, sub, items[{emoji or image,label}], colors[], paperColor |
 | C2 | Scrapbook collage | template | scrapbook, collage, polaroid, tape | Polaroids drop in with tape and notes | Product features, stories | title, photos[], notes[], paperColor |
 | C3 | Sticky notes | template | sticky notes, post-it, notes, checklist | Notes slap on a board, checks drawn | Tips, plans, steps | title, notes[], check, boardColor |
@@ -111,6 +115,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | G10 | Lower-third name tag | planned | lower third, name tag, title bar | Name + title bar | Founders, experts | Meanwhile: U1 title |
 | G11 | 3D extruded title | template | 3d title, extruded text | Thick 3D letters | Hooks | media, title ("line 1|line 2"), sub, position top/middle/bottom, titleAt, color |
 | G12 | Split color words | recipe | color word, key word color | Key word in brand color | Offers | J1 highlight, or B1 accent |
+| G13 | Neon captions | template | neon captions, glow captions | Glowing words, active word in brand color | Neon look | `captions.style: "G13"` |
 | H1 | Slide | template | slide, push | Next scene slides in | Any cut | scene.transition "H1" |
 | H2 | Glitch | template | glitch, rgb split, digital | Jitter + color bars | Tech, energy | scene.transition "H2" |
 | H3 | Glare / light sweep | template | glare, light sweep, shine | A shine passes as it fades in | Beauty, premium | scene.transition "H3" |
@@ -127,6 +132,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | H14 | 3D cube spin | template | cube, 3d spin | Scenes on a turning cube | Lists | "transition": "H14" on the entering scene |
 | H15 | Pixel / mosaic | planned | pixel, mosaic, pixelate | Pixels resolve | Tech | — |
 | H16 | Match cut | recipe | match cut | Cut on matching shape or motion | Story edits | Plan two U1 shots that match; no effect needed |
+| H17 | Neon flicker | template | neon flicker, flicker transition | New scene buzzes on like a tube | Neon look | `"transition": "H17"` |
 | I1 | Watermark | template | watermark, logo bug | Logo or brand name, top right | Every edit | job.overlays.watermark |
 | I2 | Film grain | template | grain, film grain, texture | Moving grain | Retro, paper, cinematic | job.overlays.grain (0–0.4) |
 | I3 | Light leaks | planned | light leaks | Warm color leaks | Lifestyle | — |
@@ -157,4 +163,5 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | K6 | Logo animation outro | planned | logo outro, logo animation | Logo reveal | Brand outros | Meanwhile: K7 |
 | K7 | Brand end card | template | end card, outro, brand card | Logo, headline, pulsing CTA button | Every ad | logo, headline, cta, handle |
 | K8 | 3D logo end card | template | 3d logo end | Spinning metallic logo | Premium outros | logo (PNG) or name, cta, handle |
+| K9 | Neon CTA | template | neon cta, neon button | Neon button + chasing arrows | Neon look outros | cta, title, handle, arrow, color, color2 |
 | U1 | Footage / photo shot | template | footage, broll, b-roll, photo, video clip, shot | Your clip or photo with zoom | The base of every ad | media, zoom (in/out/none), punchAt, title, titleAt |
