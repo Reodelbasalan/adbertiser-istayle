@@ -5,7 +5,7 @@ import {Captions} from './Captions';
 import {asset} from './lib/Media';
 import {Grain, SampleTag, Vignette, Watermark} from './Overlays';
 import {OWN_TEXT, REGISTRY} from './registry';
-import {TRANSITION_SFX, TransitionIn} from './Transitions';
+import {TRANSITION_SFX, TransitionIn, TransitionOut} from './Transitions';
 import type {Job, Scene, SceneProps} from './types';
 
 export const SIZES: Record<string, [number, number]> = {'9:16': [1080, 1920], '16:9': [1920, 1080], '1:1': [1080, 1080], '4:5': [1080, 1350]};
@@ -61,9 +61,11 @@ const Body: React.FC<Job> = (job) => {
         const p = {...(e?.props ?? {}), ...(s.props ?? {})};
         return (
           <Sequence key={i} from={from} durationInFrames={d + tail} name={`${s.style} ${e?.name ?? ''}`}>
-            <TransitionIn type={i > 0 ? s.transition : undefined} frames={T}>
-              {e ? <e.C p={p} dur={d} /> : <Missing id={s.style} p={p} dur={d} />}
-            </TransitionIn>
+            <TransitionOut type={tail ? next?.s.transition : undefined} start={d} frames={T}>
+              <TransitionIn type={i > 0 ? s.transition : undefined} frames={T}>
+                {e ? <e.C p={p} dur={d} /> : <Missing id={s.style} p={p} dur={d} />}
+              </TransitionIn>
+            </TransitionOut>
           </Sequence>
         );
       })}

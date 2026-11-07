@@ -65,15 +65,15 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | C7 | Polaroid stack | planned | polaroid stack, photo pile | Photos drop and pile up | Results, events | Meanwhile: C2 |
 | C8 | Crayon / marker kid style | planned | crayon, kids drawing, marker drawing | Wobbly hand-drawn lines | Family products | — |
 | C9 | Pop-up book | planned | pop-up book, fold, paper fold | Pages fold up into scenes | Storytelling | — |
-| D1 | 3D UI cards | planned | 3d cards, tilt, perspective | Tilted panels with depth | Software | — |
+| D1 | 3D UI cards | template | 3d cards, tilt, perspective | Tilted panels with depth | Software | cards [{icon, value, label} or {image}], title, bg |
 | D2 | 2.5D parallax photo | planned | parallax, 2.5d, depth, photo motion | A still photo moves with depth | Product and place photos | Will use Depth Anything V2 Small (Apache 2.0) |
 | D3 | 3D text / logo reveal | template | 3d text, 3d logo, logo reveal, metallic | Metallic text spins in | Intros | text ("line 1|line 2"), sub, color, gridColor |
-| D4 | Floating product spin | planned | 3d product, product spin, floating product | Product floats and turns | E-commerce | Meanwhile: F1 |
+| D4 | Floating product spin | template | 3d product, product spin, floating product | Product floats and turns | E-commerce | product (transparent PNG), title, sub |
 | D5 | 3D phone / laptop mockup | template | phone mockup, laptop mockup, device | Device turns, your ad on its screen | Agencies, apps | media (9:16 clip or image on the screen), title, sub, side, phoneColor |
 | D6 | 3D icons / coins rain | template | coins, money rain, 3d icons | Coins fall and bounce | Money topics | title (price / SALE), sub, symbol, count, color |
-| D7 | 3D bar chart | planned | 3d chart, growth chart | Bars rise in 3D | Growth (label SAMPLE) | Meanwhile: B5 |
+| D7 | 3D bar chart | template | 3d chart, growth chart | Bars rise in 3D | Growth (label SAMPLE) | bars [{label, value}], title, prefix, suffix, color (real numbers or SAMPLE) |
 | D8 | Photo to 3D model | recipe | image to 3d, 3d model, glb | A product photo becomes a model | Product spins | Make a .glb with an open image-to-3D model (e.g. TripoSR, MIT); D4 will load it |
-| D9 | Photo layer fly-through | planned | fly-through, layered photo, camera fly | Camera flies into a layered photo | Hooks, places | — |
+| D9 | Photo layer fly-through | template | fly-through, layered photo, camera fly | Camera flies into a layered photo | Hooks, places | photos (2–6 photos/clips), labels, title |
 | D10 | Isometric 3D store | recipe | diorama, isometric store, miniature store | A small 3D diorama of the business | Local biz | Generate a still with an image model → U1 zoom in |
 | E1 | 3D cartoon render look | recipe | 3d cartoon, animated film look, cgi cartoon | Soft 3D render look | B-roll, objects, places | Image/video model, people-free scenes → U1 |
 | E2 | Claymation | recipe | clay, claymation, plasticine | Clay textures | Food, kids, fun brands | Image/video model → U1 |
@@ -109,7 +109,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | G8 | Native outline | template | tiktok captions, native captions, white outline | White bold, black outline | Native-looking ads | job.captions {style:"G8"} |
 | G9 | Emoji captions | planned | emoji captions | Emojis pop at key words | Casual content | — |
 | G10 | Lower-third name tag | planned | lower third, name tag, title bar | Name + title bar | Founders, experts | Meanwhile: U1 title |
-| G11 | 3D extruded title | planned | 3d title, extruded text | Thick 3D letters | Hooks | — |
+| G11 | 3D extruded title | template | 3d title, extruded text | Thick 3D letters | Hooks | media, title ("line 1|line 2"), sub, position top/middle/bottom, titleAt, color |
 | G12 | Split color words | recipe | color word, key word color | Key word in brand color | Offers | J1 highlight, or B1 accent |
 | H1 | Slide | template | slide, push | Next scene slides in | Any cut | scene.transition "H1" |
 | H2 | Glitch | template | glitch, rgb split, digital | Jitter + color bars | Tech, energy | scene.transition "H2" |
@@ -124,7 +124,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | H11 | Ink / liquid wipe | planned | ink, liquid, fluid | Ink spreads to reveal | Soft brands | — |
 | H12 | Circle reveal | template | circle, iris, shape reveal, mask | Circle opens from the center | Reveals, end cards | scene.transition "H12" |
 | H13 | Page turn | planned | page turn, page flip | Page curls over | Stories | — |
-| H14 | 3D cube spin | planned | cube, 3d spin | Scenes on a turning cube | Lists | — |
+| H14 | 3D cube spin | template | cube, 3d spin | Scenes on a turning cube | Lists | "transition": "H14" on the entering scene |
 | H15 | Pixel / mosaic | planned | pixel, mosaic, pixelate | Pixels resolve | Tech | — |
 | H16 | Match cut | recipe | match cut | Cut on matching shape or motion | Story edits | Plan two U1 shots that match; no effect needed |
 | I1 | Watermark | template | watermark, logo bug | Logo or brand name, top right | Every edit | job.overlays.watermark |

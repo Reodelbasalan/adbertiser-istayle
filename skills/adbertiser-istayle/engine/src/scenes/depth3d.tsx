@@ -13,13 +13,13 @@ import type {SceneProps} from '../types';
 // 3D look: D3 3D text reveal · D5 3D phone mockup · D6 coins rain · K8 3D logo end card.
 // D3 and K8 are CSS 3D (any font, no GPU); D5 and D6 are three.js through @remotion/three.
 type P = Record<string, any>;
-const range = (k: number) => Array.from({length: Math.max(0, k)}, (_, i) => i);
+export const range = (k: number) => Array.from({length: Math.max(0, k)}, (_, i) => i);
 const off = (v: unknown) => v === false || v === '';
-const txt = (v: unknown, d: string) => (off(v) ? '' : typeof v === 'string' || typeof v === 'number' ? String(v) : d);
+export const txt = (v: unknown, d: string) => (off(v) ? '' : typeof v === 'string' || typeof v === 'number' ? String(v) : d);
 
 /* ---------------- CSS 3D helpers ---------------- */
 
-const mix = (hex: string, k: number) => {
+export const mix = (hex: string, k: number) => {
   // darken a hex color by k (0..1)
   if (!hex.startsWith('#')) return hex;
   const h = hex.length === 4 ? hex.slice(1).split('').map((c) => c + c).join('') : hex.slice(1, 7);
@@ -29,7 +29,7 @@ const mix = (hex: string, k: number) => {
 };
 
 /** extruded text: stacked layers in CSS 3D; front face gets a moving metallic sheen */
-const Extruded: React.FC<{text: string; size: number; font: string; face: string; side: string; depth: number; sheen: number}> = ({text, size, font, face, side, depth, sheen}) => {
+export const Extruded: React.FC<{text: string; size: number; font: string; face: string; side: string; depth: number; sheen: number}> = ({text, size, font, face, side, depth, sheen}) => {
   const layers = 26;
   const common: React.CSSProperties = {fontFamily: font, fontSize: size, lineHeight: 1.02, whiteSpace: 'nowrap', textTransform: 'uppercase', textAlign: 'center'};
   return (
@@ -436,6 +436,89 @@ export const CoinsRain: React.FC<SceneProps> = ({p}) => {
       {sub && (
         <div style={{position: 'absolute', left: L.pad, right: L.pad, top: L.portrait ? L.mid + size * 0.45 : L.H * 0.5 + size * 0.5, textAlign: 'center', fontFamily: b.fB, fontWeight: 800, fontSize: 50 * L.u, color: b.text, opacity: ease(f, coinsTitleAt(L.fps) + 6, coinsTitleAt(L.fps) + 14), textShadow: '0 4px 16px rgba(0,0,0,.85)'}}>{sub}</div>
       )}
+    </AbsoluteFill>
+  );
+};
+
+/* ---------------- D1 3D UI cards ---------------- */
+
+const CARDS = [
+  {icon: '📈', value: '+120%', label: 'Reach this week'},
+  {icon: '💬', value: '48', label: 'New messages'},
+  {icon: '🛒', value: '12', label: 'Orders today'},
+];
+export const cardsList = (p: P): {icon?: string; value?: string; label?: string; image?: string}[] => (Array.isArray(p.cards) && p.cards.length ? p.cards : CARDS).slice(0, 4);
+export const cardTimes = (k: number, fps: number) => range(k).map((i) => Math.round(fps * 0.25) + i * 7);
+
+/** D1: glass UI cards (stats, posts, screenshots) float in 3D at different depths while the camera drifts */
+export const Cards3D: React.FC<SceneProps> = ({p}) => {
+  const f = useCurrentFrame();
+  const L = useLayout();
+  const b = useBrand();
+  const cards = cardsList(p);
+  const ts = cardTimes(cards.length, L.fps);
+  const title = txt(p.title, 'Ganito ang resulta');
+  const cw = L.portrait ? L.W * 0.66 : L.W * 0.32;
+  const ch = (cards.some((c) => c.image) ? 1.25 : 0.36) * cw;
+  const gap = L.portrait ? Math.min(ch * 1.05, (L.H * 0.5) / cards.length) : 0;
+  const camY = -16 + Math.sin(f / (L.fps * 1.3)) * 7;
+  const camX = 10 + Math.sin(f / (L.fps * 1.7)) * 4;
+  const tk = pop(f, L.fps, 0, 220, 13);
+  return (
+    <AbsoluteFill style={{background: `radial-gradient(circle at 50% 50%, ${alpha(b.secondary, 0.35)} 0%, ${b.bg} 55%, #000 100%)`, overflow: 'hidden'}}>
+      {p.bg && <Img src={asset(p.bg)} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.25, filter: `blur(${12 * L.u}px)`}} />}
+      <Glow color={b.primary} strength={0.18} y="55%" />
+      {title && (
+        <div style={{position: 'absolute', left: L.pad, right: L.pad, top: L.portrait ? L.H * 0.14 : L.H * 0.08, textAlign: 'center', fontFamily: b.fH, fontSize: Math.min(110 * L.u, fitSize(title, L.u, L.portrait, 130)), lineHeight: 1.02, color: b.text, textTransform: 'uppercase', opacity: tk, transform: `translateY(${(1 - tk) * -40 * L.u}px)`}}>{title}</div>
+      )}
+      <AbsoluteFill style={{perspective: 1500 * L.u, alignItems: 'center', justifyContent: 'center', paddingTop: L.portrait ? L.H * 0.1 : L.H * 0.12}}>
+        <div style={{position: 'relative', width: L.portrait ? cw : cw * cards.length + 40 * L.u * (cards.length - 1), height: L.portrait ? gap * (cards.length - 1) + ch : ch, transformStyle: 'preserve-3d', transform: `rotateX(${camX}deg) rotateY(${camY}deg)`}}>
+          {cards.map((c, i) => {
+            const k = pop(f, L.fps, ts[i], 170, 14);
+            const z = (cards.length / 2 - i) * 90 * L.u;
+            const x = L.portrait ? (i % 2 ? 1 : -1) * cw * 0.12 : i * (cw + 40 * L.u);
+            const y = L.portrait ? i * gap : 0;
+            const bob = Math.sin(f / (L.fps * 0.6) + i) * 8 * L.u;
+            return (
+              <div
+                key={i}
+                style={{
+                  position: 'absolute',
+                  left: x,
+                  top: y + bob,
+                  width: cw,
+                  height: ch,
+                  boxSizing: 'border-box',
+                  borderRadius: 32 * L.u,
+                  background: `linear-gradient(135deg, ${alpha('#FFFFFF', 0.2)}, ${alpha('#FFFFFF', 0.06)})`,
+                  border: `${2 * L.u}px solid ${alpha('#FFFFFF', 0.35)}`,
+                  backdropFilter: `blur(${16 * L.u}px)`,
+                  boxShadow: `0 ${30 * L.u}px ${60 * L.u}px rgba(0,0,0,.45), inset 0 ${2 * L.u}px 0 ${alpha('#FFFFFF', 0.3)}`,
+                  transform: `translateZ(${z - (1 - k) * 900 * L.u}px)`,
+                  opacity: Math.min(1, k * 1.6),
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 28 * L.u,
+                  padding: c.image ? 14 * L.u : `0 ${36 * L.u}px`,
+                  overflow: 'hidden',
+                }}
+              >
+                {c.image ? (
+                  <Img src={asset(c.image)} style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: 22 * L.u}} />
+                ) : (
+                  <>
+                    {c.icon && <div style={{width: ch * 0.62, height: ch * 0.62, borderRadius: '50%', background: alpha(b.primary, 0.2), border: `${3 * L.u}px solid ${b.primary}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: ch * 0.32, flexShrink: 0}}>{c.icon}</div>}
+                    <div style={{minWidth: 0}}>
+                      {c.value && <div style={{fontFamily: b.fH, fontSize: ch * 0.42, lineHeight: 1, color: b.primary}}>{c.value}</div>}
+                      {c.label && <div style={{fontFamily: b.fB, fontWeight: 700, fontSize: ch * 0.17, color: alpha(b.text, 0.85), marginTop: 6 * L.u, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>{c.label}</div>}
+                    </div>
+                  </>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };

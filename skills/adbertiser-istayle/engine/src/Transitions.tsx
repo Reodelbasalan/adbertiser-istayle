@@ -15,6 +15,7 @@ export const TRANSITION_SFX: Record<string, string> = {
   H9: 'rip',
   H10: 'whoosh_fast',
   H12: 'whoosh_soft',
+  H14: 'whoosh',
 };
 
 export const TRANSITIONS = Object.keys(TRANSITION_SFX);
@@ -47,6 +48,13 @@ export const TransitionIn: React.FC<{type?: string; frames: number; children: Re
         <AbsoluteFill style={{opacity: Math.min(1, t * 2.5)}}>
           {children}
           <AbsoluteFill style={{background: 'linear-gradient(115deg, transparent 30%, rgba(255,255,255,.9) 50%, transparent 70%)', transform: `translateX(${(t * 2.4 - 1.2) * 100}%)`, mixBlendMode: 'screen'}} />
+        </AbsoluteFill>
+      );
+    case 'H14':
+      // cube spin: the new scene is the cube's right face turning to the front
+      return (
+        <AbsoluteFill style={{perspective: 1800 * L.u}}>
+          <AbsoluteFill style={{transformOrigin: '0% 50%', transform: `translateX(${v * 100}%) rotateY(${v * 90}deg)`, filter: `brightness(${0.55 + 0.45 * e})`}}>{children}</AbsoluteFill>
         </AbsoluteFill>
       );
     case 'H12':
@@ -92,4 +100,21 @@ export const TransitionIn: React.FC<{type?: string; frames: number; children: Re
     default:
       return <AbsoluteFill>{children}</AbsoluteFill>;
   }
+};
+
+/** transitions that also move the OUTGOING scene during the next scene's entry */
+export const OUT_TRANSITIONS = new Set(['H14']);
+
+/** wraps the LEAVING scene; `start` = frame where the next scene starts entering */
+export const TransitionOut: React.FC<{type?: string; start: number; frames: number; children: React.ReactNode}> = ({type, start, frames, children}) => {
+  const f = useCurrentFrame();
+  const L = useLayout();
+  if (!type || !OUT_TRANSITIONS.has(type) || f < start) return <AbsoluteFill>{children}</AbsoluteFill>;
+  const e = Easing.out(Easing.cubic)(Math.min(1, (f - start) / frames));
+  // H14: the old face turns away to the left around its right edge
+  return (
+    <AbsoluteFill style={{perspective: 1800 * L.u}}>
+      <AbsoluteFill style={{transformOrigin: '100% 50%', transform: `translateX(${-e * 100}%) rotateY(${-e * 90}deg)`, filter: `brightness(${1 - 0.45 * e})`}}>{children}</AbsoluteFill>
+    </AbsoluteFill>
+  );
 };

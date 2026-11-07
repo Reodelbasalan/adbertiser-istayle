@@ -6,7 +6,8 @@ import {Newspaper, ServicesGrid, StatCounters} from './scenes/data';
 import {PaperCutout, Scrapbook, StickyNotes, TornReveal} from './scenes/paper';
 import {FootageShot, PriceSlam, ProductHero, TextBehind} from './scenes/product';
 import {HookQuestion, KineticText, POVHook} from './scenes/text';
-import {CoinsRain, Logo3D, Phone3D, Text3D, coinsTitleAt, textLand} from './scenes/depth3d';
+import {Cards3D, CoinsRain, Logo3D, Phone3D, Text3D, cardTimes, cardsList, coinsTitleAt, textLand} from './scenes/depth3d';
+import {Bars3D, FlyThrough, ProductSpin, Title3D, barTimes, barsList, flyCount} from './scenes/depth3d2';
 import {ButtonPress, CommentKeyword, GreenScreen, MythFact, OldVsNew, SlotsCounter, SplitDialogue, UsVsThem, commentTimes, dialogAt, mythTimes, oldNewTimes, pressTimes, slotTimes, vsAt} from './scenes/formats';
 import type {SceneProps} from './types';
 
@@ -37,7 +38,7 @@ const priceSfx = (p: P, _d: number, fps: number): Ev[] => {
 };
 
 /** templates that show their own big text: captions hide there unless scene.captions === true */
-export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4', 'A8', 'A17', 'A18', 'A20', 'J11', 'K2', 'K3', 'D3', 'D5', 'D6', 'K8']);
+export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4', 'A8', 'A17', 'A18', 'A20', 'J11', 'K2', 'K3', 'D3', 'D5', 'D6', 'K8', 'D1', 'D7', 'D4', 'G11', 'D9']);
 
 export const REGISTRY: Record<string, Entry> = {
   // hooks + text
@@ -112,6 +113,14 @@ export const REGISTRY: Record<string, Entry> = {
     return [{at: 0, name: 'whoosh_fast'}, {at: t.xAt, name: 'error', volume: 0.6}, {at: t.newAt, name: 'whoosh'}, {at: t.checkAt, name: 'ding', volume: 0.8}];
   }},
   // 3D look
+  D7: {name: '3D bar chart', C: Bars3D, dur: 3.5, sfx: (p, _d, fps) => [{at: 0, name: 'whoosh_soft'}, ...barTimes(barsList(p).length, fps).map((at, i, a) => ({at: at + 2, name: i === a.length - 1 ? 'ding' : 'tick', volume: 0.7}))]},
+  D4: {name: 'Floating product spin', C: ProductSpin, dur: 3.5, sfx: (p, _d, fps) => [{at: 0, name: 'whoosh_low'}, {at: Math.round(fps * 0.4), name: 'sparkle', volume: 0.6}, ...(p.title || p.sub ? [{at: 10, name: 'pop', volume: 0.6}] : [])]},
+  D9: {name: 'Photo fly-through', C: FlyThrough, dur: 4, sfx: (p, d) => range(flyCount(p)).map((i) => ({at: Math.round((i * d) / Math.max(1, flyCount(p))), name: 'whoosh', volume: 0.6}))},
+  G11: {name: '3D title on footage', C: Title3D, dur: 3, sfx: (p, _d, fps) => {
+    const at = Math.round((p.titleAt ?? 0.2) * fps);
+    return [{at, name: 'whoosh_fast'}, {at: at + Math.round(fps * 0.45), name: 'impact', volume: 0.7}];
+  }},
+  D1: {name: '3D UI cards', C: Cards3D, dur: 3.5, sfx: (p, _d, fps) => [{at: 0, name: 'whoosh_soft'}, ...cardTimes(cardsList(p).length, fps).map((at) => ({at: at + 4, name: 'pop', volume: 0.7}))]},
   D3: {name: '3D text reveal', C: Text3D, dur: 2.5, sfx: (_p, _d, fps) => [{at: 0, name: 'whoosh_low'}, {at: textLand(fps), name: 'impact'}, {at: textLand(fps) + 4, name: 'sparkle', volume: 0.6}]},
   D5: {name: '3D phone mockup', C: Phone3D, dur: 3.5, sfx: (p) => [{at: 0, name: 'whoosh'}, ...(p.title === false || p.title === '' ? [] : [{at: 6, name: 'pop', volume: 0.7}])]},
   D6: {name: 'Coins rain', C: CoinsRain, dur: 3, sfx: (_p, _d, fps) => [{at: 0, name: 'riser', volume: 0.5}, {at: coinsTitleAt(fps), name: 'impact'}, {at: coinsTitleAt(fps) + 3, name: 'ding'}, ...[8, 14, 19, 27, 33].map((at) => ({at: coinsTitleAt(fps) + at, name: 'tick', volume: 0.45}))]},

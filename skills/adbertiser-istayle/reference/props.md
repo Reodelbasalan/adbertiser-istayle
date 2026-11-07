@@ -108,11 +108,17 @@ The keyword slams in, then gets typed into a generic comment box and posted. Use
 `{"button": "MESSAGE US", "title": "Ready ka na?", "sub": "Reply within 5 minutes", "icon": "💬", "after": "SENT ✓", "pressAt": 1.0, "hand": true}`
 `button` defaults to `brand.cta`. `after` (optional) swaps the label after the tap. `hand: false` hides the finger.
 
-## D3 3D text reveal · D5 3D phone mockup · D6 Coins rain · K8 3D logo end card (3D look)
+## 3D look: D1 3D UI cards · D3 3D text · D4 Product spin · D5 3D phone · D6 Coins rain · D7 3D bar chart · D9 Photo fly-through · G11 3D title · H14 Cube spin · K8 3D logo
 D3 `{"text": "Ads na|Bumebenta", "sub": "optional line", "color": "#FFD23F"}` · `|` splits lines (1–3 short lines). Extruded text flies in from depth and lands at ~0.55 s.
 D5 `{"media": "my_ad.mp4", "title": "Ganito dapat ang ad mo", "sub": "Hook · Product · Captions", "side": "right"}` · a 9:16 clip or image plays on the phone screen (it is cover-fitted).
 D6 `{"title": "₱999", "sub": "Starter package", "symbol": "₱", "count": 36}` · gold coins rain behind the headline; keep the headline short (price, SALE, -50%).
 K8 `{"logo": "logo.png", "name": "Brand", "cta": "MESSAGE US", "handle": "@page"}` · without a logo the brand name becomes 3D text.
+D1 `{"title": "Sample results", "cards": [{"icon": "📈", "value": "+120%", "label": "Reach"}, {"image": "post.png"}], "bg": "optional"}` · 1–4 glass cards at different depths; stats or screenshots. Mock numbers need the SAMPLE overlay.
+D4 `{"product": "bottle.png", "title": "optional", "sub": "optional"}` · a transparent PNG sways on a glowing podium.
+D7 `{"title": "Messages per week", "bars": [{"label": "Week 1", "value": 12}, {"label": "Week 4", "value": 68}], "prefix": "₱", "suffix": "K"}` · 2–6 bars; the last bar is highlighted. Real numbers only, or keep the SAMPLE overlay.
+D9 `{"photos": ["a.jpg", "b.jpg", "c.jpg"], "labels": ["Product video", "UGC", "Explainer"], "title": "optional"}` · the camera flies through the photos; the last one lands.
+G11 `{"media": "clip.mp4", "title": "Ad na|Panalo", "sub": "optional", "position": "middle", "titleAt": 0.2}` · thick 3D title flips up over footage.
+H14 cube spin: put `"transition": "H14"` on the entering scene; both scenes turn like a cube.
 D5 and D6 use WebGL (three.js); the engine renders with `--gl=angle`. On a machine with no GPU, set `Config.setChromiumOpenGlRenderer('swangle')` in `engine/remotion.config.ts`.
 
 ## K7 Brand end card · K1 One-line CTA · K4 Offer card
@@ -126,7 +132,7 @@ K4 `{"title": "Starter Package", "items": ["5 video ads", "Captions + music"], "
 Captions hide on templates that show their own big text (hooks, prices, chats, cards, end cards) and show on footage (U1, B11). Force per scene with `"captions": true` or `false`.
 `words.json`: `[{"w": "Hello", "s": 0.12, "e": 0.40}]`, or `[{"word", "start", "end"}]`, or Whisper-style segments with `words`. `y` = 0–1 of the frame height (keep 0.25–0.75 on 9:16). Captions follow `audio.vo` timing, so transcribe the VO first.
 
-## H1 H2 H3 H4 H6 H7 H9 H10 H12 Transitions
+## H1 H2 H3 H4 H6 H7 H9 H10 H12 H14 Transitions
 Put `"transition": "H9"` on the scene that comes IN. Each one has its own SFX. Mix 2–3 kinds per ad; don't use a different one on every cut.
 
 ## I1 I2 I5 I10 Overlays
