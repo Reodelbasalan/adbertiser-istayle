@@ -16,7 +16,7 @@ export const Watermark: React.FC = () => {
       {b.logo ? (
         <Img src={asset(b.logo)} style={{height: 70 * L.u, objectFit: 'contain'}} />
       ) : (
-        <span style={{fontFamily: b.fH, fontSize: 40 * L.u, color: b.text, letterSpacing: 2 * L.u, textShadow: '0 2px 8px rgba(0,0,0,.5)'}}>{b.name}</span>
+        <span style={{fontFamily: b.fH, fontSize: 40 * L.u, color: b.text, letterSpacing: 2 * L.u, textShadow: '0 2px 8px rgba(0,0,0,.5)', WebkitTextStroke: `${2 * L.u}px rgba(0,0,0,.55)`, paintOrder: 'stroke fill'}}>{b.name}</span>
       )}
     </div>
   );

@@ -18,6 +18,7 @@ export const TRANSITION_SFX: Record<string, string> = {
   H14: 'whoosh',
   H17: 'buzz',
   H18: 'whoosh_soft',
+  H19: 'scribble',
 };
 
 export const TRANSITIONS = Object.keys(TRANSITION_SFX);
@@ -52,6 +53,16 @@ export const TransitionIn: React.FC<{type?: string; frames: number; children: Re
           <AbsoluteFill style={{background: 'linear-gradient(115deg, transparent 30%, rgba(255,255,255,.9) 50%, transparent 70%)', transform: `translateX(${(t * 2.4 - 1.2) * 100}%)`, mixBlendMode: 'screen'}} />
         </AbsoluteFill>
       );
+    case 'H19': {
+      // eraser wipe: a soft white band sweeps across and leaves the new scene behind it
+      const x = e * 130 - 15;
+      return (
+        <AbsoluteFill>
+          <AbsoluteFill style={{clipPath: `polygon(0 0, ${x}% 0, ${x - 18}% 100%, 0 100%)`}}>{children}</AbsoluteFill>
+          <AbsoluteFill style={{background: `linear-gradient(100deg, transparent ${x - 26}%, rgba(255,255,255,.95) ${x - 12}%, rgba(255,255,255,.95) ${x - 2}%, transparent ${x + 6}%)`, filter: `blur(${6 * L.u}px)`}} />
+        </AbsoluteFill>
+      );
+    }
     case 'H18':
       // frosted glass: the new scene comes out of a heavy blur behind a white frost
       return (

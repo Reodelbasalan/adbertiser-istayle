@@ -55,12 +55,16 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | B22 | Cursor demo | template | cursor, click demo, walkthrough | Cursor clicks through steps in a glass app | Tutorials | buttons, result, title, at (seconds per click), bg |
 | B23 | Workflow steps | template | workflow, 3 steps, how it works | Glass step cards joined by a glowing line | Services | steps [{icon, label}], title, at, bg |
 | B24 | Sample montage | planned | montage, portfolio grid, samples | Grid of output samples | Portfolio proof | Meanwhile: C2 with photos |
-| B25 | Line-art draw-on | planned | line art, icon draw, outline animation | Outline icons draw themselves | Features | — |
+| B25 | Line icons draw-on | template | line art, icon draw, outline animation | Outline icons draw themselves | Features | icons [{icon, label}] (phone chart megaphone cart chat bulb check money camera target user clock heart star), title, at |
 | B26 | Hologram HUD | template | hud, hologram, futuristic ui | Spinning rings, value, typed items | Tech, AI, results | value, label, items, title, color, bg |
 | B27 | Neon price | template | neon price, neon promo | Neon frame, price buzzes on | Promos | label, price, oldPrice, note, color, color2 |
 | B28 | Hologram product | template | hologram product, projected product | Product as a flickering hologram | Tech, launches | product (PNG), title, sub, color2 |
 | B29 | Neon checklist | template | neon list, neon checklist | Neon lines light up with checks | Inclusions, steps | title, items, at (seconds per line) |
 | B30 | Glass pricing | template | pricing, packages, price tiers | 1–3 glass tiers, best one glows | Offers, services | tiers [{name, price, items, best}], title, bestLabel, bg |
+| B31 | Marker title | template | whiteboard, marker, handwritten title | Title written live by a marker, scribbled underline | Hooks, explainers | text ("line 1|line 2"), sub, color |
+| B32 | Whiteboard flow | template | flow, problem solution result, diagram | Boxes and arrows drawn by hand | Explainers | nodes (2–4), title, at, color |
+| B33 | Marker list | template | whiteboard list, checklist, handwritten list | Handwritten list, drawn checks, red circle | Tips, checklists | title, items, highlight (index), at |
+| B34 | Sketch chart | template | sketch chart, hand-drawn graph | Hand-drawn axes and a rising arrow | Results (true numbers) | title, from, to, xLabel, xLabel2, color |
 | C1 | Paper cutout stop-motion | template | paper, paper cutout, cutout, craft, stop motion, handmade | Torn-paper letters, cut-out items, choppy motion | Food, local biz, explainers | title, sub, items[{emoji or image,label}], colors[], paperColor |
 | C2 | Scrapbook collage | template | scrapbook, collage, polaroid, tape | Polaroids drop in with tape and notes | Product features, stories | title, photos[], notes[], paperColor |
 | C3 | Sticky notes | template | sticky notes, post-it, notes, checklist | Notes slap on a board, checks drawn | Tips, plans, steps | title, notes[], check, boardColor |
@@ -118,6 +122,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | G12 | Split color words | recipe | color word, key word color | Key word in brand color | Offers | J1 highlight, or B1 accent |
 | G13 | Neon captions | template | neon captions, glow captions | Glowing words, active word in brand color | Neon look | `captions.style: "G13"` |
 | G14 | Glass captions | template | glass captions, pill captions | Words on a frosted pill | Glass look | `captions.style: "G14"` |
+| G15 | Marker captions | template | handwritten captions, marker captions | Captions in the hand font, active word in brand color | Whiteboard look | `captions.style: "G15"` |
 | H1 | Slide | template | slide, push | Next scene slides in | Any cut | scene.transition "H1" |
 | H2 | Glitch | template | glitch, rgb split, digital | Jitter + color bars | Tech, energy | scene.transition "H2" |
 | H3 | Glare / light sweep | template | glare, light sweep, shine | A shine passes as it fades in | Beauty, premium | scene.transition "H3" |
@@ -136,6 +141,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | H16 | Match cut | recipe | match cut | Cut on matching shape or motion | Story edits | Plan two U1 shots that match; no effect needed |
 | H17 | Neon flicker | template | neon flicker, flicker transition | New scene buzzes on like a tube | Neon look | `"transition": "H17"` |
 | H18 | Frosted blur | template | blur transition, frosted, glass wipe | New scene comes out of a frosted blur | Glass look | `"transition": "H18"` |
+| H19 | Eraser wipe | template | eraser, whiteboard wipe | Soft white band wipes to the next scene | Whiteboard look | `"transition": "H19"` |
 | I1 | Watermark | template | watermark, logo bug | Logo or brand name, top right | Every edit | job.overlays.watermark |
 | I2 | Film grain | template | grain, film grain, texture | Moving grain | Retro, paper, cinematic | job.overlays.grain (0–0.4) |
 | I3 | Light leaks | planned | light leaks | Warm color leaks | Lifestyle | — |
@@ -168,4 +174,5 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | K8 | 3D logo end card | template | 3d logo end | Spinning metallic logo | Premium outros | logo (PNG) or name, cta, handle |
 | K9 | Neon CTA | template | neon cta, neon button | Neon button + chasing arrows | Neon look outros | cta, title, handle, arrow, color, color2 |
 | K10 | Glass CTA | template | glass cta, glass end card | Glass card, glowing button, shine | Glass look outros | logo or name, headline, cta, handle, bg |
+| K11 | Marker CTA | template | marker cta, whiteboard cta | CTA written by marker, boxed, arrow + star | Whiteboard look outros | cta, title, handle, color |
 | U1 | Footage / photo shot | template | footage, broll, b-roll, photo, video clip, shot | Your clip or photo with zoom | The base of every ad | media, zoom (in/out/none), punchAt, title, titleAt |

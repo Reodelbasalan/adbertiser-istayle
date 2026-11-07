@@ -121,6 +121,16 @@ G11 `{"media": "clip.mp4", "title": "Ad na|Panalo", "sub": "optional", "position
 H14 cube spin: put `"transition": "H14"` on the entering scene; both scenes turn like a cube.
 D5 and D6 use WebGL (three.js); the engine renders with `--gl=angle`. On a machine with no GPU, set `Config.setChromiumOpenGlRenderer('swangle')` in `engine/remotion.config.ts`.
 
+## Whiteboard look: B31 Marker title · B25 Line icons · B32 Flow · B33 Marker list · B34 Sketch chart · K11 Marker CTA · G15 Marker captions · H19 Eraser wipe
+White board, everything is written or drawn live (hand font = `brand.handFont`). Accent marker = `color`, else the brand primary (a light primary falls back to blue so it reads on white).
+B31 `{"text": "Bakit walang|nag-me-message?", "sub": "optional"}`
+B25 `{"title": "optional", "icons": [{"icon": "phone", "label": "Phone lang"}, {"icon": "chart", "label": "Benta"}], "at": [0.2, 1.2]}` · icons: phone chart megaphone cart chat bulb check money camera target user clock heart star.
+B32 `{"title": "optional", "nodes": ["Problema", "Solusyon", "Resulta"], "at": [0.2, 1.4, 2.6]}`
+B33 `{"title": "Checklist bago mag-boost", "items": ["Hook sa 3 segundo", "Malinaw na presyo"], "highlight": 1, "at": [0.6, 1.8]}`
+B34 `{"title": "Messages per week", "from": "5", "to": "60", "xLabel": "Bago", "xLabel2": "Pagkatapos"}` · real numbers only (or the SAMPLE overlay).
+K11 `{"cta": "MESSAGE US", "title": "Tara, usap tayo", "handle": "@page"}`
+G15 captions: `job.captions.style = "G15"`. H19: `"transition": "H19"` on the entering scene.
+
 ## Glass UI look: B17 Glass title · B2 Dashboard · B22 Cursor demo · B23 Workflow steps · B30 Glass pricing · K10 Glass CTA · G14 Glass captions · H18 Frosted blur
 Frosted glass over moving brand-color blobs; every part takes an optional `bg` photo or clip (blurred underneath).
 B17 `{"title": "Ads na mukhang premium", "sub": "Kahit phone lang", "tag": "NEW"}`
@@ -147,12 +157,12 @@ K1 `{"cta": "MESSAGE US", "arrow": "👇"}`
 K4 `{"title": "Starter Package", "items": ["5 video ads", "Captions + music"], "price": "₱4,999", "note": "Limited slots", "cta": "MESSAGE US"}`
 `cta` defaults to `brand.cta`; `logo` to `brand.logo`.
 
-## G1 G2 G3 G7 G8 G13 G14 Captions
+## G1 G2 G3 G7 G8 G13 G14 G15 Captions
 `job.captions = {"style": "G1", "file": "words.json", "y": 0.63}`
 Captions hide on templates that show their own big text (hooks, prices, chats, cards, end cards) and show on footage (U1, B11). Force per scene with `"captions": true` or `false`.
 `words.json`: `[{"w": "Hello", "s": 0.12, "e": 0.40}]`, or `[{"word", "start", "end"}]`, or Whisper-style segments with `words`. `y` = 0–1 of the frame height (keep 0.25–0.75 on 9:16). Captions follow `audio.vo` timing, so transcribe the VO first.
 
-## H1 H2 H3 H4 H6 H7 H9 H10 H12 H14 H17 H18 Transitions
+## H1 H2 H3 H4 H6 H7 H9 H10 H12 H14 H17 H18 H19 Transitions
 Put `"transition": "H9"` on the scene that comes IN. Each one has its own SFX. Mix 2–3 kinds per ad; don't use a different one on every cut.
 
 ## I1 I2 I5 I10 Overlays
