@@ -34,7 +34,7 @@ export type Job = {
   scenes: Scene[];
   audio?: {vo?: string; music?: string; musicVolume?: number; voVolume?: number};
   captions?: {style?: string; words?: Word[]; y?: number};
-  overlays?: {watermark?: boolean; grain?: number; vignette?: boolean; sample?: boolean};
+  overlays?: {watermark?: boolean; grain?: number; vignette?: boolean; sample?: boolean; lightLeaks?: boolean; vhs?: boolean; paper?: boolean; flare?: boolean; sparkle?: boolean};
   sfx?: boolean; // auto SFX on (default true)
   sfxVolume?: number;
   sfxAvailable?: string[]; // filled in by render.mjs

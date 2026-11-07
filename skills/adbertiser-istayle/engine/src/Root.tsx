@@ -40,11 +40,16 @@ export const previewJob = (id: string): Job => {
   if (id === 'I2') return {size: '9:16', scenes: [bg], overlays: {grain: 0.35}};
   if (id === 'I5') return {size: '9:16', scenes: [bg], overlays: {vignette: true}};
   if (id === 'I10') return {size: '9:16', scenes: [bg], overlays: {sample: true}};
+  if (id === 'I3') return {size: '9:16', scenes: [bg], overlays: {lightLeaks: true}};
+  if (id === 'I4') return {size: '9:16', scenes: [bg], overlays: {vhs: true}};
+  if (id === 'I6') return {size: '9:16', scenes: [bg], overlays: {paper: true}};
+  if (id === 'I7') return {size: '9:16', scenes: [bg], overlays: {flare: true}};
+  if (id === 'I8') return {size: '9:16', scenes: [bg], overlays: {sparkle: true}};
   const e = REGISTRY[id];
   return {size: '9:16', scenes: [{style: id, dur: e?.dur ?? 3}]};
 };
 
-export const PREVIEW_IDS = [...Object.keys(REGISTRY), ...TRANSITIONS, ...CAPTION_STYLES, 'I1', 'I2', 'I5', 'I10'];
+export const PREVIEW_IDS = [...Object.keys(REGISTRY), ...TRANSITIONS, ...CAPTION_STYLES, 'I1', 'I2', 'I3', 'I4', 'I5', 'I6', 'I7', 'I8', 'I10'];
 
 export const Root: React.FC = () => (
   <>

@@ -7,6 +7,9 @@ import {PaperCutout, Scrapbook, StickyNotes, TornReveal} from './scenes/paper';
 import {FootageShot, PriceSlam, ProductHero, TextBehind} from './scenes/product';
 import {HookQuestion, KineticText, POVHook} from './scenes/text';
 import {Cards3D, CoinsRain, Logo3D, Phone3D, Text3D, cardTimes, cardsList, coinsTitleAt, textLand} from './scenes/depth3d';
+import {Bundle, CatalogFlip, Exploded, SizeCompare, SpecCallouts, VariantGrid, bundleItems, bundleTimes, catalogItems, flipTimes, partList, specList, specTimes, variantItems} from './scenes/productx';
+import {Kraft, PolaroidStack, PopUpBook, Ransom, polaroidTimes, ransomCount} from './scenes/paperx';
+import {CartoonHost, LogoOutro, LowerThird, PodcastClip, PushSlide, RetroPoster, SampleMontage, StickerPop, Timeline, stickerList, timelineSteps, timelineTimes} from './scenes/extras';
 import {BrutalCTA, BrutalGrid, BrutalTitle, Marquee, PhotoBlock, cellList, cellTimes} from './scenes/brutal';
 import {IsoBlocks, IsoCTA, IsoPath, IsoTowers, blockList, blockTimes, pathSteps, pathTimes} from './scenes/iso';
 import {MapCTA, MapPins, MapRadius, MapRoute, pinList, pinTimes, routeEnd} from './scenes/mapz';
@@ -52,7 +55,7 @@ const priceSfx = (p: P, _d: number, fps: number): Ev[] => {
 };
 
 /** templates that show their own big text: captions hide there unless scene.captions === true */
-export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4', 'A8', 'A17', 'A18', 'A20', 'J11', 'K2', 'K3', 'D3', 'D5', 'D6', 'K8', 'D1', 'D7', 'D4', 'G11', 'D9', 'B12', 'B26', 'B27', 'B28', 'B29', 'K9', 'B17', 'B2', 'B22', 'B23', 'B30', 'K10', 'B31', 'B25', 'B32', 'B33', 'B34', 'K11', 'B35', 'B19', 'B36', 'B37', 'K12', 'B38', 'B40', 'B41', 'K13', 'D11', 'K14', 'B13', 'B43', 'B44', 'K15', 'B15', 'B45', 'B46', 'B47', 'K16', 'B16', 'B48', 'B49', 'B50', 'K17', 'B6', 'B51', 'B52', 'K18', 'B8', 'B53', 'B54', 'K19', 'B55', 'B56', 'B57', 'K20', 'C8', 'C10', 'C11', 'K21', 'B58', 'B59', 'B60', 'B61', 'K22']);
+export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4', 'A8', 'A17', 'A18', 'A20', 'J11', 'K2', 'K3', 'D3', 'D5', 'D6', 'K8', 'D1', 'D7', 'D4', 'G11', 'D9', 'B12', 'B26', 'B27', 'B28', 'B29', 'K9', 'B17', 'B2', 'B22', 'B23', 'B30', 'K10', 'B31', 'B25', 'B32', 'B33', 'B34', 'K11', 'B35', 'B19', 'B36', 'B37', 'K12', 'B38', 'B40', 'B41', 'K13', 'D11', 'K14', 'B13', 'B43', 'B44', 'K15', 'B15', 'B45', 'B46', 'B47', 'K16', 'B16', 'B48', 'B49', 'B50', 'K17', 'B6', 'B51', 'B52', 'K18', 'B8', 'B53', 'B54', 'K19', 'B55', 'B56', 'B57', 'K20', 'C8', 'C10', 'C11', 'K21', 'B58', 'B59', 'B60', 'B61', 'K22', 'F3', 'F7', 'F8', 'F9', 'F10', 'F12', 'C5', 'C6', 'C7', 'C9', 'B9', 'B18', 'B20', 'A22', 'K6']);
 
 export const REGISTRY: Record<string, Entry> = {
   // hooks + text
@@ -126,6 +129,30 @@ export const REGISTRY: Record<string, Entry> = {
     const t = oldNewTimes(d, fps, p.newAt);
     return [{at: 0, name: 'whoosh_fast'}, {at: t.xAt, name: 'error', volume: 0.6}, {at: t.newAt, name: 'whoosh'}, {at: t.checkAt, name: 'ding', volume: 0.8}];
   }},
+  // product pack
+  F3: {name: 'Exploded view / ingredients', C: Exploded, dur: 3.5, sfx: (p) => [{at: 0, name: 'whoosh_soft'}, ...partList(p).map((_, i) => ({at: 10 + i * 4, name: 'pop', volume: 0.55}))]},
+  F7: {name: 'Bundle builder', C: Bundle, dur: 3.5, sfx: (p, _d, fps) => {
+    const t = bundleTimes(bundleItems(p).length, fps);
+    return [...t.drops.map((at) => ({at: at + 7, name: 'pop', volume: 0.7})), {at: t.lid, name: 'whoosh_fast', volume: 0.6}, {at: t.lid + 8, name: 'impact', volume: 0.7}];
+  }},
+  F8: {name: 'Catalog flip', C: CatalogFlip, dur: 3.5, sfx: (p, d) => flipTimes(catalogItems(p).length, d).map((at) => ({at, name: 'paper', volume: 0.6}))},
+  F9: {name: 'Variant album grid', C: VariantGrid, dur: 3, sfx: (p) => [...variantItems(p).map((_, i) => ({at: 6 + i * 5, name: 'pop', volume: 0.55})), {at: 6 + variantItems(p).length * 5 + 4, name: 'ding', volume: 0.6}]},
+  F10: {name: 'Spec callouts', C: SpecCallouts, dur: 3.5, sfx: (p, _d, fps) => specTimes(specList(p).length, fps, p.at).map((at) => ({at, name: 'click', volume: 0.6}))},
+  F12: {name: 'Size comparison', C: SizeCompare, dur: 3, sfx: () => [{at: 2, name: 'pop', volume: 0.6}, {at: 8, name: 'pop', volume: 0.6}, {at: 24, name: 'ding', volume: 0.6}]},
+  // paper extras
+  C5: {name: 'Kraft / cardboard', C: Kraft, dur: 3, sfx: () => [{at: 6, name: 'impact', volume: 0.6}, {at: 14, name: 'scribble', volume: 0.5}]},
+  C6: {name: 'Ransom-note letters', C: Ransom, dur: 3, sfx: (p) => Array.from({length: Math.min(12, ransomCount(p))}, (_, i) => ({at: 2 + i * 2, name: 'paper', volume: 0.35}))},
+  C7: {name: 'Polaroid stack', C: PolaroidStack, dur: 3.5, sfx: (p, d, fps) => polaroidTimes((Array.isArray(p.photos) && p.photos.length ? p.photos.length : 3), d, fps).map((at) => ({at, name: 'shutter', volume: 0.6}))},
+  C9: {name: 'Pop-up book', C: PopUpBook, dur: 3.5, sfx: () => [{at: 0, name: 'paper', volume: 0.6}, {at: 10, name: 'whoosh_soft', volume: 0.5}, {at: 22, name: 'pop', volume: 0.6}]},
+  // 2D extras
+  B9: {name: 'Timeline / roadmap', C: Timeline, dur: 4, sfx: (p, d, fps) => timelineTimes(timelineSteps(p).length, d, fps, p.at).map((at) => ({at, name: 'pop', volume: 0.6}))},
+  B18: {name: 'Retro poster', C: RetroPoster, dur: 3, sfx: () => [{at: 0, name: 'whoosh_soft'}, {at: 14, name: 'impact', volume: 0.5}]},
+  B20: {name: 'Cartoon host', C: CartoonHost, dur: 3.5, sfx: () => [{at: 4, name: 'pop', volume: 0.6}]},
+  B21: {name: 'Sticker pop', C: StickerPop, dur: 3, sfx: (p) => stickerList(p).map((_, i) => ({at: 6 + i * 6, name: 'pop', volume: 0.7}))},
+  B24: {name: 'Sample montage', C: SampleMontage, dur: 3.5, sfx: (p) => [{at: 0, name: 'whoosh_fast'}, ...(Array.isArray(p.media) && p.media.length ? p.media : [1, 2, 3, 4]).slice(0, 6).map((_: unknown, i: number) => ({at: 2 + i * 4, name: 'shutter', volume: 0.5}))]},
+  A14: {name: 'Podcast clip', C: PodcastClip, dur: 4, sfx: () => []},
+  A22: {name: 'Push-in slide', C: PushSlide, dur: 4, sfx: (p) => (Array.isArray(p.bullets) ? p.bullets : [1, 2, 3]).slice(0, 5).map((_: unknown, i: number) => ({at: 8 + i * 8, name: 'click', volume: 0.5}))},
+  G10: {name: 'Lower-third name tag', C: LowerThird, dur: 3.5, sfx: () => [{at: 6, name: 'whoosh_soft', volume: 0.6}]},
   // bold brutalist look
   B16: {name: 'Brutalist title', C: BrutalTitle, dur: 2.5, sfx: (p) => String(p.text ?? 'a|b|c').split('|').filter((x) => x.trim()).map((_, i) => ({at: 3 + i * 6, name: 'impact', volume: 0.6}))},
   B48: {name: 'Marquee bands', C: Marquee, dur: 3, sfx: () => [{at: 0, name: 'whoosh_fast'}, {at: 6, name: 'whoosh_fast', volume: 0.6}]},
@@ -244,6 +271,7 @@ export const REGISTRY: Record<string, Entry> = {
   K20: {name: 'Press start CTA', C: PixelCTA, dur: 2.5, sfx: () => [{at: 12, name: 'ding', volume: 0.7}]},
   K21: {name: 'Crayon CTA', C: CrayonCTA, dur: 3, sfx: () => [{at: 2, name: 'scribble', volume: 0.6}, {at: 12, name: 'scribble', volume: 0.5}]},
   K22: {name: 'Data CTA', C: DataCTA, dur: 3, sfx: () => [{at: 4, name: 'whoosh_soft', volume: 0.5}, {at: 14, name: 'pop', volume: 0.7}]},
+  K6: {name: 'Logo animation outro', C: LogoOutro, dur: 3, sfx: () => [{at: 0, name: 'whoosh_soft'}, {at: 12, name: 'impact', volume: 0.6}, {at: 18, name: 'sparkle', volume: 0.5}]},
   K7: {name: 'Brand end card', C: EndCard, dur: 3, sfx: () => [{at: 0, name: 'whoosh'}, {at: 14, name: 'pop'}]},
   K1: {name: 'One-line CTA', C: EndCard, dur: 2, props: {variant: 'line'}, sfx: () => [{at: 0, name: 'impact', volume: 0.7}]},
   K4: {name: 'Offer card', C: EndCard, dur: 4, props: {variant: 'offer'}, sfx: (p) => {

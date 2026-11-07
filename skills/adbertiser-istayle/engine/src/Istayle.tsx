@@ -3,7 +3,7 @@ import {AbsoluteFill, Audio, Sequence, staticFile, useVideoConfig} from 'remotio
 import {BrandProvider, useBrand} from './brand';
 import {Captions} from './Captions';
 import {asset} from './lib/Media';
-import {Grain, SampleTag, Vignette, Watermark} from './Overlays';
+import {Grain, LensFlare, LightLeaks, PaperTexture, SampleTag, Sparkles, VhsLines, Vignette, Watermark} from './Overlays';
 import {OWN_TEXT, REGISTRY} from './registry';
 import {TRANSITION_SFX, TransitionIn, TransitionOut} from './Transitions';
 import type {Job, Scene, SceneProps} from './types';
@@ -69,6 +69,11 @@ const Body: React.FC<Job> = (job) => {
           </Sequence>
         );
       })}
+      {job.overlays?.lightLeaks && <LightLeaks />}
+      {job.overlays?.flare && <LensFlare />}
+      {job.overlays?.sparkle && <Sparkles />}
+      {job.overlays?.vhs && <VhsLines />}
+      {job.overlays?.paper && <PaperTexture />}
       {job.overlays?.vignette && <Vignette />}
       {job.overlays?.grain ? <Grain amount={job.overlays.grain} /> : null}
       {job.captions?.words?.length ? <Captions words={job.captions.words} style={job.captions.style} y={job.captions.y} hidden={hidden} /> : null}

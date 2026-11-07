@@ -24,6 +24,10 @@ export const TRANSITION_SFX: Record<string, string> = {
   H21: 'whoosh_soft',
   H22: 'glitch',
   H23: 'whoosh_soft',
+  H8: 'sparkle',
+  H11: 'whoosh_low',
+  H13: 'paper',
+  H15: 'glitch',
 };
 
 export const TRANSITIONS = Object.keys(TRANSITION_SFX);
@@ -58,6 +62,37 @@ export const TransitionIn: React.FC<{type?: string; frames: number; children: Re
           <AbsoluteFill style={{background: 'linear-gradient(115deg, transparent 30%, rgba(255,255,255,.9) 50%, transparent 70%)', transform: `translateX(${(t * 2.4 - 1.2) * 100}%)`, mixBlendMode: 'screen'}} />
         </AbsoluteFill>
       );
+    case 'H8':
+      // light leak flash: warm leak blooms over the cut and fades off the new scene
+      return (
+        <AbsoluteFill>
+          <AbsoluteFill style={{opacity: Math.min(1, t * 2.2)}}>{children}</AbsoluteFill>
+          <AbsoluteFill style={{background: `radial-gradient(circle at ${20 + 60 * t}% 30%, rgba(255,250,235,${0.95 * v}), rgba(255,150,60,${0.8 * v}) 35%, rgba(255,60,90,${0.4 * v}) 60%, transparent 80%)`, mixBlendMode: 'screen'}} />
+        </AbsoluteFill>
+      );
+    case 'H11': {
+      // ink / liquid wipe: an ink blob with a wobbly edge grows from the center
+      const pts = Array.from({length: 48}, (_, i) => {
+        const a = (i / 48) * Math.PI * 2;
+        const r = e * 95 * (1 + 0.12 * Math.sin(a * 5 + f) + 0.06 * Math.sin(a * 11 - f * 1.3));
+        return `${50 + Math.cos(a) * r}% ${50 + Math.sin(a) * r * (L.W / L.H)}%`;
+      }).join(', ');
+      return <AbsoluteFill style={{clipPath: `polygon(${pts})`}}>{children}</AbsoluteFill>;
+    }
+    case 'H13':
+      // page turn: the new scene waits underneath while the old page turns away (see TransitionOut)
+      return <AbsoluteFill style={{zIndex: 0}}>{children}</AbsoluteFill>;
+    case 'H15': {
+      // pixel mosaic: the new scene appears block by block in random order
+      const cols = 9;
+      const rows = Math.round((cols * L.H) / L.W);
+      const cw = L.W / cols;
+      const ch = L.H / rows;
+      let d = '';
+      for (let y = 0; y < rows; y++)
+        for (let x = 0; x < cols; x++) if (random(`px${x}-${y}`) < e * 1.05) d += `M${(x * cw).toFixed(1)} ${(y * ch).toFixed(1)}h${cw.toFixed(1)}v${ch.toFixed(1)}h${(-cw).toFixed(1)}z`;
+      return <AbsoluteFill style={{clipPath: d ? `path('${d}')` : 'inset(50%)'}}>{children}</AbsoluteFill>;
+    }
     case 'H22': {
       // VHS channel switch: a burst of static, then the new picture rolls in with RGB split
       const noise = f < frames * 0.45;
@@ -180,7 +215,7 @@ export const TransitionIn: React.FC<{type?: string; frames: number; children: Re
 };
 
 /** transitions that also move the OUTGOING scene during the next scene's entry */
-export const OUT_TRANSITIONS = new Set(['H14']);
+export const OUT_TRANSITIONS = new Set(['H14', 'H13']);
 
 /** wraps the LEAVING scene; `start` = frame where the next scene starts entering */
 export const TransitionOut: React.FC<{type?: string; start: number; frames: number; children: React.ReactNode}> = ({type, start, frames, children}) => {
@@ -188,6 +223,12 @@ export const TransitionOut: React.FC<{type?: string; start: number; frames: numb
   const L = useLayout();
   if (!type || !OUT_TRANSITIONS.has(type) || f < start) return <AbsoluteFill>{children}</AbsoluteFill>;
   const e = Easing.out(Easing.cubic)(Math.min(1, (f - start) / frames));
+  if (type === 'H13')
+    return (
+      <AbsoluteFill style={{perspective: 2000 * L.u, zIndex: 5}}>
+        <AbsoluteFill style={{transformOrigin: '0% 50%', transform: `rotateY(${-e * 165}deg)`, filter: `brightness(${1 - 0.5 * e})`, boxShadow: `${30 * L.u * e}px 0 ${60 * L.u}px rgba(0,0,0,${0.5 * e})`, backfaceVisibility: 'hidden'}}>{children}</AbsoluteFill>
+      </AbsoluteFill>
+    );
   // H14: the old face turns away to the left around its right edge
   return (
     <AbsoluteFill style={{perspective: 1800 * L.u}}>

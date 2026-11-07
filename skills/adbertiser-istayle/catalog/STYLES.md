@@ -18,7 +18,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | A11 | Hands-only demo / unboxing | recipe | unboxing, hands only, faceless, asmr | Faceless hands open and use the product | E-commerce | Top-down phone clips → U1 1–2 s each + F6 + K1 |
 | A12 | Behind the scenes | recipe | bts, behind the scenes, process | Making the product, team at work | Trust, local biz | U1 clips ~1.5 s + B1 lines + G1 |
 | A13 | Founder story | recipe | founder, owner story, origin story | Owner on why they started | Premium brands | A1 recipe + C2 old photos + K7 |
-| A14 | Podcast clip | planned | podcast, interview clip | 2 mics, waveform, big captions | Authority content | Meanwhile: U1 + G2 captions |
+| A14 | Podcast clip | template | podcast, interview clip | 2 mics, waveform, big captions | Authority content | media, show, guest, quote |
 | A15 | Real testimonial | recipe | testimonial, review, feedback | Real customer quote, with consent | Social proof | Real customers only, never stock people. U1 clip + G1; screenshot reviews via A6 |
 | A16 | Listicle | recipe | listicle, 3 reasons, 5 mistakes, top 5 | Numbered parts | Edu ads | J8 → per item B1 + U1 → K1 |
 | A17 | Myth vs fact | template | myth vs fact, myth, fact check | Red X, then green check | Objections | myth, fact, labels, media, flipAt |
@@ -26,7 +26,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | A19 | Price reveal ad | recipe | price reveal ad | Price lands early, story after | Promos | J4 opener → U1 shots → F6 → K1 |
 | A20 | Slots / deadline counter | template | countdown, slots, deadline, urgency | Slots left, timer (only when true) | Urgency | mode slots/timer, label, from, to, total, time, title, note (true numbers only) |
 | A21 | Motion-graphics explainer | recipe | explainer, motion graphics explainer | Motion graphics + VO | Services, offers | VO + J1 → B7 → B5 → B3 → K4, G1 captions from the VO |
-| A22 | Push-in slides | planned | slides, presentation, deck video | Slides with slow push-in + VO | Webinars, B2B | Meanwhile: U1 with slide images, zoom in |
+| A22 | Push-in slides | template | slides, presentation, deck video | Slides with slow push-in + VO | Webinars, B2B | title, bullets, image |
 | A23 | Cinematic commercial | recipe | cinematic, commercial, tvc | 16:9 premium shots, music-led | Premium brands | Real or AI video → U1 per shot, H3/H4, I2 + I5, size 16:9 |
 | A24 | Concept ad | recipe | concept ad, spec ad, portfolio ad | A 30 s ad for a made-up brand | Portfolio samples | Any chain; overlays.sample with "CONCEPT AD" text |
 | A25 | Day in the life | recipe | day in the life, ditl, routine | Quick cuts through a day | Lifestyle, services | U1 clips ~1 s, times as titles |
@@ -39,7 +39,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | B6 | Isometric blocks | template | isometric, flat illustration | Isometric cubes rise with icons on top | How it works | blocks [{icon, label, color}], title, at |
 | B7 | Services grid | template | services, features, grid, menu, icons | Icon tiles pop in | Service menus | title, items[{icon,label}] |
 | B8 | Map pins | template | map, location, branches, pins, delivery area | Stylized city map, pins drop with labels | Multi-branch biz | pins [{x, y, label, icon}] (0-1), title, at, dark, seed |
-| B9 | Timeline / roadmap | planned | timeline, roadmap, steps, process | Steps along a line | Courses, process | Meanwhile: C3 notes |
+| B9 | Timeline / roadmap | template | timeline, roadmap, steps, process | Steps along a line | Courses, process | steps [{date, label}] (up to 6), title, at |
 | B10 | Newspaper headline | template | newspaper, news, breaking, headline, balita | Page spins in, BREAKING slams | News-style hooks | paper, headline, sub, image, date, banner |
 | B11 | Doodle on footage | template | doodle, scribble, marker, circle, arrow, annotate | Marker circles, arrows, underlines | Tutorials, edu | media, marks[{type,x,y,w,h,at,label,color}] |
 | B12 | Neon sign | template | neon, neon sign, glow sign, hologram | Neon tube text flickers on | Night vibe, tech, promos | text ("line 1|line 2"), sub, color, color2, script, bg |
@@ -48,13 +48,13 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | B15 | Minimal title | template | minimal, clean, corporate, elegant | Ivory space, small caps, thin serif, hairline | Clinics, real estate | label, title ("line 1|line 2"), sub, dark |
 | B16 | Brutalist title | template | brutalist, bold blocks, loud | Giant condensed words slam in, hard grid, mono label | Scroll stoppers | text ("w1|w2|w3"), label, sub, color |
 | B17 | Glass title | template | glass, frosted, glassmorphism | Frosted glass card over color blobs | Tech, software | title, sub, tag, bg |
-| B18 | Retro poster | planned | retro, 70s, 80s, vintage poster | Grain, warm palette | Food, nostalgia | Meanwhile: J1 + I2 grain + warm brand colors |
+| B18 | Retro poster | template | retro, 70s, 80s, vintage poster | Grain, warm palette | Food, nostalgia | title, sub, year |
 | B19 | Comic panels | template | comic, manga, speech bubble, panels | Comic page: panels slam in with captions + bubbles | Stories, skits | panels [{media, caption, say}] (1–4), at |
-| B20 | Cartoon host | planned | cartoon, mascot, character host | A drawn host character | Explainers | — |
-| B21 | Sticker pop | planned | stickers, emoji pop, sticker | Stickers pop on beats | UGC energy | — |
+| B20 | Cartoon host | template | cartoon, mascot, character host | A drawn host character | Explainers | say, name, color (generic mascot drawn in code) |
+| B21 | Sticker pop | template | stickers, emoji pop, sticker | Stickers pop on beats | UGC energy | media, stickers [{text or emoji, x, y}] |
 | B22 | Cursor demo | template | cursor, click demo, walkthrough | Cursor clicks through steps in a glass app | Tutorials | buttons, result, title, at (seconds per click), bg |
 | B23 | Workflow steps | template | workflow, 3 steps, how it works | Glass step cards joined by a glowing line | Services | steps [{icon, label}], title, at, bg |
-| B24 | Sample montage | planned | montage, portfolio grid, samples | Grid of output samples | Portfolio proof | Meanwhile: C2 with photos |
+| B24 | Sample montage | template | montage, portfolio grid, samples | Grid of output samples | Portfolio proof | media (2-6 clips/photos), label |
 | B25 | Line icons draw-on | template | line art, icon draw, outline animation | Outline icons draw themselves | Features | icons [{icon, label}] (phone chart megaphone cart chat bulb check money camera target user clock heart star), title, at |
 | B26 | Hologram HUD | template | hud, hologram, futuristic ui | Spinning rings, value, typed items | Tech, AI, results | value, label, items, title, color, bg |
 | B27 | Neon price | template | neon price, neon promo | Neon frame, price buzzes on | Promos | label, price, oldPrice, note, color, color2 |
@@ -96,11 +96,11 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | C2 | Scrapbook collage | template | scrapbook, collage, polaroid, tape | Polaroids drop in with tape and notes | Product features, stories | title, photos[], notes[], paperColor |
 | C3 | Sticky notes | template | sticky notes, post-it, notes, checklist | Notes slap on a board, checks drawn | Tips, plans, steps | title, notes[], check, boardColor |
 | C4 | Torn paper reveal | template | torn paper, paper reveal, tear reveal | Paper sheet rips to show what's under | Reveals | top, media, title, tearAt |
-| C5 | Kraft / cardboard | planned | kraft, cardboard, brown paper, packaging | Brown box textures, stamps | Packaging, eco | Meanwhile: C1 with paperColor "#C8A777" |
-| C6 | Ransom-note letters | planned | ransom note, magazine letters, cut letters | Mixed magazine letters | Hooks | Meanwhile: C1 title only |
-| C7 | Polaroid stack | planned | polaroid stack, photo pile | Photos drop and pile up | Results, events | Meanwhile: C2 |
+| C5 | Kraft / cardboard | template | kraft, cardboard, brown paper, packaging | Brown box textures, stamps | Packaging, eco | title, note, sub, photo |
+| C6 | Ransom-note letters | template | ransom note, magazine letters, cut letters | Mixed magazine letters | Hooks | text ("line 1|line 2"), sub, paperColor |
+| C7 | Polaroid stack | template | polaroid stack, photo pile | Photos drop and pile up | Results, events | photos (up to 5), notes, title, paperColor |
 | C8 | Crayon title | template | crayon, kids drawing, marker drawing | Kid handwriting in crayon colors, doodled sun and stars | Family products | text ("line 1|line 2") |
-| C9 | Pop-up book | planned | pop-up book, fold, paper fold | Pages fold up into scenes | Storytelling | — |
+| C9 | Pop-up book | template | pop-up book, fold, paper fold | Pages fold up into scenes | Storytelling | title, icon, sub, paperColor |
 | C10 | Crayon doodles | template | crayon doodles, kid drawing | Crayon icons scribble in with labels | Friendly explainers | doodles [{icon, label}], title, at |
 | C11 | Crayon list | template | crayon list, kid list | Kid-style numbered list, crayon ticks | Simple steps | title, items, at |
 | D1 | 3D UI cards | template | 3d cards, tilt, perspective | Tilted panels with depth | Software | cards [{icon, value, label} or {image}], title, bg |
@@ -128,26 +128,26 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | E12 | Upscale + 60 fps | recipe | upscale, 60fps, enhance | Sharper, smoother AI clips | Any AI shot | Real-ESRGAN (BSD) + RIFE (MIT) before U1 |
 | F1 | Product hero | template | product hero, product shot, light sweep, hero | Product floats, glow, light sweep | E-commerce intros | product (PNG), title, sub |
 | F2 | Macro + slow-mo | recipe | macro, slow motion, close up | Close textures, slow pours | Food, beauty | Real or AI footage → U1 zoom in |
-| F3 | Exploded view / ingredients | planned | ingredients, exploded view, floating ingredients | Parts float around the product | Food, supplements | — |
+| F3 | Exploded view / ingredients | template | ingredients, exploded view, floating ingredients | Parts float around the product | Food, supplements | product, parts [{icon or image, label}] (up to 6), title |
 | F4 | Splash / pour | recipe | splash, pour, liquid | Liquid hits the product | Drinks, beauty | AI video (paid) → U1 |
 | F5 | Flat-lay stop-motion | recipe | flat lay, top down stop motion | Top-down items move frame by frame | Food, kits | Photos taken step by step → U1 0.2 s each, zoom none |
 | F6 | Price tag slam | template | price, price slam, promo, sale, discount, price tag | Price stamp slams with a starburst | Promos | product, name, price, oldPrice, badge, slamAt |
-| F7 | Bundle builder | planned | bundle, box, stack, package | Items stack into a box | Bundles | — |
-| F8 | Catalog flip | planned | catalog, variants, carousel | Variants flip past | Variant lines | Meanwhile: C2 |
-| F9 | Variant album grid | planned | flavor grid, album, all variants | All variants in one grid | Variety | Meanwhile: B7 with emoji or C2 |
-| F10 | Spec callouts | planned | callouts, specs, feature lines, labels | Lines point to features | Gadgets, equipment | Meanwhile: B11 arrows + labels |
+| F7 | Bundle builder | template | bundle, box, stack, package | Items stack into a box | Bundles | items [{icon or image}] (up to 5), label, price, title |
+| F8 | Catalog flip | template | catalog, variants, carousel | Variants flip past | Variant lines | items [{icon or image, name, price}] (up to 6) |
+| F9 | Variant album grid | template | flavor grid, album, all variants | All variants in one grid | Variety | items [{icon or image, name, price}], highlight, tag, title |
+| F10 | Spec callouts | template | callouts, specs, feature lines, labels | Lines point to features | Gadgets, equipment | product, specs [{x, y, label}] (0-1 on the product), title, at |
 | F11 | 360 turntable | recipe | 360, turntable, rotate product | Product turns a full circle | E-commerce | Real turntable clip → U1 |
-| F12 | Size comparison | planned | size, scale, actual size | Product next to a hand or coin | Size questions | Meanwhile: U1 photo + B11 |
+| F12 | Size comparison | template | size, scale, actual size | Product next to a hand or coin | Size questions | product, ref (hand/coin/phone/card), ratio, size, title |
 | G1 | Gold active word | template | captions, subtitles, active word | Word by word, active word in brand color | Default for every edit | job.captions {style:"G1", file} |
 | G2 | One big word | template | one word, big captions, single word | One huge word at a time | Talking heads | job.captions {style:"G2"} |
 | G3 | Karaoke box | template | karaoke, highlight box, box captions | A box behind the active word | UGC | job.captions {style:"G3"} |
-| G4 | Handwritten captions | planned | handwritten, marker captions | Marker-style words | Paper styles | — |
-| G5 | Typewriter | planned | typewriter, typing text | Letters type in | Quotes, prompts | Meanwhile: A4 |
+| G4 | Handwritten captions | template | handwritten, marker captions | Marker-style words | Paper styles | `captions.style: "G4"` |
+| G5 | Typewriter | template | typewriter, typing text | Letters type in | Quotes, prompts | `captions.style: "G5"` |
 | G6 | Text behind subject | template | text behind, behind subject, depth text | Person stands in front of a huge title | Hooks, covers | bg, subject (cut-out PNG), title, sub, titleColor |
 | G7 | Highlighter keywords | template | highlighter, marker highlight | Marker swipe behind spoken words | Edu | job.captions {style:"G7"} |
 | G8 | Native outline | template | tiktok captions, native captions, white outline | White bold, black outline | Native-looking ads | job.captions {style:"G8"} |
-| G9 | Emoji captions | planned | emoji captions | Emojis pop at key words | Casual content | — |
-| G10 | Lower-third name tag | planned | lower third, name tag, title bar | Name + title bar | Founders, experts | Meanwhile: U1 title |
+| G9 | Emoji captions | template | emoji captions | Emojis pop at key words | Casual content | `captions.style: "G9"` |
+| G10 | Lower-third name tag | template | lower third, name tag, title bar | Name + title bar | Founders, experts | media, name, role |
 | G11 | 3D extruded title | template | 3d title, extruded text | Thick 3D letters | Hooks | media, title ("line 1|line 2"), sub, position top/middle/bottom, titleAt, color |
 | G12 | Split color words | recipe | color word, key word color | Key word in brand color | Offers | J1 highlight, or B1 accent |
 | G13 | Neon captions | template | neon captions, glow captions | Glowing words, active word in brand color | Neon look | `captions.style: "G13"` |
@@ -164,14 +164,14 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | H5 | Film burn | template | film burn, burn | Orange burn through | Cinematic | `"transition": "H5"` |
 | H6 | Brand color wipe | template | wipe, color wipe, bar wipe | A diagonal brand-color bar wipes | Brand moments | scene.transition "H6" |
 | H7 | Crash zoom | template | zoom, crash zoom, punch | Zooms in from big + blur | Hooks, hits | scene.transition "H7" |
-| H8 | Light leak flash | planned | light leak | Warm leak flash | Lifestyle | — |
+| H8 | Light leak flash | template | light leak | Warm leak flash | Lifestyle | `"transition": "H8"` |
 | H9 | Paper rip | template | paper rip, tear, rip | Torn edge sweeps across | Paper styles | scene.transition "H9" |
 | H10 | Whip pan | template | whip, whip pan, motion blur | Fast blurred slide | Fast edits | scene.transition "H10" |
-| H11 | Ink / liquid wipe | planned | ink, liquid, fluid | Ink spreads to reveal | Soft brands | — |
+| H11 | Ink / liquid wipe | template | ink, liquid, fluid | Ink spreads to reveal | Soft brands | `"transition": "H11"` |
 | H12 | Circle reveal | template | circle, iris, shape reveal, mask | Circle opens from the center | Reveals, end cards | scene.transition "H12" |
-| H13 | Page turn | planned | page turn, page flip | Page curls over | Stories | — |
+| H13 | Page turn | template | page turn, page flip | Page curls over | Stories | `"transition": "H13"` |
 | H14 | 3D cube spin | template | cube, 3d spin | Scenes on a turning cube | Lists | "transition": "H14" on the entering scene |
-| H15 | Pixel / mosaic | planned | pixel, mosaic, pixelate | Pixels resolve | Tech | — |
+| H15 | Pixel / mosaic | template | pixel, mosaic, pixelate | Pixels resolve | Tech | `"transition": "H15"` |
 | H16 | Match cut | recipe | match cut | Cut on matching shape or motion | Story edits | Plan two U1 shots that match; no effect needed |
 | H17 | Neon flicker | template | neon flicker, flicker transition | New scene buzzes on like a tube | Neon look | `"transition": "H17"` |
 | H18 | Frosted blur | template | blur transition, frosted, glass wipe | New scene comes out of a frosted blur | Glass look | `"transition": "H18"` |
@@ -182,12 +182,12 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | H23 | Ivory fade | template | soft fade, fade through white | Fades through ivory with a settle | Minimal look | `"transition": "H23"` |
 | I1 | Watermark | template | watermark, logo bug | Logo or brand name, top right | Every edit | job.overlays.watermark |
 | I2 | Film grain | template | grain, film grain, texture | Moving grain | Retro, paper, cinematic | job.overlays.grain (0–0.4) |
-| I3 | Light leaks | planned | light leaks | Warm color leaks | Lifestyle | — |
-| I4 | VHS lines | planned | vhs, scanlines | Scanlines, tracking | Y2K | — |
+| I3 | Light leaks | template | light leaks | Warm color leaks | Lifestyle | `overlays.lightLeaks: true` |
+| I4 | VHS lines | template | vhs, scanlines | Scanlines, tracking | Y2K | `overlays.vhs: true` |
 | I5 | Vignette | template | vignette, dark edges | Darker edges | Cinematic | job.overlays.vignette |
-| I6 | Paper texture overlay | planned | paper texture | Paper grain on top | Paper styles | Meanwhile: I2 |
-| I7 | Lens flare | planned | lens flare | Flare streak | Product hero | — |
-| I8 | Particles / sparkle | planned | particles, sparkle, confetti | Floating sparkles | Beauty, celebrations | — |
+| I6 | Paper texture overlay | template | paper texture | Paper grain on top | Paper styles | `overlays.paper: true` |
+| I7 | Lens flare | template | lens flare | Flare streak | Product hero | `overlays.flare: true` |
+| I8 | Particles / sparkle | template | particles, sparkle, confetti | Floating sparkles | Beauty, celebrations | `overlays.sparkle: true` |
 | I9 | Ducked music + SFX on pops | recipe | music, sfx, sound design | SFX on every pop, music under the VO | Every edit | Built in: auto SFX per template, audio.music + audio.musicVolume |
 | I10 | SAMPLE tag | template | sample label, concept tag, mock label | "SAMPLE" chip | Mock stats, concept ads | job.overlays.sample |
 | J1 | Bold question hook | template | hook, question hook, bold question | A short question fills the screen | First 1–3 s | text, highlight, sub, bg |
@@ -207,7 +207,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | K3 | Button press CTA | template | button press, tap button | A button gets tapped | Messaging CTAs | button, title, sub, icon, after, pressAt, hand, media |
 | K4 | Offer card | template | offer, package, inclusions, pricing card | Title, checklist, price, button | Packages | title, items[], price, note, cta |
 | K5 | Loop ending | recipe | loop, seamless loop | Last frame flows into the first | Reels, TikTok | Repeat scene 1's style/props as the last scene; skip end cards |
-| K6 | Logo animation outro | planned | logo outro, logo animation | Logo reveal | Brand outros | Meanwhile: K7 |
+| K6 | Logo animation outro | template | logo outro, logo animation | Logo reveal | Brand outros | logo or name, tagline |
 | K7 | Brand end card | template | end card, outro, brand card | Logo, headline, pulsing CTA button | Every ad | logo, headline, cta, handle |
 | K8 | 3D logo end card | template | 3d logo end | Spinning metallic logo | Premium outros | logo (PNG) or name, cta, handle |
 | K9 | Neon CTA | template | neon cta, neon button | Neon button + chasing arrows | Neon look outros | cta, title, handle, arrow, color, color2 |

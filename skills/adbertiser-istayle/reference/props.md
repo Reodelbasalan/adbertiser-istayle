@@ -121,6 +121,28 @@ G11 `{"media": "clip.mp4", "title": "Ad na|Panalo", "sub": "optional", "position
 H14 cube spin: put `"transition": "H14"` on the entering scene; both scenes turn like a cube.
 D5 and D6 use WebGL (three.js); the engine renders with `--gl=angle`. On a machine with no GPU, set `Config.setChromiumOpenGlRenderer('swangle')` in `engine/remotion.config.ts`.
 
+## Product pack: F3 Exploded view · F7 Bundle builder · F8 Catalog flip · F9 Variant grid · F10 Spec callouts · F12 Size comparison
+Items take `image` (transparent PNG works best) or `icon` (emoji).
+F3 `{"product": "bottle.png", "parts": [{"icon": "🍃", "label": "Aloe"}, {"image": "lemon.png", "label": "Vitamin C"}], "title": "Ano ang laman?"}`
+F7 `{"items": [{"image": "a.png"}, {"image": "b.png"}, {"icon": "🪥"}], "label": "Bundle", "price": "₱999", "title": "Sulit bundle"}`
+F8 `{"items": [{"image": "white.png", "name": "Classic White", "price": "₱1,299"}]}` · F9 `{"items": [{"icon": "🍓", "name": "Strawberry"}], "highlight": 0, "tag": "BEST SELLER", "title": "Pili ka ng flavor"}`
+F10 `{"product": "bottle.png", "specs": [{"x": 0.3, "y": 0.25, "label": "Pump cap"}, {"x": 0.65, "y": 0.5, "label": "250 ml"}], "at": [0.5, 1.0]}` · `x, y` = point on the product image (0–1).
+F12 `{"product": "bottle.png", "ref": "hand", "ratio": 0.8, "size": "12 cm", "title": "Ganito kalaki"}` · `ref`: hand · coin · phone · card; `ratio` = product height vs the reference.
+
+## Paper extras: C5 Kraft / cardboard · C6 Ransom-note letters · C7 Polaroid stack · C9 Pop-up book
+C5 `{"title": "Handmade", "note": "gawa sa Pinas", "sub": "optional", "photo": "optional"}` · C6 `{"text": "Sale|Ngayon", "sub": "optional"}` · C7 `{"photos": ["a.jpg", "b.jpg"], "notes": ["best seller", "bago"], "title": "optional"}` · C9 `{"title": "Bagong Bukas!", "icon": "🏪", "sub": "optional"}`
+
+## Extras: B9 Timeline · B18 Retro poster · B20 Cartoon host · B21 Sticker pop · B24 Sample montage · A14 Podcast clip · A22 Push-in slide · G10 Lower-third · K6 Logo outro
+B9 `{"title": "optional", "steps": [{"date": "Day 1", "label": "Brief + script"}], "at": [0.3]}` · B18 `{"title": "Summer Sale", "sub": "Nov 20 – 30", "year": "2026"}` · B20 `{"say": "Hi! Tutulungan kita.", "name": "optional", "color": "#FFD23F"}` (generic mascot)
+B21 `{"media": "clip.mp4", "stickers": [{"text": "NEW!", "x": 0.2, "y": 0.3}, {"emoji": "🔥", "x": 0.8, "y": 0.35}]}` · B24 `{"media": ["a.mp4", "b.mp4", "c.jpg", "d.jpg"], "label": "Sample outputs"}`
+A14 `{"media": "clip.mp4", "show": "The Ads Talk", "guest": "Episode 12", "quote": "optional"}` · A22 `{"title": "3 parte ng panalong ad", "bullets": ["Hook", "Offer", "CTA"], "image": "optional"}`
+G10 `{"media": "clip.mp4", "name": "Juan Dela Cruz", "role": "Owner"}` · K6 `{"logo": "logo.png", "name": "Brand", "tagline": "optional"}`
+
+## More captions, transitions and overlays
+Captions: G4 note-card handwriting · G5 typewriter (words type in) · G9 emoji (keywords like benta, ads, libre, order get an emoji).
+Transitions: H8 light leak flash · H11 ink wipe · H13 page turn · H15 pixel mosaic.
+Overlays: `job.overlays = {"lightLeaks": true, "vhs": true, "paper": true, "flare": true, "sparkle": true}` (I3, I4, I6, I7, I8).
+
 ## Bold brutalist look: B16 Brutalist title · B48 Marquee bands · B49 Brutalist grid · B50 Photo block · K17 Brutalist CTA
 Huge condensed type, hard black borders, flat accent (`color`, else brand primary), mono labels.
 B16 `{"text": "Stop|Boring|Ads", "label": "AD NO. 001", "sub": "optional"}` · B48 `{"text": "BAGONG ADS", "text2": "LIMITED SLOTS", "media": "optional"}`
@@ -220,14 +242,14 @@ K1 `{"cta": "MESSAGE US", "arrow": "👇"}`
 K4 `{"title": "Starter Package", "items": ["5 video ads", "Captions + music"], "price": "₱4,999", "note": "Limited slots", "cta": "MESSAGE US"}`
 `cta` defaults to `brand.cta`; `logo` to `brand.logo`.
 
-## G1 G2 G3 G7 G8 G13 G14 G15 G16 G17 G18 G19 Captions
+## G1 G2 G3 G7 G8 G13 G14 G15 G16 G17 G18 G19 G4 G5 G9 Captions
 `job.captions = {"style": "G1", "file": "words.json", "y": 0.63}`
 Captions hide on templates that show their own big text (hooks, prices, chats, cards, end cards) and show on footage (U1, B11). Force per scene with `"captions": true` or `false`.
 `words.json`: `[{"w": "Hello", "s": 0.12, "e": 0.40}]`, or `[{"word", "start", "end"}]`, or Whisper-style segments with `words`. `y` = 0–1 of the frame height (keep 0.25–0.75 on 9:16). Captions follow `audio.vo` timing, so transcribe the VO first.
 
-## H1 H2 H3 H4 H5 H6 H7 H9 H10 H12 H14 H17 H18 H19 H20 H21 H22 H23 Transitions
+## H1 H2 H3 H4 H5 H6 H7 H9 H10 H12 H14 H17 H18 H19 H20 H21 H22 H23 H8 H11 H13 H15 Transitions
 Put `"transition": "H9"` on the scene that comes IN. Each one has its own SFX. Mix 2–3 kinds per ad; don't use a different one on every cut.
 
-## I1 I2 I5 I10 Overlays
+## I1 I2 I3 I4 I5 I6 I7 I8 I10 Overlays
 `job.overlays = {"watermark": true, "grain": 0.15, "vignette": true, "sample": true}`
 `watermark` uses `brand.logo`, or `brand.name` as text.

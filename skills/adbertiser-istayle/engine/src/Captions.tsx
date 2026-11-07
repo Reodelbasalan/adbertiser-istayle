@@ -1,10 +1,13 @@
 import React, {useMemo} from 'react';
 import {useCurrentFrame} from 'remotion';
 import {font, useBrand} from './brand';
-import {alpha, ink, pop, useLayout} from './lib/util';
+import {alpha, clean, ink, pop, useLayout} from './lib/util';
+
+/** G9: keyword → emoji (Taglish + English) */
+const EMOJI: Record<string, string> = {benta: '💰', sales: '💰', pera: '💸', ads: '📈', ad: '📈', free: '🎁', libre: '🎁', mabilis: '⚡', fast: '⚡', message: '💬', chat: '💬', order: '🛒', orders: '🛒', bili: '🛒', sale: '🔥', promo: '🔥', video: '🎬', phone: '📱', love: '❤️', gusto: '❤️', ngayon: '⏰', now: '⏰', hook: '🎣', presyo: '🏷️', price: '🏷️', ganda: '✨', panalo: '🏆', tip: '💡', idea: '💡'};
 import type {Word} from './types';
 
-export const CAPTION_STYLES = ['G1', 'G2', 'G3', 'G7', 'G8', 'G13', 'G14', 'G15', 'G16', 'G17', 'G18', 'G19'];
+export const CAPTION_STYLES = ['G1', 'G2', 'G3', 'G7', 'G8', 'G13', 'G14', 'G15', 'G16', 'G17', 'G18', 'G19', 'G4', 'G5', 'G9'];
 
 const chunk = (ws: Word[], max: number, gap = 0.45) => {
   const out: Word[][] = [];
@@ -21,7 +24,7 @@ const chunk = (ws: Word[], max: number, gap = 0.45) => {
   return out;
 };
 
-/** word-timed captions. G1 gold active word · G2 one big word · G3 karaoke box · G7 highlighter · G8 TikTok native · G13 neon glow · G14 glass pill · G15 marker · G16 comic · G17 film subtitles · G18 VHS · G19 minimal */
+/** word-timed captions. G1 gold active word · G2 one big word · G3 karaoke box · G7 highlighter · G8 TikTok native · G13 neon glow · G14 glass pill · G15 marker · G16 comic · G17 film subtitles · G18 VHS · G19 minimal · G4 note card · G5 typewriter · G9 emoji */
 export const Captions: React.FC<{words: Word[]; style?: string; y?: number; hidden?: [number, number][]}> = ({words, style = 'G1', y, hidden = []}) => {
   const f = useCurrentFrame();
   const L = useLayout();
@@ -55,6 +58,12 @@ export const Captions: React.FC<{words: Word[]; style?: string; y?: number; hidd
         rowGap: size * 0.1,
         transform: `translateY(-50%) scale(${0.85 + 0.15 * s})`,
         // G14 glass: words sit on a frosted pill
+        ...(style === 'G4'
+          ? {left: 'auto', right: 'auto', width: 'fit-content', maxWidth: L.W - 2 * L.pad, marginLeft: '50%', translate: '-50% 0', padding: `${size * 0.25}px ${size * 0.5}px`, background: '#FFFDF4', borderRadius: 6 * L.u, boxShadow: '0 10px 24px rgba(0,0,0,.35)', rotate: '-2deg', backgroundImage: `linear-gradient(rgba(29,112,224,.18) ${2 * L.u}px, transparent ${2 * L.u}px)`, backgroundSize: `100% ${size * 0.9}px`}
+          : {}),
+        ...(style === 'G5'
+          ? {left: 'auto', right: 'auto', width: 'fit-content', maxWidth: L.W - 2 * L.pad, marginLeft: '50%', translate: '-50% 0', padding: `${size * 0.18}px ${size * 0.35}px`, background: 'rgba(0,0,0,.82)', justifyContent: 'flex-start'}
+          : {}),
         ...(style === 'G14'
           ? {left: 'auto', right: 'auto', width: 'fit-content', maxWidth: L.W - 2 * L.pad, marginLeft: '50%', translate: '-50% 0', padding: `${size * 0.22}px ${size * 0.45}px`, borderRadius: size * 0.5, background: 'linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,.08))', border: `${2 * L.u}px solid rgba(255,255,255,.35)`, backdropFilter: `blur(${18 * L.u}px)`, boxShadow: '0 10px 30px rgba(0,0,0,.35)'}
           : {}),
@@ -80,6 +89,9 @@ export const Captions: React.FC<{words: Word[]; style?: string; y?: number; hidd
         if (style === 'G7' && passed)
           Object.assign(base, {color: '#111', WebkitTextStroke: '0', textShadow: 'none', padding: `0 ${size * 0.1}px`, backgroundImage: `linear-gradient(${alpha(b.primary, 0.92)}, ${alpha(b.primary, 0.92)})`, backgroundRepeat: 'no-repeat', backgroundSize: `${Math.min(1, (t - w.s) / 0.15) * 100}% 80%`, backgroundPosition: 'left center'});
         if (style === 'G8') Object.assign(base, {transform: `scale(${active ? 1.04 : 1})`});
+        if (style === 'G4') Object.assign(base, {fontFamily: b.fHand, fontWeight: 400, textTransform: 'none', WebkitTextStroke: '0', textShadow: 'none', color: active ? '#1D4ED8' : '#222222', fontSize: size * 1.05});
+        if (style === 'G5') Object.assign(base, {fontFamily: b.fType, fontWeight: 400, textTransform: 'none', WebkitTextStroke: '0', textShadow: 'none', color: '#F2F2F2', fontSize: size * 0.85, opacity: passed ? 1 : 0});
+        if (style === 'G9') Object.assign(base, {transform: `scale(${active ? 1.06 : 1})`, color: active ? b.primary : '#fff'});
         if (style === 'G18') Object.assign(base, {fontFamily: "'Courier New', monospace", fontWeight: 700, WebkitTextStroke: '0', color: '#FFFFFF', textShadow: `${-3 * L.u}px 0 0 rgba(255,0,60,.8), ${3 * L.u}px 0 0 rgba(0,220,255,.8), 0 0 ${10 * L.u}px rgba(255,255,255,.4)`, opacity: active ? 1 : 0.8});
         if (style === 'G19') Object.assign(base, {fontWeight: 500, textTransform: 'none', fontSize: size * 0.78, WebkitTextStroke: '0', color: '#FFFFFF', opacity: active ? 1 : 0.6, textShadow: `0 ${2 * L.u}px ${12 * L.u}px rgba(0,0,0,.55)`, borderBottom: active ? `${3 * L.u}px solid #FFFFFF` : `${3 * L.u}px solid transparent`});
         if (style === 'G17') Object.assign(base, {fontFamily: b.fSerif, fontStyle: 'italic', fontWeight: 700, textTransform: 'none', fontSize: size * 0.82, WebkitTextStroke: '0', color: active ? '#FFE8B0' : '#F5EFE6', textShadow: `0 ${2 * L.u}px ${10 * L.u}px rgba(0,0,0,.9)`});
@@ -92,7 +104,8 @@ export const Captions: React.FC<{words: Word[]; style?: string; y?: number; hidd
         }
         return (
           <span key={`${w.s}-${i}`} style={base}>
-            {w.w}
+            {style === 'G5' && active ? w.w.slice(0, Math.max(1, Math.ceil(((t - w.s) / Math.max(0.05, w.e - w.s)) * w.w.length))) : w.w}
+            {style === 'G9' && EMOJI[clean(w.w)] ? <span style={{display: 'inline-block', marginLeft: size * 0.15, WebkitTextStroke: '0', transform: `scale(${passed ? Math.min(1, (t - w.s) / 0.12) : 0})`}}>{EMOJI[clean(w.w)]}</span> : null}
           </span>
         );
       })}
