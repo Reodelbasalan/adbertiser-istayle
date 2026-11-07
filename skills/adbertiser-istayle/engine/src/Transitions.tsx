@@ -21,6 +21,7 @@ export const TRANSITION_SFX: Record<string, string> = {
   H19: 'scribble',
   H20: 'impact',
   H5: 'whoosh_low',
+  H21: 'whoosh_soft',
 };
 
 export const TRANSITIONS = Object.keys(TRANSITION_SFX);
@@ -53,6 +54,13 @@ export const TransitionIn: React.FC<{type?: string; frames: number; children: Re
         <AbsoluteFill style={{opacity: Math.min(1, t * 2.5)}}>
           {children}
           <AbsoluteFill style={{background: 'linear-gradient(115deg, transparent 30%, rgba(255,255,255,.9) 50%, transparent 70%)', transform: `translateX(${(t * 2.4 - 1.2) * 100}%)`, mixBlendMode: 'screen'}} />
+        </AbsoluteFill>
+      );
+    case 'H21':
+      // depth push: the new scene comes forward out of the distance, tilting flat
+      return (
+        <AbsoluteFill style={{perspective: 1600 * L.u}}>
+          <AbsoluteFill style={{transform: `translateZ(${-900 * L.u * v}px) rotateX(${14 * v}deg)`, filter: `blur(${v * 18 * L.u}px)`, opacity: Math.min(1, t * 2.5)}}>{children}</AbsoluteFill>
         </AbsoluteFill>
       );
     case 'H5':

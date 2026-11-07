@@ -82,7 +82,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | C8 | Crayon / marker kid style | planned | crayon, kids drawing, marker drawing | Wobbly hand-drawn lines | Family products | — |
 | C9 | Pop-up book | planned | pop-up book, fold, paper fold | Pages fold up into scenes | Storytelling | — |
 | D1 | 3D UI cards | template | 3d cards, tilt, perspective | Tilted panels with depth | Software | cards [{icon, value, label} or {image}], title, bg |
-| D2 | 2.5D parallax photo | planned | parallax, 2.5d, depth, photo motion | A still photo moves with depth | Product and place photos | Will use Depth Anything V2 Small (Apache 2.0) |
+| D2 | 2.5D parallax photo | template | parallax, 2.5d, depth, photo motion | A still photo moves with depth | Product and place photos | photo, depth (from scripts/depth.py), motion dolly/orbit/rise, amount, title, sub |
 | D3 | 3D text / logo reveal | template | 3d text, 3d logo, logo reveal, metallic | Metallic text spins in | Intros | text ("line 1|line 2"), sub, color, gridColor |
 | D4 | Floating product spin | template | 3d product, product spin, floating product | Product floats and turns | E-commerce | product (transparent PNG), title, sub |
 | D5 | 3D phone / laptop mockup | template | phone mockup, laptop mockup, device | Device turns, your ad on its screen | Agencies, apps | media (9:16 clip or image on the screen), title, sub, side, phoneColor |
@@ -91,6 +91,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | D8 | Photo to 3D model | recipe | image to 3d, 3d model, glb | A product photo becomes a model | Product spins | Make a .glb with an open image-to-3D model (e.g. TripoSR, MIT); D4 will load it |
 | D9 | Photo layer fly-through | template | fly-through, layered photo, camera fly | Camera flies into a layered photo | Hooks, places | photos (2–6 photos/clips), labels, title |
 | D10 | Isometric 3D store | recipe | diorama, isometric store, miniature store | A small 3D diorama of the business | Local biz | Generate a still with an image model → U1 zoom in |
+| D11 | Title between depth layers | template | text behind, depth title, 2.5d title | Big title sits behind the subject, layers drift | Hooks on photos | photo, fg (from depth.py), title, sub, color |
 | E1 | 3D cartoon render look | recipe | 3d cartoon, animated film look, cgi cartoon | Soft 3D render look | B-roll, objects, places | Image/video model, people-free scenes → U1 |
 | E2 | Claymation | recipe | clay, claymation, plasticine | Clay textures | Food, kids, fun brands | Image/video model → U1 |
 | E3 | Miniature tilt-shift | recipe | tilt shift, miniature | Tiny diorama world | Places | Image/video model → U1 |
@@ -152,6 +153,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | H18 | Frosted blur | template | blur transition, frosted, glass wipe | New scene comes out of a frosted blur | Glass look | `"transition": "H18"` |
 | H19 | Eraser wipe | template | eraser, whiteboard wipe | Soft white band wipes to the next scene | Whiteboard look | `"transition": "H19"` |
 | H20 | Comic panel slam | template | comic transition, panel slam | New scene lands as a tilted inked panel | Comic look | `"transition": "H20"` |
+| H21 | Depth push | template | depth push, dolly transition | New scene comes forward out of the distance | 2.5D look | `"transition": "H21"` |
 | I1 | Watermark | template | watermark, logo bug | Logo or brand name, top right | Every edit | job.overlays.watermark |
 | I2 | Film grain | template | grain, film grain, texture | Moving grain | Retro, paper, cinematic | job.overlays.grain (0–0.4) |
 | I3 | Light leaks | planned | light leaks | Warm color leaks | Lifestyle | — |
@@ -187,4 +189,5 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | K11 | Marker CTA | template | marker cta, whiteboard cta | CTA written by marker, boxed, arrow + star | Whiteboard look outros | cta, title, handle, color |
 | K12 | Comic CTA | template | comic cta | CTA in an inked box, pointing hand | Comic look outros | cta, title, handle |
 | K13 | Cinematic end card | template | film end card, movie outro | Wide serif name, rule, CTA, light sweep | Premium outros | name, cta, line |
+| K14 | Depth CTA | template | parallax cta, photo cta | Photo drifts in depth behind a CTA band | 2.5D look outros | photo, fg, title, cta, handle |
 | U1 | Footage / photo shot | template | footage, broll, b-roll, photo, video clip, shot | Your clip or photo with zoom | The base of every ad | media, zoom (in/out/none), punchAt, title, titleAt |

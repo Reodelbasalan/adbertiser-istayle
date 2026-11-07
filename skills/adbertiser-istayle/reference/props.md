@@ -121,6 +121,13 @@ G11 `{"media": "clip.mp4", "title": "Ad na|Panalo", "sub": "optional", "position
 H14 cube spin: put `"transition": "H14"` on the entering scene; both scenes turn like a cube.
 D5 and D6 use WebGL (three.js); the engine renders with `--gl=angle`. On a machine with no GPU, set `Config.setChromiumOpenGlRenderer('swangle')` in `engine/remotion.config.ts`.
 
+## 2.5D look: D2 Parallax photo · D11 Title between depth layers · K14 Depth CTA · H21 Depth push
+Make the depth files once per photo: `python scripts/depth.py photo.jpg` → `photo_depth.png` (white = near) and `photo_fg.png` (only the near part). Model: Depth Anything V2 Small (Apache 2.0, ~100 MB download; needs `pip install transformers torch pillow numpy`). Without a depth file D2 uses a soft center-near depth.
+D2 `{"photo": "photo.jpg", "depth": "photo_depth.png", "motion": "dolly", "amount": 0.55, "title": "optional", "sub": "optional"}` · motion: dolly · orbit · rise. WebGL (three.js).
+D11 `{"photo": "photo.jpg", "fg": "photo_fg.png", "title": "Ganda ng shot", "sub": "optional", "y": 0.5}` · the title sits between the background and the subject; `y` (0–1) moves it onto the subject.
+K14 `{"photo": "photo.jpg", "fg": "photo_fg.png", "title": "Brand", "cta": "MESSAGE US", "handle": "@page"}`
+H21: `"transition": "H21"` on the entering scene.
+
 ## Cinematic film look: B38 Cinematic title · B39 Graded shot · B40 Trailer statement · B41 Trailer word flash · K13 Cinematic end card · G17 Film subtitles · H5 Film burn
 Letterbox bars, film grade (`grade`: warm · teal · mono · none), grain, dust and light leaks; serif titles (`Playfair Display`).
 B38 `{"title": "Isang ad.|Isang kwento.", "sub": "optional", "media": "clip.mp4", "grade": "warm"}`
@@ -180,7 +187,7 @@ K4 `{"title": "Starter Package", "items": ["5 video ads", "Captions + music"], "
 Captions hide on templates that show their own big text (hooks, prices, chats, cards, end cards) and show on footage (U1, B11). Force per scene with `"captions": true` or `false`.
 `words.json`: `[{"w": "Hello", "s": 0.12, "e": 0.40}]`, or `[{"word", "start", "end"}]`, or Whisper-style segments with `words`. `y` = 0–1 of the frame height (keep 0.25–0.75 on 9:16). Captions follow `audio.vo` timing, so transcribe the VO first.
 
-## H1 H2 H3 H4 H5 H6 H7 H9 H10 H12 H14 H17 H18 H19 H20 Transitions
+## H1 H2 H3 H4 H5 H6 H7 H9 H10 H12 H14 H17 H18 H19 H20 H21 Transitions
 Put `"transition": "H9"` on the scene that comes IN. Each one has its own SFX. Mix 2–3 kinds per ad; don't use a different one on every cut.
 
 ## I1 I2 I5 I10 Overlays
