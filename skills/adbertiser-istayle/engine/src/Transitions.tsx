@@ -17,6 +17,7 @@ export const TRANSITION_SFX: Record<string, string> = {
   H12: 'whoosh_soft',
   H14: 'whoosh',
   H17: 'buzz',
+  H18: 'whoosh_soft',
 };
 
 export const TRANSITIONS = Object.keys(TRANSITION_SFX);
@@ -49,6 +50,14 @@ export const TransitionIn: React.FC<{type?: string; frames: number; children: Re
         <AbsoluteFill style={{opacity: Math.min(1, t * 2.5)}}>
           {children}
           <AbsoluteFill style={{background: 'linear-gradient(115deg, transparent 30%, rgba(255,255,255,.9) 50%, transparent 70%)', transform: `translateX(${(t * 2.4 - 1.2) * 100}%)`, mixBlendMode: 'screen'}} />
+        </AbsoluteFill>
+      );
+    case 'H18':
+      // frosted glass: the new scene comes out of a heavy blur behind a white frost
+      return (
+        <AbsoluteFill style={{filter: `blur(${v * 50 * L.u}px)`, transform: `scale(${1.06 - 0.06 * e})`, opacity: Math.min(1, t * 2.2)}}>
+          {children}
+          <AbsoluteFill style={{background: `linear-gradient(135deg, rgba(255,255,255,${0.45 * v}), rgba(255,255,255,${0.1 * v}))`}} />
         </AbsoluteFill>
       );
     case 'H17': {

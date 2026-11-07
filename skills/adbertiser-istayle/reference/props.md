@@ -121,6 +121,16 @@ G11 `{"media": "clip.mp4", "title": "Ad na|Panalo", "sub": "optional", "position
 H14 cube spin: put `"transition": "H14"` on the entering scene; both scenes turn like a cube.
 D5 and D6 use WebGL (three.js); the engine renders with `--gl=angle`. On a machine with no GPU, set `Config.setChromiumOpenGlRenderer('swangle')` in `engine/remotion.config.ts`.
 
+## Glass UI look: B17 Glass title · B2 Dashboard · B22 Cursor demo · B23 Workflow steps · B30 Glass pricing · K10 Glass CTA · G14 Glass captions · H18 Frosted blur
+Frosted glass over moving brand-color blobs; every part takes an optional `bg` photo or clip (blurred underneath).
+B17 `{"title": "Ads na mukhang premium", "sub": "Kahit phone lang", "tag": "NEW"}`
+B2 `{"title": "Ads Dashboard", "kpis": [{"label": "Reach", "value": 48200, "delta": "+32%"}, {"label": "Cost / msg", "value": 42, "prefix": "₱", "delta": "-21%"}], "series": [12, 18, 26, 31, 44]}` · mock numbers need the SAMPLE overlay.
+B22 `{"title": "Ad Maker", "buttons": ["Isulat ang hook", "Piliin ang style", "I-render"], "result": "Ad ready ✓", "at": [0.8, 1.6, 2.4]}` · `at` (seconds) times each click to the VO.
+B23 `{"title": "Ganito ang proseso", "steps": [{"icon": "📝", "label": "Script"}, {"icon": "✂️", "label": "Edit"}], "at": [0.3, 1.1]}` · 2–5 steps.
+B30 `{"title": "Pili ka ng package", "tiers": [{"name": "Starter", "price": "₱999", "items": ["1 video ad"]}, {"name": "Growth", "price": "₱2,499", "items": ["3 video ads"], "best": true}], "bestLabel": "BEST VALUE"}`
+K10 `{"logo": "logo.png", "name": "Brand", "headline": "Simulan na natin", "cta": "MESSAGE US", "handle": "@page"}`
+G14 captions: `job.captions.style = "G14"`. H18: `"transition": "H18"` on the entering scene.
+
 ## Neon look: B12 Neon sign · B26 Hologram HUD · B27 Neon price · B28 Hologram product · B29 Neon checklist · K9 Neon CTA · G13 Neon captions · H17 Neon flicker
 Neon colors come from the brand (`primary` = neon 1, `secondary` = neon 2); override per scene with `color` / `color2`. Every part takes an optional `bg` photo or clip (shown dark).
 B12 `{"text": "Bukas na|Ads mo?", "sub": "optional", "script": true}` · `|` splits lines; line 1 uses the hand font (`script: false` for block letters). Lines flicker on one by one.
@@ -137,12 +147,12 @@ K1 `{"cta": "MESSAGE US", "arrow": "👇"}`
 K4 `{"title": "Starter Package", "items": ["5 video ads", "Captions + music"], "price": "₱4,999", "note": "Limited slots", "cta": "MESSAGE US"}`
 `cta` defaults to `brand.cta`; `logo` to `brand.logo`.
 
-## G1 G2 G3 G7 G8 G13 Captions
+## G1 G2 G3 G7 G8 G13 G14 Captions
 `job.captions = {"style": "G1", "file": "words.json", "y": 0.63}`
 Captions hide on templates that show their own big text (hooks, prices, chats, cards, end cards) and show on footage (U1, B11). Force per scene with `"captions": true` or `false`.
 `words.json`: `[{"w": "Hello", "s": 0.12, "e": 0.40}]`, or `[{"word", "start", "end"}]`, or Whisper-style segments with `words`. `y` = 0–1 of the frame height (keep 0.25–0.75 on 9:16). Captions follow `audio.vo` timing, so transcribe the VO first.
 
-## H1 H2 H3 H4 H6 H7 H9 H10 H12 H14 H17 Transitions
+## H1 H2 H3 H4 H6 H7 H9 H10 H12 H14 H17 H18 Transitions
 Put `"transition": "H9"` on the scene that comes IN. Each one has its own SFX. Mix 2–3 kinds per ad; don't use a different one on every cut.
 
 ## I1 I2 I5 I10 Overlays

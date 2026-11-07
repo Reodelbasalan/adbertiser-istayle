@@ -32,7 +32,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | A25 | Day in the life | recipe | day in the life, ditl, routine | Quick cuts through a day | Lifestyle, services | U1 clips ~1 s, times as titles |
 | A26 | Problem, agitate, solve | recipe | pas, problem agitate solve | Pain, worse, fix | Any direct-response ad | J1 → B1 → F1/U1 → F6 → K1 |
 | B1 | Kinetic typography | template | kinetic, kinetic text, typography, text animation | Big words slammed in, one line at a time | Offers, hooks | lines[], accent[] |
-| B2 | UI mockup / dashboard | planned | ui mockup, dashboard, app screen, saas | Animated app screens, counters | Software, services | Meanwhile: U1 with a screenshot + B11 |
+| B2 | Dashboard | template | ui mockup, dashboard, app screen, saas | Glass app: KPIs count up, line chart draws | Software, services | kpis [{label, value, prefix, suffix, delta}], series, title, bg (mock data = SAMPLE) |
 | B3 | Chat story | template | chat, messenger, sms, conversation, dm | A customer chat plays out | Service businesses | name, messages[{from,text}] |
 | B4 | Notification stack | template | notifications, lock screen, orders, ping | Phone pings stack up (SAMPLE label) | Results-style hooks | app, items[{title,text,time}], bg, sample |
 | B5 | Infographic counters | template | infographic, stats, counter, numbers, data | Numbers count up, bars grow | Stats, pricing | title, stats[{value,label,prefix,suffix}], sample |
@@ -47,19 +47,20 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | B14 | Premium punch-zoom | recipe | premium, punch zoom, light streak | Punch zooms, light sweeps | Short-form content | U1 with punchAt + H7/H3 + G1 |
 | B15 | Clean minimal | planned | minimal, clean, corporate, elegant | White space, thin lines | Clinics, real estate | Meanwhile: K7 with a light brand.bg |
 | B16 | Bold brutalist | planned | brutalist, bold blocks, loud | Big blocks, hard shadows | Scroll stoppers | Meanwhile: B1 with accent lines |
-| B17 | Glassmorphism | planned | glass, frosted, glassmorphism | Frosted cards on blur | Tech, software | — |
+| B17 | Glass title | template | glass, frosted, glassmorphism | Frosted glass card over color blobs | Tech, software | title, sub, tag, bg |
 | B18 | Retro poster | planned | retro, 70s, 80s, vintage poster | Grain, warm palette | Food, nostalgia | Meanwhile: J1 + I2 grain + warm brand colors |
 | B19 | Comic panels | planned | comic, manga, speech bubble, panels | Panels, bubbles, halftone | Stories, skits | — |
 | B20 | Cartoon host | planned | cartoon, mascot, character host | A drawn host character | Explainers | — |
 | B21 | Sticker pop | planned | stickers, emoji pop, sticker | Stickers pop on beats | UGC energy | — |
-| B22 | Cursor demo | planned | cursor, click demo, walkthrough | A cursor clicks through a UI | Tutorials | Meanwhile: B11 arrows over U1 |
-| B23 | Workflow steps | planned | workflow, 3 steps, how it works | 3-step process animation | Services | Meanwhile: C3 notes |
+| B22 | Cursor demo | template | cursor, click demo, walkthrough | Cursor clicks through steps in a glass app | Tutorials | buttons, result, title, at (seconds per click), bg |
+| B23 | Workflow steps | template | workflow, 3 steps, how it works | Glass step cards joined by a glowing line | Services | steps [{icon, label}], title, at, bg |
 | B24 | Sample montage | planned | montage, portfolio grid, samples | Grid of output samples | Portfolio proof | Meanwhile: C2 with photos |
 | B25 | Line-art draw-on | planned | line art, icon draw, outline animation | Outline icons draw themselves | Features | — |
 | B26 | Hologram HUD | template | hud, hologram, futuristic ui | Spinning rings, value, typed items | Tech, AI, results | value, label, items, title, color, bg |
 | B27 | Neon price | template | neon price, neon promo | Neon frame, price buzzes on | Promos | label, price, oldPrice, note, color, color2 |
 | B28 | Hologram product | template | hologram product, projected product | Product as a flickering hologram | Tech, launches | product (PNG), title, sub, color2 |
 | B29 | Neon checklist | template | neon list, neon checklist | Neon lines light up with checks | Inclusions, steps | title, items, at (seconds per line) |
+| B30 | Glass pricing | template | pricing, packages, price tiers | 1–3 glass tiers, best one glows | Offers, services | tiers [{name, price, items, best}], title, bestLabel, bg |
 | C1 | Paper cutout stop-motion | template | paper, paper cutout, cutout, craft, stop motion, handmade | Torn-paper letters, cut-out items, choppy motion | Food, local biz, explainers | title, sub, items[{emoji or image,label}], colors[], paperColor |
 | C2 | Scrapbook collage | template | scrapbook, collage, polaroid, tape | Polaroids drop in with tape and notes | Product features, stories | title, photos[], notes[], paperColor |
 | C3 | Sticky notes | template | sticky notes, post-it, notes, checklist | Notes slap on a board, checks drawn | Tips, plans, steps | title, notes[], check, boardColor |
@@ -116,6 +117,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | G11 | 3D extruded title | template | 3d title, extruded text | Thick 3D letters | Hooks | media, title ("line 1|line 2"), sub, position top/middle/bottom, titleAt, color |
 | G12 | Split color words | recipe | color word, key word color | Key word in brand color | Offers | J1 highlight, or B1 accent |
 | G13 | Neon captions | template | neon captions, glow captions | Glowing words, active word in brand color | Neon look | `captions.style: "G13"` |
+| G14 | Glass captions | template | glass captions, pill captions | Words on a frosted pill | Glass look | `captions.style: "G14"` |
 | H1 | Slide | template | slide, push | Next scene slides in | Any cut | scene.transition "H1" |
 | H2 | Glitch | template | glitch, rgb split, digital | Jitter + color bars | Tech, energy | scene.transition "H2" |
 | H3 | Glare / light sweep | template | glare, light sweep, shine | A shine passes as it fades in | Beauty, premium | scene.transition "H3" |
@@ -133,6 +135,7 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | H15 | Pixel / mosaic | planned | pixel, mosaic, pixelate | Pixels resolve | Tech | — |
 | H16 | Match cut | recipe | match cut | Cut on matching shape or motion | Story edits | Plan two U1 shots that match; no effect needed |
 | H17 | Neon flicker | template | neon flicker, flicker transition | New scene buzzes on like a tube | Neon look | `"transition": "H17"` |
+| H18 | Frosted blur | template | blur transition, frosted, glass wipe | New scene comes out of a frosted blur | Glass look | `"transition": "H18"` |
 | I1 | Watermark | template | watermark, logo bug | Logo or brand name, top right | Every edit | job.overlays.watermark |
 | I2 | Film grain | template | grain, film grain, texture | Moving grain | Retro, paper, cinematic | job.overlays.grain (0–0.4) |
 | I3 | Light leaks | planned | light leaks | Warm color leaks | Lifestyle | — |
@@ -164,4 +167,5 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | K7 | Brand end card | template | end card, outro, brand card | Logo, headline, pulsing CTA button | Every ad | logo, headline, cta, handle |
 | K8 | 3D logo end card | template | 3d logo end | Spinning metallic logo | Premium outros | logo (PNG) or name, cta, handle |
 | K9 | Neon CTA | template | neon cta, neon button | Neon button + chasing arrows | Neon look outros | cta, title, handle, arrow, color, color2 |
+| K10 | Glass CTA | template | glass cta, glass end card | Glass card, glowing button, shine | Glass look outros | logo or name, headline, cta, handle, bg |
 | U1 | Footage / photo shot | template | footage, broll, b-roll, photo, video clip, shot | Your clip or photo with zoom | The base of every ad | media, zoom (in/out/none), punchAt, title, titleAt |

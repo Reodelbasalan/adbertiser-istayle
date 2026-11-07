@@ -7,6 +7,7 @@ import {PaperCutout, Scrapbook, StickyNotes, TornReveal} from './scenes/paper';
 import {FootageShot, PriceSlam, ProductHero, TextBehind} from './scenes/product';
 import {HookQuestion, KineticText, POVHook} from './scenes/text';
 import {Cards3D, CoinsRain, Logo3D, Phone3D, Text3D, cardTimes, cardsList, coinsTitleAt, textLand} from './scenes/depth3d';
+import {CursorDemo, Dashboard, GlassCTA, GlassPricing, GlassTitle, Workflow, clickTimes, cursorButtons, stepTimes, stepsList, tierList, tierTimes} from './scenes/glass';
 import {HoloHUD, HoloProduct, NeonCTA, NeonList, NeonPrice, NeonSign, ctaOn, hudItems, hudTimes, listTimes, neonItems, priceOn, signTimes} from './scenes/neon';
 import {Bars3D, FlyThrough, ProductSpin, Title3D, barTimes, barsList, flyCount} from './scenes/depth3d2';
 import {ButtonPress, CommentKeyword, GreenScreen, MythFact, OldVsNew, SlotsCounter, SplitDialogue, UsVsThem, commentTimes, dialogAt, mythTimes, oldNewTimes, pressTimes, slotTimes, vsAt} from './scenes/formats';
@@ -39,7 +40,7 @@ const priceSfx = (p: P, _d: number, fps: number): Ev[] => {
 };
 
 /** templates that show their own big text: captions hide there unless scene.captions === true */
-export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4', 'A8', 'A17', 'A18', 'A20', 'J11', 'K2', 'K3', 'D3', 'D5', 'D6', 'K8', 'D1', 'D7', 'D4', 'G11', 'D9', 'B12', 'B26', 'B27', 'B28', 'B29', 'K9']);
+export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4', 'A8', 'A17', 'A18', 'A20', 'J11', 'K2', 'K3', 'D3', 'D5', 'D6', 'K8', 'D1', 'D7', 'D4', 'G11', 'D9', 'B12', 'B26', 'B27', 'B28', 'B29', 'K9', 'B17', 'B2', 'B22', 'B23', 'B30', 'K10']);
 
 export const REGISTRY: Record<string, Entry> = {
   // hooks + text
@@ -113,6 +114,15 @@ export const REGISTRY: Record<string, Entry> = {
     const t = oldNewTimes(d, fps, p.newAt);
     return [{at: 0, name: 'whoosh_fast'}, {at: t.xAt, name: 'error', volume: 0.6}, {at: t.newAt, name: 'whoosh'}, {at: t.checkAt, name: 'ding', volume: 0.8}];
   }},
+  // glass UI look
+  B17: {name: 'Glass title', C: GlassTitle, dur: 2.5, sfx: () => [{at: 0, name: 'whoosh_soft'}, {at: 14, name: 'sparkle', volume: 0.5}]},
+  B2: {name: 'Dashboard', C: Dashboard, dur: 3.5, sfx: (p) => [{at: 0, name: 'whoosh_soft'}, ...[8, 13, 18].map((at) => ({at, name: 'pop', volume: 0.5})), {at: 14, name: 'riser', volume: 0.35}]},
+  B22: {name: 'Cursor demo', C: CursorDemo, dur: 4, sfx: (p, d, fps) => {
+    const ts = clickTimes(cursorButtons(p).length, d, fps, p.at);
+    return [{at: 0, name: 'whoosh_soft'}, ...ts.map((at) => ({at, name: 'click', volume: 0.9})), {at: (ts[ts.length - 1] ?? 0) + 8, name: 'ding', volume: 0.7}];
+  }},
+  B23: {name: 'Workflow steps', C: Workflow, dur: 4, sfx: (p, d, fps) => stepTimes(stepsList(p).length, d, fps, p.at).map((at) => ({at, name: 'pop', volume: 0.7}))},
+  B30: {name: 'Glass pricing', C: GlassPricing, dur: 3.5, sfx: (p, _d, fps) => [{at: 0, name: 'whoosh_soft'}, ...tierTimes(tierList(p).length, fps).map((at) => ({at, name: 'whoosh_fast', volume: 0.5})), {at: tierTimes(tierList(p).length, fps).slice(-1)[0] + 10, name: 'ding', volume: 0.6}]},
   // neon / hologram look
   B12: {name: 'Neon sign', C: NeonSign, dur: 2.5, sfx: (p, _d, fps) => signTimes(String(p.text ?? 'a|b').split('|').filter((x) => x.trim()).length, fps).map((at) => ({at, name: 'buzz', volume: 0.6}))},
   B26: {name: 'Hologram HUD', C: HoloHUD, dur: 4, sfx: (p, _d, fps) => [{at: 0, name: 'whoosh_soft'}, {at: 6, name: 'buzz', volume: 0.5}, ...hudTimes(hudItems(p).length, fps).map((at) => ({at, name: 'typing', volume: 0.45}))]},
@@ -142,6 +152,7 @@ export const REGISTRY: Record<string, Entry> = {
     return [{at: 0, name: 'whoosh_soft'}, {at: pressAt, name: 'click'}, {at: pressAt + 2, name: 'sparkle', volume: 0.7}];
   }},
   K9: {name: 'Neon CTA', C: NeonCTA, dur: 2.5, sfx: (_p, _d, fps) => [{at: 2, name: 'buzz', volume: 0.5}, {at: ctaOn(fps), name: 'buzz', volume: 0.7}, {at: ctaOn(fps) + 4, name: 'pop', volume: 0.6}]},
+  K10: {name: 'Glass CTA', C: GlassCTA, dur: 2.8, sfx: () => [{at: 0, name: 'whoosh_soft'}, {at: 12, name: 'pop', volume: 0.7}, {at: 20, name: 'sparkle', volume: 0.5}]},
   K7: {name: 'Brand end card', C: EndCard, dur: 3, sfx: () => [{at: 0, name: 'whoosh'}, {at: 14, name: 'pop'}]},
   K1: {name: 'One-line CTA', C: EndCard, dur: 2, props: {variant: 'line'}, sfx: () => [{at: 0, name: 'impact', volume: 0.7}]},
   K4: {name: 'Offer card', C: EndCard, dur: 4, props: {variant: 'offer'}, sfx: (p) => {
