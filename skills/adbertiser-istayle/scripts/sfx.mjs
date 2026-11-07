@@ -23,6 +23,8 @@ export const SFX = {
   typing: ['(2*random(0)-1)*exp(-mod(t,0.085)*260)', 0.85, 'highpass=f=1500,volume=1.2'],
   scribble: ['(2*random(0)-1)*(0.35+0.65*abs(sin(2*PI*6*t)))*pow(sin(PI*t/0.5),0.5)', 0.5, 'highpass=f=1800,lowpass=f=6500,volume=1'],
   notif: ['0.5*lt(t,0.12)*sin(2*PI*880*t)*exp(-t*14)+0.5*gte(t,0.1)*sin(2*PI*1320*t)*exp(-(t-0.1)*9)', 0.55, 'volume=1'],
+  error: ['0.5*(sin(2*PI*150*t)+0.6*sin(2*PI*300*t)+0.3*sin(2*PI*450*t))*(lt(t,0.13)+gte(t,0.18)*lt(t,0.34))', 0.36, 'lowpass=f=2200,volume=0.6'],
+  tick: ['0.8*sin(2*PI*2400*t)*exp(-t*120)+0.4*(2*random(0)-1)*exp(-t*400)', 0.06, 'highpass=f=900,volume=1.3'],
   riser: ['(2*random(0)-1)*pow(t/1.2,2)*0.7+0.2*sin(2*PI*(200*t+250*t*t))*(t/1.2)', 1.2, 'highpass=f=300,volume=1.4'],
 };
 

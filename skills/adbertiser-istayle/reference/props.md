@@ -76,6 +76,38 @@ Title words up to ~10 letters each; 1–4 items (images work best as transparent
 `{"media": "clip.mp4", "zoom": "in", "punchAt": 1.2, "title": "Same-day delivery", "titleAt": 0.3}`
 `zoom`: in · out · none. `punchAt` (seconds) = quick punch-in on a key word.
 
+## A5 Green screen reaction
+`{"bg": "post.png", "subject": "me_cutout.png", "title": "Totoo ba 'to?", "side": "left", "frame": "card", "scroll": true}`
+`bg` = a screenshot of a post, website or article (or a clip); a tall screenshot scrolls slowly (`scroll: false` stops it). `subject` = a transparent PNG of the person (rembg). `frame: "full"` fills the screen instead of a card. `side`: left · right. Captions stay on here. Only react to posts you may show; blur names you don't own.
+
+## A8 Split-screen dialogue
+`{"a": "customer.mp4", "b": "owner.mp4", "names": ["Customer", "Owner"], "lines": [{"who": 0, "text": "Magkano po?"}, {"who": 1, "text": "₱499 lang po!"}]}`
+Stacked on 9:16, side by side on 16:9. Each line gets `dur / lines`; the listener's half dims.
+
+## A17 Myth vs fact
+`{"myth": "Kailangan ng mahal na camera", "fact": "Phone lang + tamang hook", "labels": ["MYTH", "FACT"], "media": "optional bg", "flipAt": 1.9}`
+Red X lands on the myth, the card flips to the fact (default flip at 48% of `dur`). Keep each line under ~50 characters.
+
+## A18 Us vs them
+`{"title": "Bakit kami?", "us": "Brand", "them": "OTHERS", "rows": ["Same-day reply", {"label": "Price", "them": "₱₱₱", "us": "₱999"}]}`
+A row string = others ✗, us ✓; or set `them`/`us` to true, false or short text. 3–5 rows. Keep "them" generic: never name or show a real competitor.
+
+## A20 Slots / deadline counter
+Slots `{"label": "SLOTS LEFT", "from": 10, "to": 3, "total": 10, "title": "November batch", "note": "Message us to reserve"}` · Timer `{"mode": "timer", "time": "02:00:00", "label": "PROMO ENDS IN"}`
+`to` is the real number left; it counts down from `from` with a tick each. Only use true numbers and real deadlines (fake scarcity breaks ad policies).
+
+## J11 Old way vs new way
+`{"oldMedia": "slow.mp4", "oldText": "3 hours per video", "newMedia": "fast.mp4", "newText": "15 minutes with AI", "labels": ["OLD WAY", "NEW WAY"]}`
+Old half is grey with ✗; the new half wipes in at ~1 s with ✓. Good as a 2.5–3 s hook.
+
+## K2 Comment keyword CTA
+`{"keyword": "GUIDE", "text": "Comment", "sub": "at isesend namin ang free guide", "media": "optional bg"}`
+The keyword slams in, then gets typed into a generic comment box and posted. Use a keyword your page really replies to.
+
+## K3 Button press CTA
+`{"button": "MESSAGE US", "title": "Ready ka na?", "sub": "Reply within 5 minutes", "icon": "💬", "after": "SENT ✓", "pressAt": 1.0, "hand": true}`
+`button` defaults to `brand.cta`. `after` (optional) swaps the label after the tap. `hand: false` hides the finger.
+
 ## K7 Brand end card · K1 One-line CTA · K4 Offer card
 K7 `{"logo": "logo.png", "headline": "Order na today", "cta": "MESSAGE US", "handle": "@yourpage"}`
 K1 `{"cta": "MESSAGE US", "arrow": "👇"}`

@@ -107,7 +107,7 @@ export const Scrapbook: React.FC<SceneProps> = ({p}) => {
         const s = pop(f, L.fps, t, 230, 13);
         if (f < t) return null;
         return (
-          <div key={i} style={{position: 'absolute', left: x * L.W - ph / 2, top: (L.portrait ? L.top + (y - 0.3) * (L.bottom - L.top) * 1.35 : y * L.H) - ph * 0.6, transform: `scale(${1.35 - 0.35 * s}) rotate(${r}deg)`, opacity: Math.min(1, s * 2)}}>
+          <div key={i} style={{position: 'absolute', left: x * L.W - ph / 2, top: L.portrait ? L.top + 60 * L.u + Math.min(1, Math.max(0, (y - 0.36) / 0.32)) * (L.bottom + 40 * L.u - ph * 1.18 - L.top - 60 * L.u) : y * L.H - ph * 0.6, transform: `scale(${1.35 - 0.35 * s}) rotate(${r}deg)`, opacity: Math.min(1, s * 2)}}>
             <Cutout w={ph} h={ph * 1.18} seed={`pol${i}`} color="#FFFFFF" amp={3} inner={{flexDirection: 'column', justifyContent: 'flex-start', padding: ph * 0.06, gap: ph * 0.03}}>
               <div style={{width: '100%', height: ph * 0.86, position: 'relative', overflow: 'hidden'}}>
                 <Media src={src} zoom="none" />

@@ -9,10 +9,10 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | A2 | AI clone talking head | recipe | ai clone, digital twin, clone ad | Your own AI clone says the script | Owners who won't film | Make the clip in a lipsync/clone tool, only with the person's consent → U1 + G1 |
 | A3 | AI avatar spokesperson | recipe | ai avatar, ai presenter, spokesperson | A generic AI presenter | Brands with no face to use | Avatar tool (paid) → U1 + G1; label AI where the platform asks |
 | A4 | POV text hook | template | pov, pov hook, relatable | "POV: ..." typed over b-roll | Relatable pain points | text, media |
-| A5 | Green screen reaction | planned | green screen, reaction, react | Person cut out over a post or website | News, reviews, offers | Meanwhile: G6 with bg = screenshot, subject = cut-out PNG |
+| A5 | Green screen reaction | template | green screen, reaction, react | Person cut out over a post or website | News, reviews, offers | bg (post/site screenshot or clip), subject (cut-out PNG), title, side, frame, scroll |
 | A6 | Reply to comment | template | comment reply, reply to comment, faq | Comment card pops, then the answer | Objections, FAQs | name, comment, reply, media |
 | A7 | Skit / mini drama | recipe | skit, drama, story ad | 2 characters, problem → solution | Local biz, services | 3–6 short scenes (shot or AI video) → U1 each, H1/H7 between, G1 captions |
-| A8 | Split-screen dialogue | planned | split screen, two people, side by side | Two people side by side | Customer vs owner | Meanwhile: alternate U1 shots with H1 |
+| A8 | Split-screen dialogue | template | split screen, two people, side by side | Two people side by side | Customer vs owner | a, b (clips/photos), names, lines [{who, text}] |
 | A9 | Street interview | recipe | street interview, vox pop | Mic in frame, quick answers | Awareness | Real shoot only → U1 per answer + G8 captions |
 | A10 | Screen-recording tutorial | recipe | tutorial, screen recording, how to | Screen + zooms + callouts | Software, online services | Screen capture → U1 with punchAt on clicks + B11 circles/arrows + G1 |
 | A11 | Hands-only demo / unboxing | recipe | unboxing, hands only, faceless, asmr | Faceless hands open and use the product | E-commerce | Top-down phone clips → U1 1–2 s each + F6 + K1 |
@@ -21,10 +21,10 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | A14 | Podcast clip | planned | podcast, interview clip | 2 mics, waveform, big captions | Authority content | Meanwhile: U1 + G2 captions |
 | A15 | Real testimonial | recipe | testimonial, review, feedback | Real customer quote, with consent | Social proof | Real customers only, never stock people. U1 clip + G1; screenshot reviews via A6 |
 | A16 | Listicle | recipe | listicle, 3 reasons, 5 mistakes, top 5 | Numbered parts | Edu ads | J8 → per item B1 + U1 → K1 |
-| A17 | Myth vs fact | planned | myth vs fact, myth, fact check | Red X, then green check | Objections | Meanwhile: B11 marks x and check over U1 |
-| A18 | Us vs them | planned | comparison, us vs them, versus | Generic "others vs us" table | Services | Meanwhile: C3 notes or B1 lines |
+| A17 | Myth vs fact | template | myth vs fact, myth, fact check | Red X, then green check | Objections | myth, fact, labels, media, flipAt |
+| A18 | Us vs them | template | comparison, us vs them, versus | Generic "others vs us" table | Services | title, us, them, rows (strings or {label, them, us}), media |
 | A19 | Price reveal ad | recipe | price reveal ad | Price lands early, story after | Promos | J4 opener → U1 shots → F6 → K1 |
-| A20 | Slots / deadline counter | planned | countdown, slots, deadline, urgency | Slots left, timer (only when true) | Urgency | Meanwhile: B5 with one stat, sample:false |
+| A20 | Slots / deadline counter | template | countdown, slots, deadline, urgency | Slots left, timer (only when true) | Urgency | mode slots/timer, label, from, to, total, time, title, note (true numbers only) |
 | A21 | Motion-graphics explainer | recipe | explainer, motion graphics explainer | Motion graphics + VO | Services, offers | VO + J1 → B7 → B5 → B3 → K4, G1 captions from the VO |
 | A22 | Push-in slides | planned | slides, presentation, deck video | Slides with slow push-in + VO | Webinars, B2B | Meanwhile: U1 with slide images, zoom in |
 | A23 | Cinematic commercial | recipe | cinematic, commercial, tvc | 16:9 premium shots, music-led | Premium brands | Real or AI video → U1 per shot, H3/H4, I2 + I5, size 16:9 |
@@ -147,11 +147,11 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | J8 | Number hook | template | number hook, 3 mistakes, numbered hook | Giant number + line | Listicles | big, text, highlight |
 | J9 | Text behind subject hook | template | text behind hook | Person in front of a big title | Covers | same props as G6 |
 | J10 | Paper rip open | template | paper rip hook, rip open | First frame rips open | Paper styles | top, media, title |
-| J11 | Old way vs new way | planned | old vs new, split hook | Two ways of working side by side | Services | — |
+| J11 | Old way vs new way | template | old vs new, split hook | Two ways of working side by side | Services | oldMedia, oldText, newMedia, newText, labels |
 | J12 | Notification ping hook | template | notification hook, ping hook | Phone lights up (SAMPLE) | Results-style hooks | same props as B4 |
 | K1 | One-line CTA | template | cta, call to action, message us, order now | One bold line + bouncing arrow | Last 2 s | cta, arrow |
-| K2 | Comment keyword CTA | planned | comment keyword, comment to get | "Comment WORD" + arrow | Lead magnets | Meanwhile: K1 cta "Comment GUIDE" |
-| K3 | Button press CTA | planned | button press, tap button | A button gets tapped | Messaging CTAs | — |
+| K2 | Comment keyword CTA | template | comment keyword, comment to get | "Comment WORD" + arrow | Lead magnets | keyword, text, sub, media |
+| K3 | Button press CTA | template | button press, tap button | A button gets tapped | Messaging CTAs | button, title, sub, icon, after, pressAt, hand, media |
 | K4 | Offer card | template | offer, package, inclusions, pricing card | Title, checklist, price, button | Packages | title, items[], price, note, cta |
 | K5 | Loop ending | recipe | loop, seamless loop | Last frame flows into the first | Reels, TikTok | Repeat scene 1's style/props as the last scene; skip end cards |
 | K6 | Logo animation outro | planned | logo outro, logo animation | Logo reveal | Brand outros | Meanwhile: K7 |

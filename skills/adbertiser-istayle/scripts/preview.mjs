@@ -29,7 +29,7 @@ for (const line of remotion(['compositions', entry], log).split('\n')) {
 const ids = args[0] === 'all' ? [...comps.keys()] : args[0].split(',').map((s) => s.trim().toUpperCase());
 
 // moment to capture (seconds); default = 82% through the demo
-const AT = {C4: 1.13, J10: 0.6, A4: 2.4, B1: 2.6, J1: 1.8, J8: 1.8};
+const AT = {C4: 1.13, J10: 0.6, A4: 2.4, B1: 2.6, J1: 1.8, J8: 1.8, K3: 1.2, J11: 2.2};
 const done = [];
 for (const id of ids) {
   const c = comps.get(id);

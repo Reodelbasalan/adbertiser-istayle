@@ -6,6 +6,7 @@ import {Newspaper, ServicesGrid, StatCounters} from './scenes/data';
 import {PaperCutout, Scrapbook, StickyNotes, TornReveal} from './scenes/paper';
 import {FootageShot, PriceSlam, ProductHero, TextBehind} from './scenes/product';
 import {HookQuestion, KineticText, POVHook} from './scenes/text';
+import {ButtonPress, CommentKeyword, GreenScreen, MythFact, OldVsNew, SlotsCounter, SplitDialogue, UsVsThem, commentTimes, dialogAt, mythTimes, oldNewTimes, pressTimes, slotTimes, vsAt} from './scenes/formats';
 import type {SceneProps} from './types';
 
 type Ev = {at: number; name: string; volume?: number}; // at = frame inside the scene
@@ -35,7 +36,7 @@ const priceSfx = (p: P, _d: number, fps: number): Ev[] => {
 };
 
 /** templates that show their own big text: captions hide there unless scene.captions === true */
-export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4']);
+export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4', 'A8', 'A17', 'A18', 'A20', 'J11', 'K2', 'K3']);
 
 export const REGISTRY: Record<string, Entry> = {
   // hooks + text
@@ -92,7 +93,32 @@ export const REGISTRY: Record<string, Entry> = {
   G6: {name: 'Text behind subject', C: TextBehind, dur: 3, sfx: () => [{at: 0, name: 'whoosh_low'}]},
   J9: {name: 'Text behind subject hook', C: TextBehind, dur: 2.5, sfx: () => [{at: 0, name: 'whoosh_low'}]},
   U1: {name: 'Footage / photo shot', C: FootageShot, dur: 3, sfx: (p, _d, fps) => (p.title ? [{at: Math.round((p.titleAt ?? 0.3) * fps), name: 'pop', volume: 0.7}] : [])},
+  // ad formats
+  A5: {name: 'Green screen reaction', C: GreenScreen, dur: 4, sfx: (p) => [{at: 0, name: 'whoosh_soft'}, {at: 6, name: 'pop', volume: 0.7}, ...(p.title === false || p.title === '' ? [] : [{at: 10, name: 'click', volume: 0.6}])]},
+  A8: {name: 'Split-screen dialogue', C: SplitDialogue, dur: 5, sfx: (p, d, fps) => [{at: 0, name: 'whoosh_fast', volume: 0.7}, ...dialogAt(p, d, fps).map((at, i) => ({at, name: 'pop', volume: i % 2 ? 0.8 : 0.65}))]},
+  A17: {name: 'Myth vs fact', C: MythFact, dur: 4, sfx: (p, d, fps) => {
+    const t = mythTimes(p, d, fps);
+    return [{at: 0, name: 'whoosh_fast'}, {at: t.xAt, name: 'error'}, {at: t.flip - 6, name: 'whoosh', volume: 0.7}, {at: t.checkAt, name: 'ding'}];
+  }},
+  A18: {name: 'Us vs them', C: UsVsThem, dur: 4.5, sfx: (p, d, fps) => [{at: 0, name: 'whoosh_soft'}, ...vsAt(p, d, fps).flatMap((t) => [{at: t + 4, name: 'click', volume: 0.5}, {at: t + 9, name: 'pop', volume: 0.8}])]},
+  A20: {name: 'Slots / deadline counter', C: SlotsCounter, dur: 3.5, sfx: (p, d, fps) => {
+    if (p.mode === 'timer') return [{at: 0, name: 'whoosh_fast'}, ...range(Math.floor(d / fps)).map((i) => ({at: (i + 1) * fps, name: 'tick', volume: 0.8})).filter((e) => e.at < d)];
+    const t = slotTimes(p, d, fps);
+    return [{at: 0, name: 'whoosh_fast'}, ...t.ticks.map((at) => ({at, name: 'tick', volume: 0.8})), ...(t.ticks.length ? [{at: t.end, name: 'impact', volume: 0.8}] : [])];
+  }},
+  J11: {name: 'Old way vs new way', C: OldVsNew, dur: 3, sfx: (p, d, fps) => {
+    const t = oldNewTimes(d, fps, p.newAt);
+    return [{at: 0, name: 'whoosh_fast'}, {at: t.xAt, name: 'error', volume: 0.6}, {at: t.newAt, name: 'whoosh'}, {at: t.checkAt, name: 'ding', volume: 0.8}];
+  }},
   // CTA
+  K2: {name: 'Comment keyword CTA', C: CommentKeyword, dur: 3, sfx: (p, d, fps) => {
+    const t = commentTimes(p, d, fps);
+    return [{at: 5, name: 'impact', volume: 0.8}, {at: t.typeAt, name: 'typing', volume: 0.6}, {at: t.sendAt, name: 'click'}, {at: t.postAt, name: 'notif', volume: 0.8}];
+  }},
+  K3: {name: 'Button press CTA', C: ButtonPress, dur: 2.5, sfx: (p, d, fps) => {
+    const {pressAt} = pressTimes(p, d, fps);
+    return [{at: 0, name: 'whoosh_soft'}, {at: pressAt, name: 'click'}, {at: pressAt + 2, name: 'sparkle', volume: 0.7}];
+  }},
   K7: {name: 'Brand end card', C: EndCard, dur: 3, sfx: () => [{at: 0, name: 'whoosh'}, {at: 14, name: 'pop'}]},
   K1: {name: 'One-line CTA', C: EndCard, dur: 2, props: {variant: 'line'}, sfx: () => [{at: 0, name: 'impact', volume: 0.7}]},
   K4: {name: 'Offer card', C: EndCard, dur: 4, props: {variant: 'offer'}, sfx: (p) => {
