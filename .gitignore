@@ -1,0 +1,12 @@
+node_modules/
+skills/adbertiser-istayle/engine/build/
+skills/adbertiser-istayle/engine/out/
+skills/adbertiser-istayle/engine/public/jobs/
+skills/adbertiser-istayle/engine/public/sfx/
+skills/adbertiser-istayle/engine/.pkg-hash
+out/
+istayle-previews/
+previews/*.log
+*.log
+.DS_Store
+Thumbs.db

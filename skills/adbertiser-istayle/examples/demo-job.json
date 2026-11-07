@@ -1,0 +1,14 @@
+{
+  "name": "demo",
+  "size": "9:16",
+  "brand": {"name": "BANANA CO.", "primary": "#FFD23F", "secondary": "#7C5CFF", "cta": "ORDER NA"},
+  "overlays": {"watermark": true, "grain": 0.1},
+  "scenes": [
+    {"style": "J1", "dur": 2.4, "props": {"text": "Bakit walang bumibili?", "highlight": "bumibili"}},
+    {"style": "C1", "dur": 3.6, "transition": "H9", "props": {"title": "Crispy Daily", "sub": "Gawa sa totoong saging", "items": [{"emoji": "🍌", "label": "Real banana"}, {"emoji": "🔥", "label": "Crispy"}, {"emoji": "🛍️", "label": "3 for ₱100"}]}},
+    {"style": "C2", "dur": 3.4, "transition": "H1", "props": {"title": "Fan favorites", "photos": ["demo:🍌:45", "demo:🍫:20", "demo:🧀:50"], "notes": ["classic", "choco", "cheese"]}},
+    {"style": "B3", "dur": 4.2, "transition": "H7", "props": {"name": "Ana", "messages": [{"from": "them", "text": "Available pa po?"}, {"from": "me", "text": "Yes po! Ilan po?"}, {"from": "them", "text": "3 packs po, COD"}, {"from": "me", "text": "Noted, ship today ✅"}]}},
+    {"style": "F6", "dur": 2.8, "transition": "H2", "props": {"product": "demo:🍌", "name": "3 packs", "price": "₱100", "oldPrice": "₱120"}},
+    {"style": "K7", "dur": 2.6, "transition": "H12", "props": {"headline": "Order na today"}}
+  ]
+}

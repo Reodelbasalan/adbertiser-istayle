@@ -1,0 +1,10 @@
+{
+  "name": "adbertiser-istayle",
+  "version": "0.1.0",
+  "description": "150+ named video ad styles (paper cutout, scrapbook, kinetic text, chat story, price slam, product hero, captions, transitions...) rendered with Remotion from one job file.",
+  "author": {
+    "name": "Reodel Basalan"
+  },
+  "license": "MIT",
+  "keywords": ["video", "ads", "remotion", "reels", "tiktok", "shorts", "motion-graphics", "paper-style", "filipino"]
+}

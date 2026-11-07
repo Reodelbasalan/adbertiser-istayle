@@ -1,0 +1,22 @@
+{
+  "name": "adbertiser-istayle-engine",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Remotion engine for the Adbertiser Istayle skill",
+  "scripts": {
+    "studio": "remotion studio",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.526",
+    "@remotion/google-fonts": "4.0.526",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.526"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.7",
+    "typescript": "5.9.3"
+  }
+}

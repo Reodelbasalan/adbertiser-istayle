@@ -1,0 +1,99 @@
+import type React from 'react';
+import {ChatStory, CommentReply, Notifications} from './scenes/social';
+import {Doodle} from './scenes/doodle';
+import {EndCard} from './scenes/endcard';
+import {Newspaper, ServicesGrid, StatCounters} from './scenes/data';
+import {PaperCutout, Scrapbook, StickyNotes, TornReveal} from './scenes/paper';
+import {FootageShot, PriceSlam, ProductHero, TextBehind} from './scenes/product';
+import {HookQuestion, KineticText, POVHook} from './scenes/text';
+import type {SceneProps} from './types';
+
+type Ev = {at: number; name: string; volume?: number}; // at = frame inside the scene
+type P = Record<string, any>;
+
+export type Entry = {
+  name: string;
+  C: React.FC<SceneProps>;
+  dur: number; // default seconds
+  props?: P; // fixed variant props
+  sfx?: (p: P, dur: number, fps: number) => Ev[];
+};
+
+const n = (v: unknown, fallback: number) => (Array.isArray(v) && v.length ? v.length : fallback);
+const wc = (s: unknown, fallback: number) => (typeof s === 'string' ? s.split(/\s+/).filter(Boolean).length : fallback);
+const range = (k: number) => Array.from({length: k}, (_, i) => i);
+
+const hookSfx = (p: P, _d: number, fps: number): Ev[] => [
+  {at: 0, name: p.big ? 'impact' : 'whoosh_fast'},
+  {at: (p.big ? 7 : 0) + wc(p.text, 3) * 3 + 6, name: 'pop', volume: 0.8},
+  ...(p.sub ? [{at: Math.round(fps * 0.9), name: 'click', volume: 0.6}] : []),
+];
+
+const priceSfx = (p: P, _d: number, fps: number): Ev[] => {
+  const at = Math.round((p.slamAt ?? 0.5) * fps);
+  return [{at: 0, name: 'whoosh_soft'}, {at, name: 'impact'}, {at: at + 6, name: 'ding', volume: 0.7}];
+};
+
+export const REGISTRY: Record<string, Entry> = {
+  // hooks + text
+  J1: {name: 'Bold question hook', C: HookQuestion, dur: 2.5, sfx: hookSfx},
+  J8: {name: 'Number hook', C: HookQuestion, dur: 2.5, props: {big: '3', text: 'Mali sa ads mo', highlight: 'mali'}, sfx: hookSfx},
+  B1: {name: 'Kinetic typography', C: KineticText, dur: 3, sfx: (p, d) => {
+    const k = n(p.lines, 3);
+    return range(k).map((i) => ({at: Math.round((i * d) / k), name: i === k - 1 ? 'impact' : 'whoosh_fast', volume: 0.8}));
+  }},
+  A4: {name: 'POV text hook', C: POVHook, dur: 3, sfx: () => [{at: 0, name: 'typing', volume: 0.6}]},
+  // social
+  B3: {name: 'Chat story', C: ChatStory, dur: 5, sfx: (p, d, fps) => {
+    const msgs: P[] = p.messages ?? [{from: 'them'}, {from: 'me'}, {from: 'them'}, {from: 'me'}];
+    const start = Math.round(fps * 0.5);
+    const gap = Math.max(10, (d - start - fps * 0.6) / msgs.length);
+    return msgs.map((m, i) => ({at: Math.round(start + i * gap), name: m.from === 'me' ? 'pop' : 'notif', volume: 0.7}));
+  }},
+  B4: {name: 'Notification stack', C: Notifications, dur: 4, sfx: (p, d, fps) => {
+    const k = n(p.items, 4);
+    const gap = Math.max(8, (d - fps * 0.8) / k);
+    return range(k).map((i) => ({at: Math.round(fps * 0.4 + i * gap), name: 'notif', volume: 0.7}));
+  }},
+  J12: {name: 'Notification ping hook', C: Notifications, dur: 2.5, sfx: (p, d, fps) => range(n(p.items, 4)).map((i) => ({at: Math.round(fps * 0.4 + i * Math.max(8, (d - fps * 0.8) / n(p.items, 4))), name: 'notif', volume: 0.7}))},
+  A6: {name: 'Reply to comment', C: CommentReply, dur: 4, sfx: (_p, _d, fps) => [{at: 4, name: 'notif'}, {at: Math.round(fps * 1.3), name: 'whoosh_soft', volume: 0.6}, {at: Math.round(fps * 1.8), name: 'pop'}]},
+  J7: {name: 'Comment reply hook', C: CommentReply, dur: 3, sfx: (_p, _d, fps) => [{at: 4, name: 'notif'}, {at: Math.round(fps * 1.8), name: 'pop'}]},
+  // motion graphics
+  B5: {name: 'Infographic counters', C: StatCounters, dur: 3.5, sfx: (p) => range(n(p.stats, 3)).map((i) => ({at: 6 + i * 8, name: 'pop', volume: 0.7}))},
+  B7: {name: 'Services grid', C: ServicesGrid, dur: 3.5, sfx: (p) => range(Math.min(6, n(p.items, 6))).map((i) => ({at: 6 + i * 4, name: 'pop', volume: 0.55}))},
+  B10: {name: 'Newspaper headline', C: Newspaper, dur: 3.5, sfx: (_p, _d, fps) => [{at: 0, name: 'whoosh'}, {at: Math.round(fps * 0.7) + 4, name: 'impact'}]},
+  B11: {name: 'Doodle on footage', C: Doodle, dur: 3.5, sfx: (p, _d, fps) => {
+    const marks: P[] = p.marks ?? [{}, {}, {}];
+    return marks.map((m, i) => ({at: Math.round((m.at ?? 0.35 + i * 0.6) * fps), name: 'scribble', volume: 0.7}));
+  }},
+  // paper + craft
+  C1: {name: 'Paper cutout stop-motion', C: PaperCutout, dur: 4, sfx: (p) => {
+    const letters = String(p.title ?? 'Fresh Daily').replace(/\s/g, '').length;
+    const at = 6 + letters * 2 + 6;
+    return [{at: 2, name: 'paper'}, ...range(n(p.items, 3)).map((i) => ({at: at + i * 4, name: 'pop', volume: 0.6}))];
+  }},
+  C2: {name: 'Scrapbook collage', C: Scrapbook, dur: 4, sfx: (p) => [{at: 0, name: 'paper', volume: 0.7}, ...range(Math.min(4, n(p.photos, 3))).map((i) => ({at: 8 + i * 12, name: 'shutter', volume: 0.7}))]},
+  C3: {name: 'Sticky notes', C: StickyNotes, dur: 4.5, sfx: (p, d) => {
+    const k = n(p.notes, 4);
+    const allIn = 10 + k * 7 + 8;
+    const gap = Math.max(6, (d - allIn - 10) / k);
+    return [...range(k).map((i) => ({at: 10 + i * 7, name: 'pop', volume: 0.7})), ...(p.check === false ? [] : range(k).map((i) => ({at: Math.round(allIn + i * gap), name: 'scribble', volume: 0.6})))];
+  }},
+  C4: {name: 'Torn paper reveal', C: TornReveal, dur: 3, sfx: (p, d, fps) => [{at: Math.round((p.tearAt ?? Math.min(1.2, (d / fps) * 0.35)) * fps), name: 'rip'}]},
+  J10: {name: 'Paper rip open', C: TornReveal, dur: 2.5, props: {tearAt: 0.5}, sfx: (_p, _d, fps) => [{at: Math.round(0.5 * fps), name: 'rip'}]},
+  // product
+  F1: {name: 'Product hero', C: ProductHero, dur: 3, sfx: (_p, _d, fps) => [{at: 0, name: 'whoosh_soft'}, {at: Math.round(fps * 0.5), name: 'sparkle', volume: 0.6}]},
+  J3: {name: 'Product slam hook', C: ProductHero, dur: 2.5, props: {drop: true}, sfx: (_p, _d, fps) => [{at: 0, name: 'whoosh_fast'}, {at: Math.round(fps * 0.45), name: 'impact'}]},
+  F6: {name: 'Price tag slam', C: PriceSlam, dur: 3, sfx: priceSfx},
+  J4: {name: 'Price reveal hook', C: PriceSlam, dur: 2.5, sfx: priceSfx},
+  G6: {name: 'Text behind subject', C: TextBehind, dur: 3, sfx: () => [{at: 0, name: 'whoosh_low'}]},
+  J9: {name: 'Text behind subject hook', C: TextBehind, dur: 2.5, sfx: () => [{at: 0, name: 'whoosh_low'}]},
+  U1: {name: 'Footage / photo shot', C: FootageShot, dur: 3, sfx: (p, _d, fps) => (p.title ? [{at: Math.round((p.titleAt ?? 0.3) * fps), name: 'pop', volume: 0.7}] : [])},
+  // CTA
+  K7: {name: 'Brand end card', C: EndCard, dur: 3, sfx: () => [{at: 0, name: 'whoosh'}, {at: 14, name: 'pop'}]},
+  K1: {name: 'One-line CTA', C: EndCard, dur: 2, props: {variant: 'line'}, sfx: () => [{at: 0, name: 'impact', volume: 0.7}]},
+  K4: {name: 'Offer card', C: EndCard, dur: 4, props: {variant: 'offer'}, sfx: (p) => {
+    const k = n(p.items, 3);
+    return [...range(k).map((i) => ({at: 8 + i * 5, name: 'pop', volume: 0.6})), ...(p.price ? [{at: 10 + k * 5, name: 'ding'}] : []), {at: 16 + k * 5, name: 'click'}];
+  }},
+};

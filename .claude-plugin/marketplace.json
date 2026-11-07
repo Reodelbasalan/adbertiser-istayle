@@ -1,0 +1,14 @@
+{
+  "name": "adbertiser-istayle",
+  "owner": {
+    "name": "Reodel Basalan"
+  },
+  "plugins": [
+    {
+      "name": "adbertiser-istayle",
+      "source": "./",
+      "description": "150+ named video ad styles rendered with Remotion from one job file.",
+      "version": "0.1.0"
+    }
+  ]
+}
