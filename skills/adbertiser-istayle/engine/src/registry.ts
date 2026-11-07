@@ -7,6 +7,14 @@ import {PaperCutout, Scrapbook, StickyNotes, TornReveal} from './scenes/paper';
 import {FootageShot, PriceSlam, ProductHero, TextBehind} from './scenes/product';
 import {HookQuestion, KineticText, POVHook} from './scenes/text';
 import {Cards3D, CoinsRain, Logo3D, Phone3D, Text3D, cardTimes, cardsList, coinsTitleAt, textLand} from './scenes/depth3d';
+import {BrutalCTA, BrutalGrid, BrutalTitle, Marquee, PhotoBlock, cellList, cellTimes} from './scenes/brutal';
+import {IsoBlocks, IsoCTA, IsoPath, IsoTowers, blockList, blockTimes, pathSteps, pathTimes} from './scenes/iso';
+import {MapCTA, MapPins, MapRadius, MapRoute, pinList, pinTimes, routeEnd} from './scenes/mapz';
+import {GameHud, PixelCTA, PixelLoad, PixelTitle, hudLevelAt, loadEnd} from './scenes/pixel';
+import {CrayonCTA, CrayonDoodles, CrayonList, CrayonTitle, crayonItems, crayonTimes, doodleList, doodleTimes} from './scenes/crayon';
+import {BigNumber, DataCTA, Donut, LineNote, RankBars, bigEnd, lineMarkAt, rankList} from './scenes/dataviz';
+import {CrtTv, VhsCTA, VhsFootage, VhsTitle, Y2KChrome} from './scenes/retro';
+import {Editorial, MinimalCTA, MinimalFeatures, MinimalProduct, MinimalTitle, minimalItems, minimalTimes} from './scenes/minimal';
 import {DepthCTA, DepthTitle, Parallax} from './scenes/depth25';
 import {CineEnd, CineFlash, CineShot, CineStatement, CineTitle, flashTimes, flashWords} from './scenes/cinematic';
 import {ComicBubble, ComicCTA, ComicPanels, ComicPrice, ComicTitle, burstAt, panelList, panelTimes, priceSlamAt} from './scenes/comic';
@@ -44,7 +52,7 @@ const priceSfx = (p: P, _d: number, fps: number): Ev[] => {
 };
 
 /** templates that show their own big text: captions hide there unless scene.captions === true */
-export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4', 'A8', 'A17', 'A18', 'A20', 'J11', 'K2', 'K3', 'D3', 'D5', 'D6', 'K8', 'D1', 'D7', 'D4', 'G11', 'D9', 'B12', 'B26', 'B27', 'B28', 'B29', 'K9', 'B17', 'B2', 'B22', 'B23', 'B30', 'K10', 'B31', 'B25', 'B32', 'B33', 'B34', 'K11', 'B35', 'B19', 'B36', 'B37', 'K12', 'B38', 'B40', 'B41', 'K13', 'D11', 'K14']);
+export const OWN_TEXT = new Set(['J1', 'J8', 'B1', 'A4', 'B3', 'B4', 'J12', 'A6', 'J7', 'B5', 'B7', 'B10', 'C1', 'C2', 'C3', 'C4', 'J10', 'F1', 'J3', 'F6', 'J4', 'G6', 'J9', 'K7', 'K1', 'K4', 'A8', 'A17', 'A18', 'A20', 'J11', 'K2', 'K3', 'D3', 'D5', 'D6', 'K8', 'D1', 'D7', 'D4', 'G11', 'D9', 'B12', 'B26', 'B27', 'B28', 'B29', 'K9', 'B17', 'B2', 'B22', 'B23', 'B30', 'K10', 'B31', 'B25', 'B32', 'B33', 'B34', 'K11', 'B35', 'B19', 'B36', 'B37', 'K12', 'B38', 'B40', 'B41', 'K13', 'D11', 'K14', 'B13', 'B43', 'B44', 'K15', 'B15', 'B45', 'B46', 'B47', 'K16', 'B16', 'B48', 'B49', 'B50', 'K17', 'B6', 'B51', 'B52', 'K18', 'B8', 'B53', 'B54', 'K19', 'B55', 'B56', 'B57', 'K20', 'C8', 'C10', 'C11', 'K21', 'B58', 'B59', 'B60', 'B61', 'K22']);
 
 export const REGISTRY: Record<string, Entry> = {
   // hooks + text
@@ -118,6 +126,42 @@ export const REGISTRY: Record<string, Entry> = {
     const t = oldNewTimes(d, fps, p.newAt);
     return [{at: 0, name: 'whoosh_fast'}, {at: t.xAt, name: 'error', volume: 0.6}, {at: t.newAt, name: 'whoosh'}, {at: t.checkAt, name: 'ding', volume: 0.8}];
   }},
+  // bold brutalist look
+  B16: {name: 'Brutalist title', C: BrutalTitle, dur: 2.5, sfx: (p) => String(p.text ?? 'a|b|c').split('|').filter((x) => x.trim()).map((_, i) => ({at: 3 + i * 6, name: 'impact', volume: 0.6}))},
+  B48: {name: 'Marquee bands', C: Marquee, dur: 3, sfx: () => [{at: 0, name: 'whoosh_fast'}, {at: 6, name: 'whoosh_fast', volume: 0.6}]},
+  B49: {name: 'Brutalist grid', C: BrutalGrid, dur: 3.5, sfx: (p, _d, fps) => cellTimes(cellList(p).length, fps).map((at) => ({at, name: 'impact', volume: 0.45}))},
+  B50: {name: 'Photo block', C: PhotoBlock, dur: 3, sfx: () => [{at: 0, name: 'impact', volume: 0.6}, {at: 8, name: 'pop', volume: 0.6}]},
+  // isometric look
+  B6: {name: 'Isometric blocks', C: IsoBlocks, dur: 3.5, sfx: (p, _d, fps) => blockTimes(blockList(p).length, fps, p.at).map((at) => ({at, name: 'pop', volume: 0.7}))},
+  B51: {name: 'Isometric path', C: IsoPath, dur: 3.5, sfx: (p, d, fps) => pathTimes(pathSteps(p).length, d, fps).map((at) => ({at, name: 'pop', volume: 0.6}))},
+  B52: {name: 'Isometric towers', C: IsoTowers, dur: 3.5, sfx: () => [{at: 6, name: 'riser', volume: 0.4}, {at: 30, name: 'ding', volume: 0.6}]},
+  // map look
+  B8: {name: 'Map pins', C: MapPins, dur: 3.5, sfx: (p, _d, fps) => pinTimes(pinList(p).length, fps, p.at).map((at) => ({at, name: 'pop', volume: 0.7}))},
+  B53: {name: 'Map route', C: MapRoute, dur: 4, sfx: (_p, d, fps) => [{at: 10, name: 'whoosh_soft', volume: 0.6}, {at: routeEnd(d, fps), name: 'ding', volume: 0.7}]},
+  B54: {name: 'Coverage radius', C: MapRadius, dur: 3, sfx: () => [{at: 4, name: 'whoosh_soft', volume: 0.6}, {at: 16, name: 'pop', volume: 0.7}]},
+  // pixel look
+  B55: {name: 'Pixel title', C: PixelTitle, dur: 3, sfx: () => [{at: 0, name: 'typing', volume: 0.5}, {at: 26, name: 'typing', volume: 0.4}]},
+  B56: {name: 'Game HUD', C: GameHud, dur: 3.5, sfx: (_p, d) => [...[8, 16, 24, 32, 40].map((at) => ({at, name: 'tick', volume: 0.6})), {at: hudLevelAt(d), name: 'ding', volume: 0.8}]},
+  B57: {name: 'Pixel loading bar', C: PixelLoad, dur: 3, sfx: (_p, d) => [...[6, 15, 24, 33, 42, 51].filter((t) => t < loadEnd(d)).map((at) => ({at, name: 'tick', volume: 0.5})), {at: loadEnd(d), name: 'ding', volume: 0.8}]},
+  // crayon look
+  C8: {name: 'Crayon title', C: CrayonTitle, dur: 3, sfx: () => [{at: 2, name: 'scribble', volume: 0.6}, {at: 14, name: 'scribble', volume: 0.5}]},
+  C10: {name: 'Crayon doodles', C: CrayonDoodles, dur: 4, sfx: (p, d, fps) => doodleTimes(doodleList(p).length, d, fps, p.at).map((at) => ({at, name: 'scribble', volume: 0.6}))},
+  C11: {name: 'Crayon list', C: CrayonList, dur: 4, sfx: (p, d, fps) => crayonTimes(crayonItems(p).length, d, fps, p.at).map((at) => ({at, name: 'scribble', volume: 0.55}))},
+  // data-viz look
+  B58: {name: 'Big number', C: BigNumber, dur: 3, sfx: (_p, _d, fps) => [{at: 4, name: 'riser', volume: 0.4}, {at: bigEnd(fps), name: 'ding', volume: 0.7}]},
+  B59: {name: 'Donut chart', C: Donut, dur: 3, sfx: () => [{at: 6, name: 'whoosh_soft', volume: 0.6}, {at: 40, name: 'pop', volume: 0.6}]},
+  B60: {name: 'Ranking bars', C: RankBars, dur: 3.5, sfx: (p) => rankList(p).map((_, i) => ({at: 6 + i * 5, name: 'whoosh_fast', volume: 0.4}))},
+  B61: {name: 'Annotated line', C: LineNote, dur: 3.5, sfx: (p, _d, fps) => [{at: 6, name: 'whoosh_soft', volume: 0.5}, {at: lineMarkAt(p, fps), name: 'pop', volume: 0.7}]},
+  // retro VHS / Y2K look
+  B13: {name: 'VHS title', C: VhsTitle, dur: 2.5, sfx: () => [{at: 0, name: 'glitch', volume: 0.6}, {at: 4, name: 'click', volume: 0.6}]},
+  B42: {name: 'VHS footage', C: VhsFootage, dur: 3, sfx: () => [{at: 0, name: 'glitch', volume: 0.4}]},
+  B43: {name: 'Y2K chrome text', C: Y2KChrome, dur: 2.5, sfx: () => [{at: 2, name: 'sparkle', volume: 0.7}, {at: 4, name: 'pop', volume: 0.6}]},
+  B44: {name: 'CRT TV', C: CrtTv, dur: 3, sfx: () => [{at: 0, name: 'click', volume: 0.7}, {at: 2, name: 'glitch', volume: 0.5}]},
+  // minimal luxury look
+  B15: {name: 'Minimal title', C: MinimalTitle, dur: 3, sfx: () => [{at: 6, name: 'whoosh_soft', volume: 0.5}]},
+  B45: {name: 'Minimal product', C: MinimalProduct, dur: 3.5, sfx: () => [{at: 0, name: 'whoosh_soft', volume: 0.5}, {at: 14, name: 'sparkle', volume: 0.35}]},
+  B46: {name: 'Minimal features', C: MinimalFeatures, dur: 4, sfx: (p, d, fps) => minimalTimes(minimalItems(p).length, d, fps, p.at).map((at) => ({at, name: 'click', volume: 0.4}))},
+  B47: {name: 'Editorial split', C: Editorial, dur: 3.5, sfx: () => [{at: 0, name: 'whoosh_soft', volume: 0.5}, {at: 14, name: 'paper', volume: 0.4}]},
   // 2.5D look
   D2: {name: '2.5D parallax photo', C: Parallax, dur: 3.5, sfx: (p) => [{at: 0, name: 'whoosh_low', volume: 0.6}, ...(p.title ? [{at: 8, name: 'pop', volume: 0.6}] : [])]},
   D11: {name: 'Title between depth layers', C: DepthTitle, dur: 3, sfx: () => [{at: 2, name: 'whoosh_low'}, {at: 12, name: 'impact', volume: 0.5}]},
@@ -192,6 +236,14 @@ export const REGISTRY: Record<string, Entry> = {
   K12: {name: 'Comic CTA', C: ComicCTA, dur: 2.5, sfx: () => [{at: 0, name: 'whoosh_fast'}, {at: 8, name: 'impact', volume: 0.8}, {at: 14, name: 'pop', volume: 0.6}]},
   K13: {name: 'Cinematic end card', C: CineEnd, dur: 3, sfx: () => [{at: 0, name: 'whoosh_low'}, {at: 10, name: 'sparkle', volume: 0.4}, {at: 18, name: 'impact', volume: 0.5}]},
   K14: {name: 'Depth CTA', C: DepthCTA, dur: 3, sfx: () => [{at: 0, name: 'whoosh_soft'}, {at: 6, name: 'pop', volume: 0.7}]},
+  K15: {name: 'VHS CTA', C: VhsCTA, dur: 2.5, sfx: () => [{at: 0, name: 'click', volume: 0.7}, {at: 6, name: 'glitch', volume: 0.4}]},
+  K16: {name: 'Minimal CTA', C: MinimalCTA, dur: 3, sfx: () => [{at: 14, name: 'click', volume: 0.5}]},
+  K17: {name: 'Brutalist CTA', C: BrutalCTA, dur: 2.5, sfx: () => [{at: 0, name: 'impact', volume: 0.6}, {at: 8, name: 'impact', volume: 0.4}, {at: 16, name: 'impact', volume: 0.4}]},
+  K18: {name: 'Isometric CTA', C: IsoCTA, dur: 2.8, sfx: () => [{at: 2, name: 'pop', volume: 0.6}, {at: 14, name: 'pop', volume: 0.7}]},
+  K19: {name: 'Map CTA', C: MapCTA, dur: 3, sfx: () => [{at: 0, name: 'whoosh_soft'}, {at: 4, name: 'pop', volume: 0.6}, {at: 14, name: 'pop', volume: 0.6}]},
+  K20: {name: 'Press start CTA', C: PixelCTA, dur: 2.5, sfx: () => [{at: 12, name: 'ding', volume: 0.7}]},
+  K21: {name: 'Crayon CTA', C: CrayonCTA, dur: 3, sfx: () => [{at: 2, name: 'scribble', volume: 0.6}, {at: 12, name: 'scribble', volume: 0.5}]},
+  K22: {name: 'Data CTA', C: DataCTA, dur: 3, sfx: () => [{at: 4, name: 'whoosh_soft', volume: 0.5}, {at: 14, name: 'pop', volume: 0.7}]},
   K7: {name: 'Brand end card', C: EndCard, dur: 3, sfx: () => [{at: 0, name: 'whoosh'}, {at: 14, name: 'pop'}]},
   K1: {name: 'One-line CTA', C: EndCard, dur: 2, props: {variant: 'line'}, sfx: () => [{at: 0, name: 'impact', volume: 0.7}]},
   K4: {name: 'Offer card', C: EndCard, dur: 4, props: {variant: 'offer'}, sfx: (p) => {

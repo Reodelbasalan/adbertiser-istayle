@@ -8,6 +8,8 @@ import * as Montserrat from '@remotion/google-fonts/Montserrat';
 import * as BebasNeue from '@remotion/google-fonts/BebasNeue';
 import * as Inter from '@remotion/google-fonts/Inter';
 import * as Bangers from '@remotion/google-fonts/Bangers';
+import * as PressStart2P from '@remotion/google-fonts/PressStart2P';
+import * as Gaegu from '@remotion/google-fonts/Gaegu';
 import type {Brand} from './types';
 
 type FontModule = {
@@ -26,6 +28,8 @@ const FONTS = {
   'Bebas Neue': BebasNeue,
   Inter,
   Bangers,
+  'Press Start 2P': PressStart2P,
+  Gaegu,
 } as unknown as Record<string, FontModule>;
 
 const cache = new Map<string, string>();

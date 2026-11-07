@@ -121,6 +121,44 @@ G11 `{"media": "clip.mp4", "title": "Ad na|Panalo", "sub": "optional", "position
 H14 cube spin: put `"transition": "H14"` on the entering scene; both scenes turn like a cube.
 D5 and D6 use WebGL (three.js); the engine renders with `--gl=angle`. On a machine with no GPU, set `Config.setChromiumOpenGlRenderer('swangle')` in `engine/remotion.config.ts`.
 
+## Bold brutalist look: B16 Brutalist title · B48 Marquee bands · B49 Brutalist grid · B50 Photo block · K17 Brutalist CTA
+Huge condensed type, hard black borders, flat accent (`color`, else brand primary), mono labels.
+B16 `{"text": "Stop|Boring|Ads", "label": "AD NO. 001", "sub": "optional"}` · B48 `{"text": "BAGONG ADS", "text2": "LIMITED SLOTS", "media": "optional"}`
+B49 `{"title": "The deal", "cells": [{"label": "Price", "value": "₱999"}, {"label": "Videos", "value": "3"}], "highlight": 0}` · B50 `{"media": "a.jpg", "label": "Real footage", "number": "01"}` · K17 `{"cta": "MESSAGE US NOW", "handle": "@page"}`
+
+## Isometric look: B6 Isometric blocks · B51 Isometric path · B52 Isometric towers · K18 Isometric CTA
+B6 `{"title": "Daloy ng benta", "blocks": [{"icon": "📱", "label": "Ads"}, {"icon": "💬", "label": "Messages"}], "at": [0.3, 1.2]}` · B51 `{"steps": ["Script", "Shoot", "Edit", "Post"], "title": "optional"}`
+B52 `{"title": "Messages per week", "bars": [{"label": "W1", "value": 12}, {"label": "W4", "value": 68}]}` · K18 `{"title": "Brand", "cta": "MESSAGE US", "handle": "@page"}`
+
+## Map look: B8 Map pins · B53 Map route · B54 Coverage radius · K19 Map CTA
+A made-up stylized street map (no map tiles). Positions are 0–1 of the frame. `dark: true` for a night map, `seed` for a different layout.
+B8 `{"title": "Malapit lang kami", "pins": [{"x": 0.3, "y": 0.4, "label": "Branch 1"}], "at": [0.4]}` · B53 `{"from": {"x": 0.2, "y": 0.3, "label": "Shop"}, "to": {"x": 0.75, "y": 0.65, "label": "Ikaw"}, "eta": "30 mins", "icon": "🛵"}`
+B54 `{"x": 0.5, "y": 0.5, "radius": 0.36, "label": "Within 5 km"}` · K19 `{"name": "Brand", "address": "Open daily · 9AM–9PM", "cta": "MESSAGE US"}`
+
+## Pixel / 8-bit look: B55 Pixel title · B56 Game HUD · B57 Pixel loading bar · K20 Press start CTA
+Press Start 2P (OFL), stepped motion. B55 `{"text": "LEVEL UP|YOUR ADS", "sub": "optional"}` · B56 `{"media": "optional clip", "score": 2400, "label": "LEVEL UP!"}` · B57 `{"label": "LOADING ADS...", "done": "READY!"}` · K20 `{"title": "PRESS START", "cta": "MESSAGE US"}`
+
+## Crayon look: C8 Crayon title · C10 Crayon doodles · C11 Crayon list · K21 Crayon CTA
+Gaegu handwriting (OFL), crayon colors, wobbly stop-motion on lined paper. Doodle icons = the whiteboard icon set.
+C8 `{"text": "Simple lang|ang ads!"}` · C10 `{"doodles": [{"icon": "heart", "label": "Gusto ng tao"}], "at": [0.4]}` · C11 `{"title": "Steps ko", "items": ["Kuha sa phone", "Lagyan ng hook"], "at": [0.4, 1.2]}` · K21 `{"cta": "MESSAGE US", "title": "Tara na!"}`
+
+## Data-viz look: B58 Big number · B59 Donut · B60 Ranking bars · B61 Annotated line · K22 Data CTA
+Dark slate, one brand-color series, numbers count up. Use real numbers or keep the SAMPLE overlay.
+B58 `{"value": 1240, "label": "messages this month", "delta": "+212%"}` · B59 `{"value": 72, "label": "nanood hanggang dulo"}`
+B60 `{"title": "Saan galing ang benta?", "bars": [{"label": "Video ads", "value": 64}], "suffix": "%"}` · B61 `{"title": "Messages per day", "series": [8, 9, 7, 18, 26, 42], "mark": 3, "note": "Bagong ad dito"}` · K22 `{"title": "Gusto mo ng ganitong numbers?", "cta": "MESSAGE US"}`
+
+## Retro VHS / Y2K look: B13 VHS title · B42 VHS footage · B43 Y2K chrome · B44 CRT TV · K15 VHS CTA · G18 VHS captions · H22 Channel switch
+Scanlines, rolling tracking band, RGB split, camcorder display (`mode`: "PLAY ▶" or "REC", `date`: "NOV 07 2026").
+B13 `{"text": "Throwback|Pero Bago", "sub": "optional", "bg": "optional clip"}` · B42 `{"media": "clip.mp4", "title": "optional", "mode": "REC"}`
+B43 `{"text": "Bagong|Drop", "sub": "optional"}` · B44 `{"media": "clip.mp4", "title": "As seen on TV", "channel": "CH 03"}` · K15 `{"cta": "MESSAGE US", "title": "PRESS PLAY", "handle": "@page"}`
+G18 captions: `job.captions.style = "G18"`. H22: `"transition": "H22"`.
+
+## Minimal luxury look: B15 Minimal title · B45 Minimal product · B46 Minimal features · B47 Editorial split · K16 Minimal CTA · G19 Minimal captions · H23 Ivory fade
+Ivory background (or `"dark": true` for black), spaced small caps, serif headings, hairlines, slow fades.
+B15 `{"label": "Brand", "title": "Less noise.|More sales.", "sub": "optional"}` · B45 `{"product": "bottle.png", "name": "The Essential", "line": "Made for every day", "price": "₱1,299"}`
+B46 `{"title": "The details", "items": ["Malinis na script", "Tamang ilaw"], "at": [0.4, 1.4]}` · B47 `{"photo": "a.jpg", "kicker": "Issue 01", "title": "Ang ad na tahimik pero mabenta", "text": "optional"}`
+K16 `{"logo": "logo.png", "name": "Brand", "cta": "MESSAGE US", "handle": "@page"}` · G19 captions: `job.captions.style = "G19"`. H23: `"transition": "H23"`.
+
 ## 2.5D look: D2 Parallax photo · D11 Title between depth layers · K14 Depth CTA · H21 Depth push
 Make the depth files once per photo: `python scripts/depth.py photo.jpg` → `photo_depth.png` (white = near) and `photo_fg.png` (only the near part). Model: Depth Anything V2 Small (Apache 2.0, ~100 MB download; needs `pip install transformers torch pillow numpy`). Without a depth file D2 uses a soft center-near depth.
 D2 `{"photo": "photo.jpg", "depth": "photo_depth.png", "motion": "dolly", "amount": 0.55, "title": "optional", "sub": "optional"}` · motion: dolly · orbit · rise. WebGL (three.js).
@@ -182,12 +220,12 @@ K1 `{"cta": "MESSAGE US", "arrow": "👇"}`
 K4 `{"title": "Starter Package", "items": ["5 video ads", "Captions + music"], "price": "₱4,999", "note": "Limited slots", "cta": "MESSAGE US"}`
 `cta` defaults to `brand.cta`; `logo` to `brand.logo`.
 
-## G1 G2 G3 G7 G8 G13 G14 G15 G16 G17 Captions
+## G1 G2 G3 G7 G8 G13 G14 G15 G16 G17 G18 G19 Captions
 `job.captions = {"style": "G1", "file": "words.json", "y": 0.63}`
 Captions hide on templates that show their own big text (hooks, prices, chats, cards, end cards) and show on footage (U1, B11). Force per scene with `"captions": true` or `false`.
 `words.json`: `[{"w": "Hello", "s": 0.12, "e": 0.40}]`, or `[{"word", "start", "end"}]`, or Whisper-style segments with `words`. `y` = 0–1 of the frame height (keep 0.25–0.75 on 9:16). Captions follow `audio.vo` timing, so transcribe the VO first.
 
-## H1 H2 H3 H4 H5 H6 H7 H9 H10 H12 H14 H17 H18 H19 H20 H21 Transitions
+## H1 H2 H3 H4 H5 H6 H7 H9 H10 H12 H14 H17 H18 H19 H20 H21 H22 H23 Transitions
 Put `"transition": "H9"` on the scene that comes IN. Each one has its own SFX. Mix 2–3 kinds per ad; don't use a different one on every cut.
 
 ## I1 I2 I5 I10 Overlays

@@ -22,6 +22,8 @@ export const TRANSITION_SFX: Record<string, string> = {
   H20: 'impact',
   H5: 'whoosh_low',
   H21: 'whoosh_soft',
+  H22: 'glitch',
+  H23: 'whoosh_soft',
 };
 
 export const TRANSITIONS = Object.keys(TRANSITION_SFX);
@@ -54,6 +56,24 @@ export const TransitionIn: React.FC<{type?: string; frames: number; children: Re
         <AbsoluteFill style={{opacity: Math.min(1, t * 2.5)}}>
           {children}
           <AbsoluteFill style={{background: 'linear-gradient(115deg, transparent 30%, rgba(255,255,255,.9) 50%, transparent 70%)', transform: `translateX(${(t * 2.4 - 1.2) * 100}%)`, mixBlendMode: 'screen'}} />
+        </AbsoluteFill>
+      );
+    case 'H22': {
+      // VHS channel switch: a burst of static, then the new picture rolls in with RGB split
+      const noise = f < frames * 0.45;
+      return (
+        <AbsoluteFill>
+          <AbsoluteFill style={{transform: `translateY(${noise ? 0 : v * 12}%)`, filter: noise ? undefined : `drop-shadow(${-6 * L.u * v}px 0 0 rgba(255,0,60,.7)) drop-shadow(${6 * L.u * v}px 0 0 rgba(0,220,255,.7))`}}>{children}</AbsoluteFill>
+          {noise && <AbsoluteFill style={{backgroundColor: '#777', backgroundImage: `repeating-radial-gradient(circle at ${random(`n1${f}`) * 100}% ${random(`n2${f}`) * 100}%, #fff 0 1px, #111 1px 2px, #888 2px 3px)`}} />}
+        </AbsoluteFill>
+      );
+    }
+    case 'H23':
+      // soft fade through ivory with a slight settle
+      return (
+        <AbsoluteFill style={{transform: `scale(${1.03 - 0.03 * e})`}}>
+          {children}
+          <AbsoluteFill style={{background: '#F5F1EA', opacity: Math.max(0, 1 - t * 1.6)}} />
         </AbsoluteFill>
       );
     case 'H21':

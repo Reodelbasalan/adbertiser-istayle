@@ -36,17 +36,17 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | B3 | Chat story | template | chat, messenger, sms, conversation, dm | A customer chat plays out | Service businesses | name, messages[{from,text}] |
 | B4 | Notification stack | template | notifications, lock screen, orders, ping | Phone pings stack up (SAMPLE label) | Results-style hooks | app, items[{title,text,time}], bg, sample |
 | B5 | Infographic counters | template | infographic, stats, counter, numbers, data | Numbers count up, bars grow | Stats, pricing | title, stats[{value,label,prefix,suffix}], sample |
-| B6 | Flat isometric | planned | isometric, flat illustration | Small isometric scenes | How it works | — |
+| B6 | Isometric blocks | template | isometric, flat illustration | Isometric cubes rise with icons on top | How it works | blocks [{icon, label, color}], title, at |
 | B7 | Services grid | template | services, features, grid, menu, icons | Icon tiles pop in | Service menus | title, items[{icon,label}] |
-| B8 | Map + pins | planned | map, location, branches, pins, delivery area | Branches, delivery areas | Multi-branch biz | — |
+| B8 | Map pins | template | map, location, branches, pins, delivery area | Stylized city map, pins drop with labels | Multi-branch biz | pins [{x, y, label, icon}] (0-1), title, at, dark, seed |
 | B9 | Timeline / roadmap | planned | timeline, roadmap, steps, process | Steps along a line | Courses, process | Meanwhile: C3 notes |
 | B10 | Newspaper headline | template | newspaper, news, breaking, headline, balita | Page spins in, BREAKING slams | News-style hooks | paper, headline, sub, image, date, banner |
 | B11 | Doodle on footage | template | doodle, scribble, marker, circle, arrow, annotate | Marker circles, arrows, underlines | Tutorials, edu | media, marks[{type,x,y,w,h,at,label,color}] |
 | B12 | Neon sign | template | neon, neon sign, glow sign, hologram | Neon tube text flickers on | Night vibe, tech, promos | text ("line 1|line 2"), sub, color, color2, script, bg |
-| B13 | Glitch / VHS / Y2K | planned | glitch scene, vhs, y2k, retro tv | RGB split, scanlines | Pattern interrupts | Meanwhile: H2 transition + I2 grain |
+| B13 | VHS title | template | glitch scene, vhs, y2k, retro tv | Blue VHS screen, RGB-split title, OSD | Pattern interrupts | text ("line 1|line 2"), sub, mode, date, bg, color |
 | B14 | Premium punch-zoom | recipe | premium, punch zoom, light streak | Punch zooms, light sweeps | Short-form content | U1 with punchAt + H7/H3 + G1 |
-| B15 | Clean minimal | planned | minimal, clean, corporate, elegant | White space, thin lines | Clinics, real estate | Meanwhile: K7 with a light brand.bg |
-| B16 | Bold brutalist | planned | brutalist, bold blocks, loud | Big blocks, hard shadows | Scroll stoppers | Meanwhile: B1 with accent lines |
+| B15 | Minimal title | template | minimal, clean, corporate, elegant | Ivory space, small caps, thin serif, hairline | Clinics, real estate | label, title ("line 1|line 2"), sub, dark |
+| B16 | Brutalist title | template | brutalist, bold blocks, loud | Giant condensed words slam in, hard grid, mono label | Scroll stoppers | text ("w1|w2|w3"), label, sub, color |
 | B17 | Glass title | template | glass, frosted, glassmorphism | Frosted glass card over color blobs | Tech, software | title, sub, tag, bg |
 | B18 | Retro poster | planned | retro, 70s, 80s, vintage poster | Grain, warm palette | Food, nostalgia | Meanwhile: J1 + I2 grain + warm brand colors |
 | B19 | Comic panels | template | comic, manga, speech bubble, panels | Comic page: panels slam in with captions + bubbles | Stories, skits | panels [{media, caption, say}] (1–4), at |
@@ -72,6 +72,26 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | B39 | Graded film shot | template | film look, color grade, letterbox | Footage graded + letterboxed, subtitle line | B-roll with mood | media, line, grade, zoom, leak |
 | B40 | Trailer statement | template | trailer text, statement | Words fade in on black like a trailer | Big claims (true) | text |
 | B41 | Trailer word flash | template | trailer flash, impact words | Hard cuts of big serif words with flashes | Rhythm hooks | words (2–5), media, grade |
+| B42 | VHS footage | template | camcorder, vhs footage, rec | Clip as a camcorder tape: chroma, REC, scanlines | Throwback, UGC | media, title, mode, date |
+| B43 | Y2K chrome text | template | y2k, chrome text, bubble | Chrome lettering, pastel bubbles, sparkles | Gen Z drops | text ("line 1|line 2"), sub |
+| B44 | CRT TV | template | old tv, crt, retro tv | Clip plays in an old TV after static | Throwback, "as seen on TV" | media, title, channel |
+| B45 | Minimal product | template | minimal product, luxury product | Product on an empty stage, thin corners | Premium products | product, name, line, price, dark |
+| B46 | Minimal features | template | minimal list, 01 02 03 | Numbered features with hairlines | Premium details | title, items, at, dark |
+| B47 | Editorial split | template | editorial, magazine layout | Tall photo + magazine text block | Premium stories | photo, kicker, title, text, dark |
+| B48 | Marquee bands | template | marquee, ticker, scrolling text | Two crossing bands scroll a phrase | Drops, sales | text, text2, media, color |
+| B49 | Brutalist grid | template | brutalist grid, deal grid | Hard-bordered grid, values slam in | Offers, specs | title, cells [{label, value}], highlight, color |
+| B50 | Photo block | template | brutalist photo, framed photo | Photo in a thick frame, giant number, sticker | Proof, steps | media, label, number, color |
+| B51 | Isometric path | template | iso path, isometric steps | Ball hops along isometric tiles | Process | steps, title |
+| B52 | Isometric towers | template | iso chart, 3d towers | Isometric towers grow like bars | Results (true numbers) | bars [{label, value}], title |
+| B53 | Map route | template | route, delivery route, directions | Route draws A to B, vehicle rides it, ETA | Delivery, service visits | from {x, y, label}, to, eta, icon, title, color |
+| B54 | Coverage radius | template | coverage, delivery area, radius | Pulsing radius around a pin + label | Delivery areas | x, y, radius, label, title, color |
+| B55 | Pixel title | template | 8-bit title, pixel text, game title | 8-bit text types in over a starfield | Gamified hooks | text ("line 1|line 2"), sub, color |
+| B56 | Game HUD | template | game hud, score, level up | Hearts, score counter, coins, LEVEL UP | Gamified results | media, score, label |
+| B57 | Pixel loading bar | template | loading bar, progress | Blocky bar fills, flips to READY | "We are working on it" | label, done, color |
+| B58 | Big number | template | big number, kpi, stat | One giant number counts up + delta chip | Results (true numbers) | value, prefix, suffix, decimals, label, delta |
+| B59 | Donut chart | template | donut, percentage, pie | Donut draws to a percentage | Rates, shares | value (0-100), label, title, color |
+| B60 | Ranking bars | template | ranking, horizontal bars, bar race | Horizontal bars grow in order | Comparisons | bars [{label, value}], title, suffix, color |
+| B61 | Annotated line | template | line chart, annotation, turning point | Line draws, callout at the turning point | Change over time (true data) | series, mark (index), note, title, color |
 | C1 | Paper cutout stop-motion | template | paper, paper cutout, cutout, craft, stop motion, handmade | Torn-paper letters, cut-out items, choppy motion | Food, local biz, explainers | title, sub, items[{emoji or image,label}], colors[], paperColor |
 | C2 | Scrapbook collage | template | scrapbook, collage, polaroid, tape | Polaroids drop in with tape and notes | Product features, stories | title, photos[], notes[], paperColor |
 | C3 | Sticky notes | template | sticky notes, post-it, notes, checklist | Notes slap on a board, checks drawn | Tips, plans, steps | title, notes[], check, boardColor |
@@ -79,8 +99,10 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | C5 | Kraft / cardboard | planned | kraft, cardboard, brown paper, packaging | Brown box textures, stamps | Packaging, eco | Meanwhile: C1 with paperColor "#C8A777" |
 | C6 | Ransom-note letters | planned | ransom note, magazine letters, cut letters | Mixed magazine letters | Hooks | Meanwhile: C1 title only |
 | C7 | Polaroid stack | planned | polaroid stack, photo pile | Photos drop and pile up | Results, events | Meanwhile: C2 |
-| C8 | Crayon / marker kid style | planned | crayon, kids drawing, marker drawing | Wobbly hand-drawn lines | Family products | — |
+| C8 | Crayon title | template | crayon, kids drawing, marker drawing | Kid handwriting in crayon colors, doodled sun and stars | Family products | text ("line 1|line 2") |
 | C9 | Pop-up book | planned | pop-up book, fold, paper fold | Pages fold up into scenes | Storytelling | — |
+| C10 | Crayon doodles | template | crayon doodles, kid drawing | Crayon icons scribble in with labels | Friendly explainers | doodles [{icon, label}], title, at |
+| C11 | Crayon list | template | crayon list, kid list | Kid-style numbered list, crayon ticks | Simple steps | title, items, at |
 | D1 | 3D UI cards | template | 3d cards, tilt, perspective | Tilted panels with depth | Software | cards [{icon, value, label} or {image}], title, bg |
 | D2 | 2.5D parallax photo | template | parallax, 2.5d, depth, photo motion | A still photo moves with depth | Product and place photos | photo, depth (from scripts/depth.py), motion dolly/orbit/rise, amount, title, sub |
 | D3 | 3D text / logo reveal | template | 3d text, 3d logo, logo reveal, metallic | Metallic text spins in | Intros | text ("line 1|line 2"), sub, color, gridColor |
@@ -133,6 +155,8 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | G15 | Marker captions | template | handwritten captions, marker captions | Captions in the hand font, active word in brand color | Whiteboard look | `captions.style: "G15"` |
 | G16 | Comic captions | template | comic captions, bangers | Comic lettering, active word yellow | Comic look | `captions.style: "G16"` |
 | G17 | Film subtitles | template | movie subtitles, serif captions | Italic serif subtitles | Cinematic look | `captions.style: "G17"` |
+| G18 | VHS captions | template | vhs captions, camcorder text | Mono OSD text with RGB split | Retro look | `captions.style: "G18"` |
+| G19 | Minimal captions | template | minimal captions, clean captions | Light words, active word underlined | Minimal look | `captions.style: "G19"` |
 | H1 | Slide | template | slide, push | Next scene slides in | Any cut | scene.transition "H1" |
 | H2 | Glitch | template | glitch, rgb split, digital | Jitter + color bars | Tech, energy | scene.transition "H2" |
 | H3 | Glare / light sweep | template | glare, light sweep, shine | A shine passes as it fades in | Beauty, premium | scene.transition "H3" |
@@ -154,6 +178,8 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | H19 | Eraser wipe | template | eraser, whiteboard wipe | Soft white band wipes to the next scene | Whiteboard look | `"transition": "H19"` |
 | H20 | Comic panel slam | template | comic transition, panel slam | New scene lands as a tilted inked panel | Comic look | `"transition": "H20"` |
 | H21 | Depth push | template | depth push, dolly transition | New scene comes forward out of the distance | 2.5D look | `"transition": "H21"` |
+| H22 | Channel switch | template | static, channel switch, vhs transition | Static burst, picture rolls in | Retro look | `"transition": "H22"` |
+| H23 | Ivory fade | template | soft fade, fade through white | Fades through ivory with a settle | Minimal look | `"transition": "H23"` |
 | I1 | Watermark | template | watermark, logo bug | Logo or brand name, top right | Every edit | job.overlays.watermark |
 | I2 | Film grain | template | grain, film grain, texture | Moving grain | Retro, paper, cinematic | job.overlays.grain (0–0.4) |
 | I3 | Light leaks | planned | light leaks | Warm color leaks | Lifestyle | — |
@@ -190,4 +216,12 @@ Look up one style with `node scripts/style.mjs <ID or words>`; props are in `ref
 | K12 | Comic CTA | template | comic cta | CTA in an inked box, pointing hand | Comic look outros | cta, title, handle |
 | K13 | Cinematic end card | template | film end card, movie outro | Wide serif name, rule, CTA, light sweep | Premium outros | name, cta, line |
 | K14 | Depth CTA | template | parallax cta, photo cta | Photo drifts in depth behind a CTA band | 2.5D look outros | photo, fg, title, cta, handle |
+| K15 | VHS CTA | template | vhs cta, press play | Blinking "▶ CTA" on a VHS menu | Retro outros | cta, title, handle, date |
+| K16 | Minimal CTA | template | minimal cta, luxury end card | Spaced wordmark, outlined button | Premium outros | logo or name, cta, handle, dark |
+| K17 | Brutalist CTA | template | brutalist cta | CTA words fill the frame, colors flip | Bold outros | cta, handle, color |
+| K18 | Isometric CTA | template | iso cta | Isometric phone with chat icon + CTA pill | Iso look outros | cta, title, handle |
+| K19 | Map CTA | template | map cta, visit us | Map zooms to a pin, card with name + CTA | Local business outros | name, address, cta |
+| K20 | Press start CTA | template | press start, pixel cta | PRESS START blinks, pixel CTA button | Pixel look outros | cta, title, handle, color |
+| K21 | Crayon CTA | template | crayon cta | CTA scribbled in a crayon cloud | Crayon look outros | cta, title |
+| K22 | Data CTA | template | data cta | Question line + sparkline + CTA | Data look outros | title, cta, handle |
 | U1 | Footage / photo shot | template | footage, broll, b-roll, photo, video clip, shot | Your clip or photo with zoom | The base of every ad | media, zoom (in/out/none), punchAt, title, titleAt |
