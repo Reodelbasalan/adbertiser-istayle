@@ -160,7 +160,7 @@ export const HoloHUD: React.FC<SceneProps> = ({p}) => {
           return (
             <div key={i} style={{display: 'flex', alignItems: 'center', gap: 20 * L.u, opacity: k, transform: `translateX(${(1 - k) * -30 * L.u}px)`, border: `${2 * L.u}px solid ${alpha(c, 0.6)}`, background: alpha(c, 0.08), borderRadius: 14 * L.u, padding: `${14 * L.u}px ${22 * L.u}px`, boxShadow: `0 0 ${18 * L.u}px ${alpha(c, 0.35)}, inset 0 0 ${18 * L.u}px ${alpha(c, 0.15)}`}}>
               <div style={{width: 18 * L.u, height: 18 * L.u, borderRadius: 4 * L.u, background: c, boxShadow: `0 0 ${12 * L.u}px ${c}`, flexShrink: 0}} />
-              <div style={{fontFamily: b.fB, fontWeight: 700, fontSize: 40 * L.u, color: lift(c, 0.85), whiteSpace: 'nowrap', overflow: 'hidden'}}>
+              <div style={{fontFamily: b.fB, fontWeight: 700, fontSize: 48 * L.u, color: lift(c, 0.85), whiteSpace: 'nowrap', overflow: 'hidden'}}>
                 {it.slice(0, chars)}
                 {chars < it.length && <span style={{opacity: f % 8 < 4 ? 1 : 0}}>▍</span>}
               </div>

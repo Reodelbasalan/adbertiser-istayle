@@ -24,7 +24,7 @@ export const ChatStory: React.FC<SceneProps> = ({p, dur}) => {
   const at = msgs.map((_, i) => start + i * gap);
   const cardW = L.portrait ? L.W * 0.86 : L.H * 0.62;
   const cardH = L.portrait ? L.bottom - L.top + L.H * 0.06 : L.H * 0.84;
-  const fs = 40 * L.u * (L.portrait ? 1 : 0.85);
+  const fs = 50 * L.u * (L.portrait ? 1 : 0.85);
   const typingIdx = msgs.findIndex((m, i) => m.from !== 'me' && f >= at[i] - 14 && f < at[i] && gap > 18);
   const name: string = p.name ?? 'Customer';
   const enter = pop(f, L.fps, 0, 180, 14);
@@ -96,7 +96,7 @@ export const Notifications: React.FC<SceneProps> = ({p, dur}) => {
   const app: string = p.app ?? b.name;
   const gap = Math.max(8, (dur - L.fps * 0.8) / items.length);
   const w = L.portrait ? L.W * 0.88 : L.H * 0.8;
-  const fs = 36 * L.u * (L.portrait ? 1 : 0.85);
+  const fs = 42 * L.u * (L.portrait ? 1 : 0.85);
   const visible = items.map((_, i) => Math.round(L.fps * 0.4 + i * gap)).filter((t) => f >= t).length;
   return (
     <AbsoluteFill style={{alignItems: 'center'}}>

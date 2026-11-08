@@ -20,7 +20,7 @@ export const StatCounters: React.FC<SceneProps> = ({p}) => {
     {value: 38, suffix: '%', label: 'Repeat buyers'},
   ];
   const max = Math.max(...stats.map((s) => s.value));
-  const fs = (L.portrait ? 120 : 110) * L.u;
+  const fs = (stats.length === 1 ? 220 : stats.length === 2 ? 160 : L.portrait ? 120 : 110) * L.u;
   return (
     <AbsoluteFill style={{background: b.bg}}>
       <Glow color={b.primary} strength={0.2} y="35%" />

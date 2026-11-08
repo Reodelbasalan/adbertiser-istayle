@@ -226,7 +226,7 @@ const SPECS = [
   {x: 0.35, y: 0.75, label: 'Recyclable bottle'},
 ];
 export const specList = (p: P): {x: number; y: number; label: string}[] => (Array.isArray(p.specs) && p.specs.length ? p.specs : SPECS).slice(0, 5);
-export const specTimes = (n: number, fps: number, at?: number[]) => range(n).map((i) => (Array.isArray(at) && typeof at[i] === 'number' ? Math.round(at[i] * fps) : Math.round(fps * 0.5) + i * 10));
+export const specTimes = (n: number, fps: number, at?: number[]) => range(n).map((i) => (Array.isArray(at) && typeof at[i] === 'number' ? Math.round(at[i] * fps) : Math.round(fps * 0.3) + i * 7));
 
 /** F10: lines draw from points on the product to feature labels on alternating sides */
 export const SpecCallouts: React.FC<SceneProps> = ({p}) => {

@@ -123,40 +123,38 @@ export const PolaroidStack: React.FC<SceneProps> = ({p, dur}) => {
 
 /* ---------------- C9 pop-up book ---------------- */
 
-/** C9: a book opens and paper layers fold up out of the spread (scene, item, sign) with the title on the sign */
+/** C9: an open book; paper layers fold up out of the spread one by one (scene, item, sign with the title) */
 export const PopUpBook: React.FC<SceneProps> = ({p}) => {
   const f = useCurrentFrame();
   const L = useLayout();
   const b = useBrand();
   const title = txt(p.title, 'Bagong Bukas!');
-  const open = ease(f, 0, 18);
-  const bw = L.portrait ? L.W * 0.9 : L.W * 0.6;
-  const bh = bw * 0.5;
+  const bw = L.portrait ? L.W * 0.92 : L.W * 0.62;
   const bx = (L.W - bw) / 2;
-  const by = L.H * 0.6;
-  const layer = (at: number, h: number, w: number, color: string, children?: React.ReactNode, dx = 0) => {
-    const k = ease(f, at, at + 14);
+  const spine = L.portrait ? L.H * 0.62 : L.H * 0.66;
+  const pageH = bw * 0.32;
+  const open = ease(f, 0, 14);
+  const fold = (at: number) => ease(f, at, at + 12);
+  const layer = (at: number, w: number, h: number, color: string, dx: number, children?: React.ReactNode, z = 1) => {
+    const k = fold(at);
     return (
-      <div style={{position: 'absolute', left: (bw - w) / 2 + dx, bottom: bh * 0.5, width: w, height: h, transformOrigin: 'bottom center', transform: `rotateX(${(1 - k) * 88}deg)`, background: color, borderRadius: `${14 * L.u}px ${14 * L.u}px 0 0`, boxShadow: '0 -6px 14px rgba(0,0,0,.18)', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>{children}</div>
+      <div style={{position: 'absolute', left: L.W / 2 - w / 2 + dx, top: spine - h, width: w, height: h, transformOrigin: 'bottom center', transform: `scaleY(${k}) skewX(${(1 - k) * 8}deg)`, background: color, borderRadius: `${18 * L.u}px ${18 * L.u}px 0 0`, boxShadow: `0 ${-4 * L.u}px ${16 * L.u}px rgba(0,0,0,.18), inset 0 ${-14 * L.u}px 0 rgba(0,0,0,.08)`, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: z}}>{children}</div>
     );
   };
   return (
     <AbsoluteFill>
       <PaperBg color={p.paperColor ?? '#F4E9D8'} lines="none" u={L.u} />
-      <div style={{position: 'absolute', left: bx, top: by - bh * 0.5, width: bw, height: bh, perspective: 1600 * L.u}}>
-        <div style={{position: 'absolute', inset: 0, transformStyle: 'preserve-3d', transform: 'rotateX(52deg)', transformOrigin: 'center'}}>
-          {/* pages */}
-          <div style={{position: 'absolute', left: 0, top: 0, width: bw / 2, height: bh, background: '#FFFDF7', borderRight: `${2 * L.u}px solid #D8CBB6`, transformOrigin: 'right center', transform: `rotateY(${(1 - open) * -170}deg)`, boxShadow: '0 10px 20px rgba(0,0,0,.25)'}} />
-          <div style={{position: 'absolute', left: bw / 2, top: 0, width: bw / 2, height: bh, background: '#FFFDF7', boxShadow: '0 10px 20px rgba(0,0,0,.25)'}} />
-          {/* pop-up layers stand up from the spine (rotateX -90 to stand vertical in this tilted space) */}
-          <div style={{position: 'absolute', left: 0, top: bh / 2, width: bw, height: 0, transformStyle: 'preserve-3d', transform: 'rotateX(-90deg)', transformOrigin: 'top'}}>
-            {layer(10, bh * 1.2, bw * 0.84, '#7FC8A9', null)}
-            {layer(16, bh * 0.9, bw * 0.5, '#F2A65A', <div style={{fontSize: bh * 0.4}}>{txt(p.icon, '🏪')}</div>, -bw * 0.12)}
-            {layer(22, bh * 0.55, bw * 0.62, b.primary, <div style={{fontFamily: b.fH, fontSize: Math.min(bh * 0.24, (bw * 0.55) / Math.max(5, title.length) * 1.6), color: '#1E1A12', textTransform: 'uppercase', padding: `0 ${10 * L.u}px`, textAlign: 'center'}}>{title}</div>, bw * 0.08)}
-          </div>
-        </div>
+      {/* open book: two pages in perspective */}
+      <div style={{position: 'absolute', left: bx, top: spine, width: bw, height: pageH, opacity: open}}>
+        <div style={{position: 'absolute', left: 0, top: 0, width: bw / 2, height: pageH, background: '#FFFDF7', clipPath: `polygon(${(1 - open) * 30 + 6}% 0, 100% 0, 100% 100%, 0 100%)`, boxShadow: 'inset -20px 0 30px rgba(0,0,0,.08)'}} />
+        <div style={{position: 'absolute', left: bw / 2, top: 0, width: bw / 2, height: pageH, background: '#FFFDF7', clipPath: `polygon(0 0, ${100 - ((1 - open) * 30 + 6)}% 0, 100% 100%, 0 100%)`, boxShadow: 'inset 20px 0 30px rgba(0,0,0,.08)'}} />
+        <div style={{position: 'absolute', left: bw / 2 - 2 * L.u, top: 0, width: 4 * L.u, height: pageH, background: '#D8CBB6'}} />
+        <div style={{position: 'absolute', left: -10 * L.u, right: -10 * L.u, top: pageH, height: 22 * L.u, background: '#8C5A3C', borderRadius: `0 0 ${12 * L.u}px ${12 * L.u}px`}} />
       </div>
-      {txt(p.sub, '') && <div style={{position: 'absolute', left: L.pad, right: L.pad, top: L.H * 0.74, textAlign: 'center', fontFamily: b.fHand, fontSize: 64 * L.u, color: '#3A2A18', opacity: ease(f, 30, 38)}}>{txt(p.sub, '')}</div>}
+      {layer(8, bw * 0.86, bw * 0.62, '#7FC8A9', 0, null, 1)}
+      {layer(14, bw * 0.4, bw * 0.48, '#F2A65A', -bw * 0.2, <div style={{fontSize: bw * 0.2}}>{txt(p.icon, '🏪')}</div>, 2)}
+      {layer(20, bw * 0.62, bw * 0.24, b.primary, bw * 0.12, <div style={{fontFamily: b.fH, fontSize: Math.min(bw * 0.09, ((bw * 0.56) / Math.max(5, title.length)) * 1.6), color: '#1E1A12', textTransform: 'uppercase', padding: `0 ${10 * L.u}px`, textAlign: 'center'}}>{title}</div>, 3)}
+      {txt(p.sub, '') && <div style={{position: 'absolute', left: L.pad, right: L.pad, top: spine + pageH + 50 * L.u, textAlign: 'center', fontFamily: b.fHand, fontSize: 64 * L.u, color: '#3A2A18', opacity: ease(f, 30, 38)}}>{txt(p.sub, '')}</div>}
     </AbsoluteFill>
   );
 };

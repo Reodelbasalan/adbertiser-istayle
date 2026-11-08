@@ -32,7 +32,10 @@ const stale = !fs.existsSync(stamp) || fs.readFileSync(stamp, 'utf8') !== hash;
 if (!fs.existsSync(CLI) || (!same && stale)) {
   console.log('installing Remotion (first time takes a few minutes)...');
   const win = process.platform === 'win32';
-  const r = spawnSync(win ? 'npm.cmd' : 'npm', ['install', '--no-audit', '--no-fund', '--loglevel=error'], {cwd: ENGINE, stdio: 'inherit', shell: win});
+  // one command string (no args array) avoids Node's DEP0190 warning when a shell is needed on Windows
+  const r = win
+    ? spawnSync('npm install --no-audit --no-fund --loglevel=error', {cwd: ENGINE, stdio: 'inherit', shell: true})
+    : spawnSync('npm', ['install', '--no-audit', '--no-fund', '--loglevel=error'], {cwd: ENGINE, stdio: 'inherit'});
   if (r.status !== 0) {
     console.error('npm install failed');
     process.exit(1);

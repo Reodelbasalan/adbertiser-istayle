@@ -17,9 +17,11 @@ const cell = (id, w) => `<td align="center"><img src="previews/${id}.jpg" width=
 const table = (ids, cols, w, prefix = '') =>
   `<table>\n${Array.from({length: Math.ceil(ids.length / cols)}, (_, r) => `<tr>${ids.slice(r * cols, r * cols + cols).map((id) => cell(id, w).replace('previews/', prefix)).join('')}</tr>`).join('\n')}\n</table>`;
 
-const PICK = ['J1', 'B1', 'C1', 'C2', 'C3', 'C4', 'B3', 'B4', 'B10', 'B11', 'F6', 'G6', 'H9', 'G1', 'K4', 'K7'].filter((id) => have.includes(id));
+// one preview per look: 2D motion, paper, social UI, footage, 3D, 2.5D, neon, glass, whiteboard, comic,
+// cinematic, retro, minimal, brutalist, isometric, map, pixel, crayon, data-viz, product
+const PICK = ['B1', 'C1', 'B3', 'G6', 'D5', 'D11', 'B12', 'B2', 'B31', 'B35', 'B38', 'B44', 'B45', 'B16', 'B6', 'B53', 'B56', 'C10', 'B59', 'F3'].filter((id) => have.includes(id));
 const readme = path.join(root, 'README.md');
-const gal = `<!-- GALLERY -->\n${table(PICK, 4, 180)}\n\nAll ${have.length} template previews: [previews/](previews/README.md)\n<!-- /GALLERY -->`;
+const gal = `<!-- GALLERY -->\n${table(PICK, 4, 180, 'previews/')}\n\nAll ${have.length} template previews: [previews/](previews/README.md)\n<!-- /GALLERY -->`;
 let md = fs.readFileSync(readme, 'utf8');
 md = md.includes('<!-- /GALLERY -->') ? md.replace(/<!-- GALLERY -->[\s\S]*<!-- \/GALLERY -->/, gal) : md.replace('<!-- GALLERY -->', gal);
 fs.writeFileSync(readme, md);
